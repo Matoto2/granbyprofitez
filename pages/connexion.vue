@@ -46,8 +46,3 @@ export default {
 	}
 }
 </script>
-<style>
-.p-float-label{
-	margin: 1.5rem 0;
-}
-</style>

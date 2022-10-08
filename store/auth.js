@@ -97,4 +97,8 @@ export const getters = {
 	isAuthenticated: (state) => {
 		return state.access_token && state.access_token !== ''
 	},
+	// get user role
+	getRole: (state) => {
+		return state.current_user.role
+	}
 }
