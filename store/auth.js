@@ -9,9 +9,8 @@ export const AUTH_MUTATIONS = {
 }
 
 export const state = () => ({
-	access_token: null, // JWT access token
-	refresh_token: null, // JWT refresh token
-	current_user: null, // user
+	access_token: null,
+	current_user: null,
 	errors: {}
 })
 
@@ -22,20 +21,14 @@ export const mutations = {
 	},
 
 	// store new or updated token fields in the state
-	[AUTH_MUTATIONS.SET_PAYLOAD] (state, { token, refresh_token = null }) {
+	[AUTH_MUTATIONS.SET_PAYLOAD] (state, token) {
 		state.access_token = token
-
-		// refresh token is optional, only set it if present
-		if (refresh_token) {
-			state.refresh_token = refresh_token
-		}
 	},
 
 	// clear our the state, essentially logging out the user
 	[AUTH_MUTATIONS.LOGOUT] (state) {
 		state.current_user = null
 		state.access_token = null
-		state.refresh_token = null
 	},
 
 	[AUTH_MUTATIONS.SET_ERRORS] (state, errors) {
@@ -45,7 +38,6 @@ export const mutations = {
 
 export const actions = {
 	async login ({ commit, dispatch }, { email, password }) {
-		// make an API call to login the user with an email address and password
 		try{
 			const data = await this.$axios.post(
 				'/login',
@@ -53,8 +45,15 @@ export const actions = {
 			)
 
 			// commit the user and tokens to the state
-			commit(AUTH_MUTATIONS.SET_USER, data.data.user)
-			commit(AUTH_MUTATIONS.SET_PAYLOAD, data.data.authorisation)
+			commit(AUTH_MUTATIONS.SET_USER, {
+				id: data.data.session.id,
+				role: data.data.session.role,
+				name: data.data.session.name,
+			})
+			commit(AUTH_MUTATIONS.SET_PAYLOAD, {
+				token: data.data.session.token,
+				datePing: data.data.session.datePing
+			})
 		}catch(error){
 			commit(AUTH_MUTATIONS.SET_ERRORS, error.response)
 		}
@@ -73,21 +72,8 @@ export const actions = {
 		commit(AUTH_MUTATIONS.SET_PAYLOAD, payload)
 	},*/
 
-	// given the current refresh token, refresh the user's access token to prevent expiry
-	async refresh ({ commit, state }) {
-		const { refresh_token } = state
-
-		// make an API call using the refresh token to generate a new access token
-		const { data: { data: { payload } } } = await this.$axios.post(
-			'/refresh',
-			{ refresh_token }
-		)
-
-		commit(AUTH_MUTATIONS.SET_PAYLOAD, payload)
-	},
-
 	// logout the user
-	logout ({ commit, state }) {
+	logout ({ commit }) {
 		commit(AUTH_MUTATIONS.LOGOUT)
 	},
 }

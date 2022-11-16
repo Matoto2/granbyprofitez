@@ -21,8 +21,8 @@ export default {
 	data(){
 		return {
 			form: {
-				firstname: this.$store.state.auth.current_user.firstname,
-				lastname: this.$store.state.auth.current_user.lastname,
+				firstname: this.$store.state.auth.current_user?.firstname,
+				lastname: this.$store.state.auth.current_user?.lastname,
 			}
 		}
 	},
