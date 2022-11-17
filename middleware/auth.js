@@ -10,8 +10,6 @@ export default function ({ store, route, error, redirect }){
 	})
 	page_roles = page_roles[0]
 
-	console.log('page_roles', page_roles, store.getters['auth/getRole'])
-
 	if (page_roles.length && !page_roles.includes(store.getters['auth/getRole'])) {
 		return error({
 			statusCode: 401,

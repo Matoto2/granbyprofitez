@@ -11,7 +11,7 @@ export default {
 	props: ['label', 'id']
 }
 </script>
-<style>
+<style scoped>
 .field-wrapper{
 	display: flex;
 	flex-direction: column;

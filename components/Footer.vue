@@ -3,7 +3,7 @@
 		Ceci est un footer
 	</footer>
 </template>
-<style>
+<style scoped>
 #footer{
 	background-color: #000;
 	color: #fff;

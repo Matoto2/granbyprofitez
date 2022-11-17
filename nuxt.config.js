@@ -20,25 +20,40 @@ export default {
 	css: [
 		'normalize.css',
 		'primeflex/primeflex.css',
-		'~/assets/css/style.css'
+		'~/assets/css/style.css',
+		'quill/dist/quill.core.css',
+		'quill/dist/quill.snow.css',
 	],
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
 	plugins: [
 		"~/plugins/axios.js",
 		"~/plugins/local-storage.js",
+		"~/plugins/slugify",
+		{ src: "~/plugins/vue_trix", mode: "client", ssr: false },
+		{ src: "~/plugins/confirmationService", mode: "client", ssr: false },
+		{ src: "~/plugins/toastService", mode: "client", ssr: false },
 	],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
 	components: {
 		dirs: [
 			'~/components',
-			'~/components/Admin'
+			'~/components/Admin',
+			'~/components/Admin/Forms',
 		]
 	},
 
 	// Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-	buildModules: [],
+	buildModules: [
+		'@nuxtjs/moment'
+	],
+	moment: {
+		timezone: true,
+		defaultTimezone: 'America/New_York',
+		defaultLocale: "fr",
+		locales: ["fr"]
+	},
 
 	// Modules: https://go.nuxtjs.dev/config-modules
 	modules: [
