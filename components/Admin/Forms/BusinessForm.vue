@@ -1,9 +1,11 @@
 <template>
 	<form @submit.prevent="submit">
+		{{form}}
 		<FieldWrapper id="business" label="Nom de l'entreprise">
 			<InputText type="text" v-model="form.business"/>
 		</FieldWrapper>
 		<FieldWrapper id="logo" label="Logo de l'entreprise">
+			<img alt="">
 			<FileUpload mode="basic" name="logo[]" @select="onSelectedFiles" accept="image/*"/>
 		</FieldWrapper>
 		<FieldWrapper id="nameFirst" label="Prénom">
@@ -38,7 +40,7 @@ export default {
 			default: () => {
 				return {
 					business: '',
-					logo: '',
+					logo: {},
 					nameFirst: '',
 					nameLast: '',
 					email: '',
@@ -60,14 +62,19 @@ export default {
 	methods: {
 		onSelectedFiles(event){
 			if(event.files.length > 0){
+				this.form.logo = {}
+				this.form.logo.size = event.files[0].size
+				this.form.logo.type = event.files[0].type
+				this.form.logo.ext = event.files[0].name.substring(event.files[0].name.lastIndexOf('.'), event.files[0].name.length) || event.files[0].name
 				this.getBase64(event.files[0])
 			}
 		},
 		getBase64(file){
 			const reader = new FileReader();
 			reader.readAsDataURL(file);
-			reader.onload = () => {
-				this.form.logo = reader.result
+			reader.onloadend = () => {
+				let data = reader.result
+				this.form.logo.data = data.substring(data.indexOf(',') + 1)
 			};
 			reader.onerror = function (error) {
 				console.log('Error: ', error);
@@ -83,6 +90,7 @@ export default {
 				nameFirst: this.form.nameFirst,
 				nameLast: this.form.nameLast,
 			}
+			console.log(form);return;
 			let response = {}
 			if(this.use === 'add'){
 				//check password
