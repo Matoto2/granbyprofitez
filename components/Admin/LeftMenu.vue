@@ -18,6 +18,13 @@ export default {
 					}
 				},
 				{
+					label: 'Entreprises',
+					icon:'pi pi-fw pi-building',
+					command: () => {
+						this.$router.push('/admin/entreprises')
+					}
+				},
+				{
 					label: 'Nouvelles',
 					icon:'pi pi-fw pi-book',
 					command: () => {

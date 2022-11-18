@@ -1,5 +1,11 @@
 <template>
 	<form @submit.prevent="submit">
+		<FieldWrapper id="business" label="Nom de l'entreprise">
+			<InputText type="text" v-model="form.business"/>
+		</FieldWrapper>
+		<FieldWrapper id="logo" label="Logo de l'entreprise">
+			<FileUpload mode="basic" name="logo[]" @select="onSelectedFiles" accept="image/*"/>
+		</FieldWrapper>
 		<FieldWrapper id="nameFirst" label="Prénom">
 			<InputText type="text" v-model="form.nameFirst"/>
 		</FieldWrapper>
@@ -18,18 +24,21 @@
 </template>
 <script>
 import InputText from 'primevue/inputtext';
-
 import Button from 'primevue/button';
+import FileUpload from 'primevue/fileupload';
 export default {
 	components: {
 		InputText,
 		Button,
+		FileUpload
 	},
 	props: {
 		form: {
 			type: Object,
 			default: () => {
 				return {
+					business: '',
+					logo: '',
 					nameFirst: '',
 					nameLast: '',
 					email: '',
@@ -49,11 +58,27 @@ export default {
 		}
 	},
 	methods: {
+		onSelectedFiles(event){
+			if(event.files.length > 0){
+				this.getBase64(event.files[0])
+			}
+		},
+		getBase64(file){
+			const reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = () => {
+				this.form.logo = reader.result
+			};
+			reader.onerror = function (error) {
+				console.log('Error: ', error);
+			};
+		},
 		async submit(){
 			this.saving = true
 			const form = {
 				token: this.$store.getters['auth/get_token'],
-				role: 'admin',
+				business: this.form.business,
+				logo: this.form.logo,
 				email: this.form.email,
 				nameFirst: this.form.nameFirst,
 				nameLast: this.form.nameLast,
@@ -91,7 +116,7 @@ export default {
 			this.saving = false
 			if(response.data.success){
 				this.$toast.add({severity:'success', summary: 'Succès!', detail:'Sauvegarde effectué', life: 3000});
-				await this.$router.push('/admin/administrateurs');
+				await this.$router.push('/admin/entreprises');
 			}else{
 				this.$toast.add({severity:'error', summary: 'Erreur!', detail:response.data.error, life: 15000});
 			}
