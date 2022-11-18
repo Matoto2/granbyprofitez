@@ -98,7 +98,7 @@ export default {
 				this.$toast.add({severity:'success', summary: 'Succès!', detail:'Sauvegarde effectué', life: 3000});
 				await this.$router.push('/admin/nouvelles/'+response.data.news.id)
 			}else{
-				this.$toast.add({severity:'error', summary: 'Erreur!', detail:"Un problème est survenu. Veuillez contacter l'administrateur", life: 3000});
+				this.$toast.add({severity:'error', summary: 'Erreur!', detail:response.data.error, life: 15000});
 			}
 		}
 	}

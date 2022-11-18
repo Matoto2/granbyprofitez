@@ -25,10 +25,10 @@ export default {
 					}
 				},
 				{
-					label: 'Utilisateurs',
+					label: 'Administrateurs',
 					icon:'pi pi-fw pi-users',
 					command: () => {
-						this.$router.push('/admin/utilisateurs')
+						this.$router.push('/admin/administrateurs')
 					}
 				}
 			]

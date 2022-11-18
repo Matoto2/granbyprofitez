@@ -1,45 +1,32 @@
 <template>
 	<div>
-		<AdminLayout title="Nouvelles">
-			<NuxtLink class="p-button p-component" to="/admin/nouvelles/add">
+		<AdminLayout title="Administrateurs">
+			<NuxtLink class="p-button p-component" to="/admin/administrateurs/add">
 				Ajouter +
 			</NuxtLink>
 
 			<DataTable :loading="tableLoading"
-					   :value="news"
+					   :value="users"
 					   showGridlines
 					   :filters.sync="filters"
 					   filterDisplay="menu"
-					   :globalFilterFields="['title']"
+					   :globalFilterFields="['nameFirst','nameLast','email']"
 					   responsiveLayout="scroll">
 				<template #header>
 					<div class="datatable-header-row">
-						<div>
-							<Button label="Tous" @click="filters['status'].value = ''" class="p-button-text" />
-							<Button label="Publié" @click="filters['status'].value = 'publish'" class="p-button-text" />
-							<Button label="Brouillon" @click="filters['status'].value = 'draft'" class="p-button-text" />
-						</div>
 						<InputText v-model="filters['global'].value" placeholder="Recherche" />
 					</div>
 
 				</template>
 				<template #empty>
-					Aucune nouvelle trouvé.
+					Aucun admin trouvé.
 				</template>
-				<Column field="title" header="Titre"></Column>
-				<Column headerStyle="width: 3rem" field="status" header="Status">
-					<template #body="{data}">
-						<span>{{data.status==='publish' ? 'Publié':'Brouillon'}}</span>
-					</template>
-				</Column>
-				<Column headerStyle="width: 3rem" field="posted_date" header="Date">
-					<template #body="{data}">
-						<span>{{$moment(data.posted_date).format('DD MMM YYYY HH:mm')}}</span>
-					</template>
-				</Column>
+				<Column field="nameFirst" header="Prénom"></Column>
+				<Column field="nameLast" header="Nom"></Column>
+				<Column field="email" header="Courriel"></Column>
 				<Column headerStyle="width: 50px; text-align: center">
 					<template #body="{data}">
-						<NuxtLink class="p-button" :to="'/admin/nouvelles/'+data.id">
+						<NuxtLink class="p-button" :to="'/admin/administrateurs/'+data.id">
 							<i class="pi pi-file-edit"></i>
 						</NuxtLink>
 						<Button type="button" @click="del(data.id)" class="p-button-danger" icon="pi pi-trash"></Button>
@@ -74,14 +61,16 @@ export default {
 	},
 	data(){
 		return {
-			news: [],
+			users: [],
 			tableLoading: true,
 			filters: {}
 		}
 	},
 	async fetch(){
-		const resp = await this.$axios.$get('/news/list')
-		this.news = resp.news
+		const resp = await this.$axios.$post('/users/list/admin', {
+			token: this.$store.getters['auth/get_token']
+		})
+		this.users = resp.users
 		this.tableLoading = false
 	},
 	methods: {
@@ -98,14 +87,14 @@ export default {
 				icon: 'pi pi-exclamation-triangle',
 				accept: async () => {
 					this.tableLoading = true
-					const result = await this.$axios.$post('/news/delete', {
+					const result = await this.$axios.$post('/users/delete', {
 						token: this.$store.getters['auth/get_token'],
 						id: id
 					})
 					if(result.success){
 						this.$toast.add({severity:'success', summary: 'Succès!', detail:'suppression effectué', life: 3000});
 					} else{
-						this.$toast.add({severity:'error', summary: 'Erreur!', detail:"Un problème est survenu. Veuillez contacter l'administrateur", life: 3000});
+						this.$toast.add({severity:'error', summary: 'Erreur!', detail:result.error, life: 3000});
 					}
 					this.tableLoading = false
 					this.$nuxt.refresh()
