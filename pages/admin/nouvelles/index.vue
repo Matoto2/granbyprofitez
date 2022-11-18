@@ -5,7 +5,27 @@
 				Ajouter +
 			</NuxtLink>
 
-			<DataTable :loading="tableLoading" :value="news">
+			<DataTable :loading="tableLoading"
+					   :value="news"
+					   showGridlines
+					   :filters.sync="filters"
+					   filterDisplay="menu"
+					   :globalFilterFields="['title']"
+					   responsiveLayout="scroll">
+				<template #header>
+					<div class="datatable-header-row">
+						<div>
+							<Button label="Tous" @click="filters['status'].value = ''" class="p-button-text" />
+							<Button label="Publié" @click="filters['status'].value = 'publish'" class="p-button-text" />
+							<Button label="Brouillon" @click="filters['status'].value = 'draft'" class="p-button-text" />
+						</div>
+						<InputText v-model="filters['global'].value" placeholder="Recherche" />
+					</div>
+
+				</template>
+				<template #empty>
+					Aucune nouvelle trouvé.
+				</template>
 				<Column field="title" header="Titre"></Column>
 				<Column headerStyle="width: 3rem" field="status" header="Status">
 					<template #body="{data}">
@@ -31,9 +51,12 @@
 </template>
 
 <script>
+import {FilterMatchMode,FilterOperator} from 'primevue/api/';
+
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Button from 'primevue/button';
+import InputText from 'primevue/inputtext';
 
 export default {
 	middleware: 'auth',
@@ -44,11 +67,16 @@ export default {
 		DataTable,
 		Column,
 		Button,
+		InputText
+	},
+	created() {
+		this.initFilters();
 	},
 	data(){
 		return {
 			news: [],
 			tableLoading: true,
+			filters: {}
 		}
 	},
 	async fetch(){
@@ -57,6 +85,12 @@ export default {
 		this.tableLoading = false
 	},
 	methods: {
+		initFilters() {
+			this.filters = {
+				'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
+				'status': {value: null, matchMode: FilterMatchMode.EQUALS},
+			}
+		},
 		del(id){
 			this.$confirm.require({
 				message: 'Êtes-vous sûr? Cette opération est irréversible.',
@@ -81,3 +115,10 @@ export default {
 	}
 }
 </script>
+<style scoped>
+.datatable-header-row{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+</style>
