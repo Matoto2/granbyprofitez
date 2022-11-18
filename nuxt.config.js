@@ -33,6 +33,7 @@ export default {
 		{ src: "~/plugins/vue_trix", mode: "client", ssr: false },
 		{ src: "~/plugins/confirmationService", mode: "client", ssr: false },
 		{ src: "~/plugins/toastService", mode: "client", ssr: false },
+		{ src: "~/plugins/vcalendar", ssr: false },
 	],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components

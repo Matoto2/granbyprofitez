@@ -10,8 +10,14 @@
 			<Dropdown id="status" v-model="form.status" :options="statusChoises" optionLabel="label" optionValue="value" placeholder="Choix" />
 		</FieldWrapper>
 		<FieldWrapper id="date" label="Date publiée">
-			{{form.posted_date}}
-			<input type="datetime-local" v-model="form.posted_date">
+			<client-only>
+				<v-date-picker v-model="form.posted_date" mode="dateTime" is24hr>
+					<template v-slot="{ inputValue, inputEvents }">
+						<InputText :value="inputValue"
+								   v-on="inputEvents"></InputText>
+					</template>
+				</v-date-picker>
+			</client-only>
 		</FieldWrapper>
 		<FieldWrapper id="content" label="Contenu">
 			<client-only>
@@ -23,14 +29,12 @@
 </template>
 <script>
 import Dropdown from 'primevue/dropdown';
-import Calendar from 'primevue/calendar';
 import InputText from 'primevue/inputtext';
 
 import Button from 'primevue/button';
 export default {
 	components: {
 		Dropdown,
-		Calendar,
 		InputText,
 		Button,
 	},
