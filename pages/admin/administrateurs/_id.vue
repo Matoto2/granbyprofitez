@@ -12,13 +12,8 @@ export default {
 	meta: {
 		auth: {role: ['admin']}
 	},
-	async asyncData({ params, $axios, error, store }) {
-		const resp = await $axios.$post('/users/get', {
-			token: store.getters['auth/get_token'],
-			id: params.id
-		})
-		if(!resp.success)
-			error({ statusCode: 404, message: 'Oups, vérifier votre URL' })
+	async asyncData({ params, $dataApi }) {
+		const resp = await $dataApi.getUser(params.id)
 		return {resp}
 	}
 }

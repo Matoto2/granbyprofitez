@@ -5,7 +5,8 @@ export default function({$axios, error, store}, inject){
 		deleteNews,
 		getUser,
 		getBusinesses,
-		deleteUser
+		deleteUser,
+		getAdmins
 	})
 	//News
 	async function getSingleNews(id){
@@ -38,6 +39,12 @@ export default function({$axios, error, store}, inject){
 	}
 	async function getBusinesses(){
 		const resp = await $axios.$post('/users/list/business', {
+			token: store.getters['auth/get_token']
+		})
+		return resp
+	}
+	async function getAdmins(){
+		const resp = await $axios.$post('/users/list/admin', {
 			token: store.getters['auth/get_token']
 		})
 		return resp
