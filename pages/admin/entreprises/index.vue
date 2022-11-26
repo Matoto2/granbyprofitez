@@ -24,7 +24,7 @@
 				<Column field="business" header="Entreprise"></Column>
 				<Column field="logo" header="Logo">
 					<template #body="{data}">
-						<img v-if="data.logo" :src=000000000000000000000000000000000000000000000000000000000000"data.logo.sizes.thumbnail.source_url" alt="">
+						<img class="logo-preview" v-if="data.logo" :src="data.logo.sizes.thumbnail.source_url" alt="">
 					</template>
 				</Column>
 				<Column field="email" header="Courriel"></Column>
@@ -113,5 +113,11 @@ export default {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+}
+.logo-preview{
+	height: 80px;
+	width: 100%;
+	object-fit: contain;
+	object-position: top left
 }
 </style>

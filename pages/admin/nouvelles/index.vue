@@ -80,7 +80,7 @@ export default {
 		}
 	},
 	async fetch(){
-		const resp = await this.$axios.$get('/news/list')
+		const resp = await this.$dataApi.getNewsList()
 		this.news = resp.news
 		this.tableLoading = false
 	},

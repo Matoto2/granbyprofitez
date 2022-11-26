@@ -27,9 +27,10 @@ export default {
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
 	plugins: [
-		"~/plugins/axios.js",
-		"~/plugins/local-storage.js",
+		"~/plugins/axios",
+		"~/plugins/local-storage",
 		"~/plugins/slugify",
+		"~/plugins/dataApi",
 		{ src: "~/plugins/vue_trix", mode: "client", ssr: false },
 		{ src: "~/plugins/confirmationService", mode: "client", ssr: false },
 		{ src: "~/plugins/toastService", mode: "client", ssr: false },

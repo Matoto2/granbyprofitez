@@ -6,13 +6,13 @@
 		<FieldWrapper id="logo" label="Logo de l'entreprise">
 			<div class="upload-file-wrapper">
 				<div style="position: relative;display: inline-block" class="img-wrapper">
-					<Button v-if="form.logo.wp_id !== undefined"
+					<Button v-if="form.logo?.wp_id"
 							icon="pi pi-trash"
 							class="p-button-rounded p-button-danger"
 							style="position: absolute;right:-10px;opacity: .8"
 							@click="deleteImage"
 					/>
-					<img v-if="form.logo.wp_id !== undefined" :src="form.logo?.sizes?.thumbnail?.source_url" style="margin-top: 10px" alt="">
+					<img v-if="form.logo?.wp_id" :src="form.logo?.sizes?.thumbnail?.source_url" style="margin-top: 10px" alt="">
 				</div>
 				<FileUpload mode="basic" name="logo[]" @select="onSelectedFiles" accept="image/*"/>
 			</div>

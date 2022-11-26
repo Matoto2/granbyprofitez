@@ -12,12 +12,8 @@ export default {
 	meta: {
 		auth: {role: ['admin']}
 	},
-	async asyncData({ params, $axios, error }) {
-		const resp = await $axios.$post('/news/get', {
-			id: params.id
-		})
-		if(!resp.success)
-			error({ statusCode: 404, message: 'Oups, vérifier votre URL' })
+	async asyncData({ params, $dataApi }) {
+		const resp = await $dataApi.getSingleNews(params.id)
 		return {resp}
 	}
 }
