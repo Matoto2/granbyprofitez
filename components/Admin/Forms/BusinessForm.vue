@@ -4,18 +4,7 @@
 			<InputText type="text" v-model="form.business"/>
 		</FieldWrapper>
 		<FieldWrapper id="logo" label="Logo de l'entreprise">
-			<div class="upload-file-wrapper">
-				<div style="position: relative;display: inline-block" class="img-wrapper">
-					<Button v-if="form.logo?.wp_id"
-							icon="pi pi-trash"
-							class="p-button-rounded p-button-danger"
-							style="position: absolute;right:-10px;opacity: .8"
-							@click="deleteImage"
-					/>
-					<img v-if="form.logo?.wp_id" :src="form.logo?.sizes?.thumbnail?.source_url" style="margin-top: 10px" alt="">
-				</div>
-				<FileUpload mode="basic" name="logo[]" @select="onSelectedFiles" accept="image/*"/>
-			</div>
+			<SingleFileUpload @saving="toggleIsSaving" v-model="form.logo"></SingleFileUpload>
 		</FieldWrapper>
 		<FieldWrapper id="nameFirst" label="Prénom">
 			<InputText type="text" v-model="form.nameFirst"/>
@@ -36,12 +25,11 @@
 <script>
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
-import FileUpload from 'primevue/fileupload';
+
 export default {
 	components: {
 		InputText,
-		Button,
-		FileUpload
+		Button
 	},
 	props: {
 		form: {
@@ -69,33 +57,8 @@ export default {
 		}
 	},
 	methods: {
-		onSelectedFiles(event){
-			if(event.files.length > 0){
-				let bodyFormData = new FormData();
-				bodyFormData.append('file', event.files[0])
-				this.$axios.post(
-					'https://imgapi.lithiummarketing.net/wp-json/wp/v2/media',
-					bodyFormData,
-					{
-						headers: {
-							"Content-Disposition": "attachment; filename=pexels-pixabay-60597.jpg",
-							"Content-Type": "image/jpg"
-						},
-						auth: {
-							username: "lithiummarketing",
-							password: "LVrE BrkO PPh0 q8XJ csxq laqa"
-						}
-					}
-				).then((response)=>{
-					this.form.logo = {
-						wp_id: response.data.id,
-						sizes: response.data.media_details.sizes
-					}
-				})
-			}
-		},
-		async deleteImage(){
-
+		toggleIsSaving(value){
+			this.saving = value
 		},
 		async submit(){
 			this.saving = true

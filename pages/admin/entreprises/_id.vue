@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<AdminLayout title="Editer une nouvelle">
+		<AdminLayout title="Editer une entreprise">
 			<BusinessForm :form="resp.user" :use="'edit'" />
 		</AdminLayout>
 	</div>

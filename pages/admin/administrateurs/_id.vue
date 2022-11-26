@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<AdminLayout title="Editer une nouvelle">
+		<AdminLayout title="Editer un administrateur">
 			<UserForm :form="resp.user" :use="'edit'" />
 		</AdminLayout>
 	</div>
