@@ -35,6 +35,7 @@ export default {
 		{ src: "~/plugins/toastService", mode: "client", ssr: false },
 		{ src: "~/plugins/vcalendar", ssr: false },
 	],
+	serverMiddleware: ['~/serverMiddleware/selectiveSSR.js'],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
 	components: {

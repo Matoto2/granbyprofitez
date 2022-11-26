@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<AdminLayout title="Ajouter un administrateur">
-			<UserForm />
+		<AdminLayout title="Ajouter une entreprise">
+			<BusinessForm />
 		</AdminLayout>
 	</div>
 </template>

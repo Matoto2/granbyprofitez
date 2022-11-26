@@ -22,7 +22,11 @@
 					Aucune entreprise trouvé.
 				</template>
 				<Column field="business" header="Entreprise"></Column>
-				<Column field="logo" header="Logo"></Column>
+				<Column field="logo" header="Logo">
+					<template #body="{data}">
+						<img v-if="data.logo" :src=000000000000000000000000000000000000000000000000000000000000"data.logo.sizes.thumbnail.source_url" alt="">
+					</template>
+				</Column>
 				<Column field="email" header="Courriel"></Column>
 				<Column headerStyle="width: 50px; text-align: center">
 					<template #body="{data}">
