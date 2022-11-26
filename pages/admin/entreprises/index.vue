@@ -71,9 +71,7 @@ export default {
 		}
 	},
 	async fetch(){
-		const resp = await this.$axios.$post('/users/list/business', {
-			token: this.$store.getters['auth/get_token']
-		})
+		const resp = await this.$dataApi.getBusinesses()
 		this.users = resp.users
 		this.tableLoading = false
 	},
@@ -91,10 +89,7 @@ export default {
 				icon: 'pi pi-exclamation-triangle',
 				accept: async () => {
 					this.tableLoading = true
-					const result = await this.$axios.$post('/users/delete', {
-						token: this.$store.getters['auth/get_token'],
-						id: id
-					})
+					const result = await this.$dataApi.deleteUser(id)
 					if(result.success){
 						this.$toast.add({severity:'success', summary: 'Succès!', detail:'suppression effectué', life: 3000});
 					} else{
