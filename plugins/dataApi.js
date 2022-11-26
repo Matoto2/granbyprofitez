@@ -1,7 +1,8 @@
-export default function({$axios, error}, inject){
+export default function({$axios, error, store}, inject){
 	inject('dataApi', {
 		getSingleNews,
-		getNewsList
+		getNewsList,
+		deleteNews
 	})
 	async function getSingleNews(id){
 		const resp = await $axios.$post('/news/get', {
@@ -13,5 +14,11 @@ export default function({$axios, error}, inject){
 	}
 	async function getNewsList(){
 		return await $axios.$get('/news/list')
+	}
+	async function deleteNews(id){
+		return await $axios.$post('/news/delete', {
+			token: store.getters['auth/get_token'],
+			id: id
+		})
 	}
 }
