@@ -1,12 +1,21 @@
 <template>
 	<form @submit.prevent="submit">
-		{{form}}
 		<FieldWrapper id="business" label="Nom de l'entreprise">
 			<InputText type="text" v-model="form.business"/>
 		</FieldWrapper>
 		<FieldWrapper id="logo" label="Logo de l'entreprise">
-			<img alt="">
-			<FileUpload mode="basic" name="logo[]" @select="onSelectedFiles" accept="image/*"/>
+			<div class="upload-file-wrapper">
+				<div style="position: relative;display: inline-block" class="img-wrapper">
+					<Button v-if="form.logo"
+							icon="pi pi-trash"
+							class="p-button-rounded p-button-danger"
+							style="position: absolute;right:-10px;opacity: .8"
+							@click="deleteImage"
+					/>
+					<img v-if="form.logo" :src="form.logo?.sizes?.thumbnail?.source_url" style="margin-top: 10px" alt="">
+				</div>
+				<FileUpload mode="basic" name="logo[]" @select="onSelectedFiles" accept="image/*"/>
+			</div>
 		</FieldWrapper>
 		<FieldWrapper id="nameFirst" label="Prénom">
 			<InputText type="text" v-model="form.nameFirst"/>
@@ -62,23 +71,31 @@ export default {
 	methods: {
 		onSelectedFiles(event){
 			if(event.files.length > 0){
-				this.form.logo = {}
-				this.form.logo.size = event.files[0].size
-				this.form.logo.type = event.files[0].type
-				this.form.logo.ext = event.files[0].name.substring(event.files[0].name.lastIndexOf('.'), event.files[0].name.length) || event.files[0].name
-				this.getBase64(event.files[0])
+				let bodyFormData = new FormData();
+				bodyFormData.append('file', event.files[0])
+				this.$axios.post(
+					'https://imgapi.lithiummarketing.net/wp-json/wp/v2/media',
+					bodyFormData,
+					{
+						headers: {
+							"Content-Disposition": "attachment; filename=pexels-pixabay-60597.jpg",
+							"Content-Type": "image/jpg"
+						},
+						auth: {
+							username: "lithiummarketing",
+							password: "LVrE BrkO PPh0 q8XJ csxq laqa"
+						}
+					}
+				).then((response)=>{
+					this.form.logo = {
+						wp_id: response.data.id,
+						sizes: response.data.media_details.sizes
+					}
+				})
 			}
 		},
-		getBase64(file){
-			const reader = new FileReader();
-			reader.readAsDataURL(file);
-			reader.onloadend = () => {
-				let data = reader.result
-				this.form.logo.data = data.substring(data.indexOf(',') + 1)
-			};
-			reader.onerror = function (error) {
-				console.log('Error: ', error);
-			};
+		async deleteImage(){
+
 		},
 		async submit(){
 			this.saving = true
@@ -90,7 +107,7 @@ export default {
 				nameFirst: this.form.nameFirst,
 				nameLast: this.form.nameLast,
 			}
-			console.log(form);return;
+
 			let response = {}
 			if(this.use === 'add'){
 				//check password
