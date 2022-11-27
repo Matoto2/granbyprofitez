@@ -44,6 +44,7 @@ export default {
 			'~/components',
 			'~/components/Admin',
 			'~/components/Admin/Forms',
+			'~/components/Gestion',
 		]
 	},
 
