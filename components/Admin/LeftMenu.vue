@@ -1,45 +1,60 @@
 <template>
-	<Menu :model="items" />
+	<nav class="menu-left-nav">
+		<ul class="menu-left">
+			<li v-for="item in items">
+				<NuxtLink :to="item.to">
+					<i :class="item.icon"></i>
+					{{item.label}}
+				</NuxtLink>
+			</li>
+		</ul>
+	</nav>
+
 </template>
 <script>
-import Menu from 'primevue/menu';
 export default {
-	components: {
-		Menu,
-	},
 	data() {
 		return {
 			items: [
 				{
 					label: 'Tableau de bord',
 					icon:'pi pi-fw pi-th-large',
-					command: () => {
-						this.$router.push('/admin/tableau-de-bord')
-					}
+					to: '/admin/tableau-de-bord'
 				},
 				{
 					label: 'Entreprises',
 					icon:'pi pi-fw pi-building',
-					command: () => {
-						this.$router.push('/admin/entreprises')
-					}
+					to: '/admin/entreprises'
 				},
 				{
 					label: 'Nouvelles',
 					icon:'pi pi-fw pi-book',
-					command: () => {
-						this.$router.push('/admin/nouvelles')
-					}
+					to: '/admin/nouvelles'
 				},
 				{
 					label: 'Administrateurs',
 					icon:'pi pi-fw pi-users',
-					command: () => {
-						this.$router.push('/admin/administrateurs')
-					}
+					to: '/admin/administrateurs'
 				}
 			]
 		}
 	}
 }
 </script>
+<style scoped>
+.menu-left{
+	padding-left: 0;
+	list-style: none;
+}
+nav a{
+	padding: .5rem;
+	border-bottom: 1px solid #ccc;
+	display: block;
+	color: #000;
+	text-decoration: none
+}
+a.nuxt-link-active{
+	font-weight: 700;
+	background: #f2f2f2;
+}
+</style>

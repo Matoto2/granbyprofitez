@@ -5,13 +5,11 @@ export const AUTH_MUTATIONS = {
 	SET_USER: 'SET_USER',
 	SET_PAYLOAD: 'SET_PAYLOAD',
 	LOGOUT: 'LOGOUT',
-	SET_ERRORS: 'SET_ERRORS'
 }
 
 export const state = () => ({
 	access_token: null,
 	current_user: null,
-	errors: {}
 })
 
 export const mutations = {
@@ -30,20 +28,15 @@ export const mutations = {
 		state.current_user = null
 		state.access_token = null
 	},
-
-	[AUTH_MUTATIONS.SET_ERRORS] (state, errors) {
-		state.errors = errors.data
-	},
 }
 
 export const actions = {
 	async login ({ commit, dispatch }, { email, password }) {
-		try{
-			const data = await this.$axios.post(
-				'/login',
-				{ email, password }
-			)
-
+		const data = await this.$axios.post(
+			'/login',
+			{ email, password }
+		)
+		if(data.data.success){
 			// commit the user and tokens to the state
 			commit(AUTH_MUTATIONS.SET_USER, {
 				id: data.data.session.id,
@@ -54,10 +47,9 @@ export const actions = {
 				token: data.data.session.token,
 				datePing: data.data.session.datePing
 			})
-		}catch(error){
-			commit(AUTH_MUTATIONS.SET_ERRORS, error.response)
+		}else{
+			return 'Nom d\'utilisateur ou mot de passe invalide.';
 		}
-
 	},
 
 	/*async register ({ commit }, { email_addr, password }) {

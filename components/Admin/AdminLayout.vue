@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1>Bienvenue {{current_user.name}}</h1>
+		<h1>Bienvenue {{current_user?.name}}</h1>
 		<div class="sidebar-wrapper">
 			<div id="sidebar">
 				<LeftMenu></LeftMenu>

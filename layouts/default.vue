@@ -5,9 +5,7 @@
 			<Nuxt />
 		</main>
 		<Footer/>
-		<ClientOnly>
-			<ConfirmDialog></ConfirmDialog>
-			<Toast />
-		</ClientOnly>
+		<ConfirmDialog></ConfirmDialog>
+		<Toast />
 	</div>
 </template>

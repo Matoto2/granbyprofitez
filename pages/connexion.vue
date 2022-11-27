@@ -10,10 +10,10 @@
 				<InputText id="password" type="password" v-model="password" />
 				<label for="password">Mot de passe</label>
 			</span>
-			<div v-if="$store.state.auth.errors.status" class="error">
-				Nom d'utilisateur ou mot de passe invalide.
+			<div v-if="errors" class="error">
+				{{errors}}
 			</div>
-			<Button type="submit" label="Se connecter" />
+			<Button :disabled="loading" type="submit" label="Se connecter" />
 		</form>
 	</div>
 </template>
@@ -29,19 +29,25 @@ export default {
 	},
 	data(){
 		return {
+			loading: false,
 			email: '',
 			password: '',
+			errors: '',
 		}
 	},
 	methods: {
 		async login() {
 			const email = this.email
 			const password = this.password
-			await this.$store.dispatch('auth/login', { email, password })
-			this.redirect_to_dashboard()
+			this.errors = await this.$store.dispatch('auth/login', { email, password })
+			if(!this.errors)
+				this.redirect_to_dashboard()
+			else
+				this.$toast.add({severity:'error', summary: 'Erreur!', detail:this.errors, life: 3000});
 		},
 		redirect_to_dashboard(){
-			this.$router.push('/tableau-de-bord')
+			const url = this.$store.getters['auth/getRole'] === 'admin' ? '/admin':'/gestion'
+			this.$router.push(url+'/tableau-de-bord')
 		}
 	}
 }
