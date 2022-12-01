@@ -1,12 +1,62 @@
+:root{
+	font-family: 'Montserrat', sans-serif;
+	font-size: 18px;
+	color: #606060;
+}
 .p-float-label{
 	margin: 1.5rem 0;
-}
-.sidebar-wrapper{
-	display: grid;
-	grid-template-columns: 300px 1fr;
-	gap: 3rem;
 }
 .p-button,
 .p-button *{
 	text-decoration: none;
+}
+a{
+	font-weight: bold;
+	color: #000;
+}
+img{
+	max-width: 100%;
+	height: auto;
+}
+.container{
+	max-width: 1700px;
+	width: 100%;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	margin-left: auto;
+	margin-right: auto;
+	box-sizing: border-box;
+}
+.btn{
+	display: inline-block;
+	text-align: center;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: #fff !important;
+	font-weight: 600;
+	padding: .9rem 1.5rem;
+	border-radius: 10px;
+	background-color: #EDA008;
+	transition: all .3s;
+}
+.btn:hover{
+	color: #fff !important;
+	background-color: #000;
+}
+button{
+	cursor: pointer;
+}
+.h2{
+	font-size: 2rem;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+address{
+	font-style: normal;
+}
+.GMap__Wrapper{
+	height: 70vh !important;
 }

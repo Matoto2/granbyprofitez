@@ -12,7 +12,20 @@ export default {
 			{name: 'format-detection', content: 'telephone=no'}
 		],
 		link: [
-			{rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
+			{rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
+			{
+				rel: 'preconnect',
+				href: 'https://fonts.googleapis.com'
+			},
+			{
+				rel: 'preconnect',
+				href: 'https://fonts.gstatic.com',
+				crossorigin: true
+			},
+			{
+				rel: 'stylesheet',
+				href: 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap'
+			}
 		]
 	},
 
@@ -45,12 +58,15 @@ export default {
 			'~/components/Admin',
 			'~/components/Admin/Forms',
 			'~/components/Gestion',
+			'~/components/Gestion/Forms',
+			'~/components/LmMap',
 		]
 	},
 
 	// Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
 	buildModules: [
-		'@nuxtjs/moment'
+		'@nuxtjs/moment',
+		'vue-ssr-carousel/nuxt'
 	],
 	moment: {
 		timezone: true,
@@ -65,6 +81,12 @@ export default {
 		'primevue/nuxt',
 		// https://go.nuxtjs.dev/axios
 		'@nuxtjs/axios',
+		[
+			"nuxt-gmaps",
+			{
+				key: 'AIzaSyB_qrCxWaDhlsfk3bXFZLBcHa7PltphHh4'
+			}
+		]
 	],
 
 	// Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -76,6 +98,6 @@ export default {
 	// Build Configuration: https://go.nuxtjs.dev/config-build
 	build: {
 		// https://github.com/primefaces/primevue/issues/844
-		transpile: ['primevue'],
+		transpile: ['primevue', '@googlemaps/js-api-loader'],
 	}
 }

@@ -1,6 +1,6 @@
 export default function(req, res, next) {
-	const path = '/admin/'
-	if(req.originalUrl.includes(path)) {
+	const paths = ['/admin/', '/gestion/']
+	if(paths.some(e => req.originalUrl.includes(e))) {
 		res.spa = true
 	}
 	next()

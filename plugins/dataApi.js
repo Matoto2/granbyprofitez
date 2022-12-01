@@ -6,7 +6,10 @@ export default function({$axios, error, store}, inject){
 		getUser,
 		getBusinesses,
 		deleteUser,
-		getAdmins
+		getAdmins,
+		getJobsList,
+		getSingleJob,
+		deleteJob
 	})
 	//News
 	async function getSingleNews(id){
@@ -56,4 +59,31 @@ export default function({$axios, error, store}, inject){
 		})
 		return resp
 	}
+
+	//Jobs
+	async function getJobsList(businessID = false){
+		let post = {}
+		if(businessID){
+			post = {
+				businessID: businessID
+			}
+		}
+		return await $axios.$post('/jobs/list', post)
+	}
+	async function getSingleJob(id){
+		const resp = await $axios.$post('/jobs/get', {
+			id: id
+		})
+		if(!resp.success)
+			error({ statusCode: 404, message: 'Oups, vérifier votre URL' })
+		return resp
+	}
+	async function deleteJob(id){
+		const resp = await $axios.$post('/jobs/delete', {
+			token: store.getters['auth/get_token'],
+			id: id
+		})
+		return resp
+	}
+
 }

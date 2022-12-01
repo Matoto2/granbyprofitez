@@ -13,32 +13,7 @@
 </template>
 <script>
 export default {
-	data() {
-		return {
-			items: [
-				{
-					label: 'Tableau de bord',
-					icon:'pi pi-fw pi-th-large',
-					to: '/admin/tableau-de-bord'
-				},
-				{
-					label: 'Entreprises',
-					icon:'pi pi-fw pi-building',
-					to: '/admin/entreprises'
-				},
-				{
-					label: 'Nouvelles',
-					icon:'pi pi-fw pi-book',
-					to: '/admin/nouvelles'
-				},
-				{
-					label: 'Administrateurs',
-					icon:'pi pi-fw pi-users',
-					to: '/admin/administrateurs'
-				}
-			]
-		}
-	}
+	props: ['items']
 }
 </script>
 <style scoped>
