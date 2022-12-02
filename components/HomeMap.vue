@@ -1,7 +1,7 @@
 <template>
 	<div class="grid-home-map">
-		<InteractiveMap v-if="mapLocations"
-						:locations="mapLocations.services"
+		<InteractiveMap v-if="mapLocations.length"
+						:locations="mapLocations"
 						:centerLat="45.40372"
 						:centerLng="-72.73419"
 		></InteractiveMap>
@@ -11,7 +11,7 @@
 				<Dropdown v-model="selectedCategory" optionValue="value" optionLabel="label" :options="categories"></Dropdown>
 			</div>
 			<div class="liste-entreprises">
-				<div v-for="location in mapLocations.services">
+				<div v-for="location in mapLocations">
 					<h2>{{location.name}}</h2>
 					<address>{{ location.address }},<br>{{ location.city }}, {{location.province}} {{location.postal_code}}</address>
 					<div class="contact">
@@ -43,17 +43,22 @@ export default {
 		}
 	},
 	async fetch(){
-		let [locations, categories] = await Promise.all([
-			this.$axios.$get('/services/list'),
-			this.$axios.$get('services/categories'),
-		])
+		this.mapLocations = this.$store.getters["locations/all_locations"]
+		if(!this.mapLocations.length){
+			await Promise.all([
+				this.$store.dispatch('locations/storeAllLocations'),
+				this.$store.dispatch('locations/storeCategories'),
+			])
 
-		this.mapLocations = locations
+			this.mapLocations = this.$store.getters["locations/all_locations"]
+		}
 
-		const cats = Object.keys(categories.categories).map(v => {
+		const storecategories = this.$store.getters["locations/categories"]
+
+		const cats = Object.keys(storecategories).map(v => {
 			return {
 				value: v,
-				label: categories.categories[v]
+				label: storecategories[v]
 			}
 		})
 		cats.unshift({
@@ -90,5 +95,6 @@ export default {
 	display: flex;
 	align-items: center;
 	background-color: #f2f2f2;
+	padding-left: 3rem;
 }
 </style>

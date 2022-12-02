@@ -49,6 +49,7 @@ export default {
 <style scoped>
 .grid-img-links{
 	position: relative;
+	padding-bottom: 7rem
 }
 .grid-img-links .container{
 	display: grid;

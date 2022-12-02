@@ -12,11 +12,13 @@
 			</div>
 			<div class="galerie">
 				<div class="col1">
-
+					<img src="/images/tempo1.jpg" alt="">
 				</div>
 				<div class="col2">
-
-					<NuxtLink class="btn" to="">Prêts à vous installer?</NuxtLink>
+					<img src="/images/tempo1.jpg" alt="">
+					<div class="btn-wrapper">
+						<NuxtLink class="btn" to="">Prêts à vous installer?</NuxtLink>
+					</div>
 				</div>
 			</div>
 
@@ -31,6 +33,7 @@
 .upper{
 	display: flex;
 	padding-bottom: 4rem;
+	padding-left: 15%;
 }
 h2{
 	display: flex;
@@ -46,5 +49,15 @@ h2 span{
 .galerie{
 	display: grid;
 	grid-template-columns: 1fr 1fr;
+	padding-bottom: 3rem;
+}
+.col2{
+	position: relative;
+	margin-top: -7rem;
+}
+.btn-wrapper{
+	display: flex;
+	justify-content: center;
+	margin-top: 3.5rem;
 }
 </style>
