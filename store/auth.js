@@ -81,5 +81,8 @@ export const getters = {
 	// get user role
 	getRole: (state) => {
 		return state.current_user.role
+	},
+	user_id: (state) => {
+		return state.current_user.id
 	}
 }

@@ -12,7 +12,7 @@
 					   filterDisplay="menu"
 					   :globalFilterFields="['title']"
 					   sortField="dateUpdated"
-					   :sortOrder="1"
+					   :sortOrder="-1"
 					   responsiveLayout="scroll">
 				<template #header>
 					<div class="datatable-header-row">
@@ -87,9 +87,7 @@ export default {
 		}
 	},
 	async fetch(){
-		const resp = await this.$dataApi.getJobsList({
-			businessID: this.$store.state.auth.current_user.id
-		})
+		const resp = await this.$dataApi.getJobsList(this.$store.getters['auth/user_id'])
 		this.jobs = resp.jobs
 		this.tableLoading = false
 	},

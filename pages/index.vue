@@ -49,50 +49,7 @@ export default {
 				"de la vie",
 				"de la nature",
 			],
-			jobs: [
-				{
-					id: '123413231231',
-					title: 'Cariste',
-					logo: '/images/deposit1.jpg',
-					business: 'Avril Supermarché Santé',
-					date: new Date(),
-				},
-				{
-					id: '1233413231231',
-					title: 'Programmeur, machines à contrôle numérique (CN)',
-					logo: '/images/deposit1.jpg',
-					business: 'Avril Supermarché Santé',
-					date: new Date(),
-				},
-				{
-					id: '1234132331231',
-					title: 'Cariste',
-					logo: '/images/deposit1.jpg',
-					business: 'Avril Supermarché Santé',
-					date: new Date(),
-				},
-				{
-					id: '12334132312311',
-					title: 'Programmeur, machines à contrôle numérique (CN)',
-					logo: '/images/deposit1.jpg',
-					business: 'Avril Supermarché Santé',
-					date: new Date(),
-				},
-				{
-					id: '1223413231231',
-					title: 'Cariste',
-					logo: '/images/deposit1.jpg',
-					business: 'Avril Supermarché Santé',
-					date: new Date(),
-				},
-				{
-					id: '21233413231231',
-					title: 'Programmeur, machines à contrôle numérique (CN)',
-					logo: '/images/deposit1.jpg',
-					business: 'Avril Supermarché Santé',
-					date: new Date(),
-				}
-			]
+			jobs: []
 		}
 	},
 }

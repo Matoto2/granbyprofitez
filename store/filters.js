@@ -6,17 +6,17 @@ export const FILTER_MUTATIONS = {
 }
 
 export const state = () => ({
-	categories: {},
+	secteurs: {},
 	categoriesPro: {},
-	specifications: {},
+	type_emploi: {},
 	horaire: {}
 })
 
 export const mutations = {
 	[FILTER_MUTATIONS.SET_FILTERS] (state, data) {
-		state.categories = data.categories
+		state.secteurs = data.secteurs
 		state.categoriesPro = data.categoriesPro
-		state.specifications = data.specifications
+		state.type_emploi = data.type_emploi
 		state.horaire = data.horaire
 	},
 }
@@ -24,11 +24,11 @@ export const mutations = {
 export const actions = {
 	async filters ({ commit }) {
 		const resp = await this.$axios.get('/filters/get')
-		if(resp.data.categories){
+		if(resp.data.secteurs){
 			commit(FILTER_MUTATIONS.SET_FILTERS, {
-				categories: resp.data.categories,
+				secteurs: resp.data.secteurs,
 				categoriesPro: resp.data.categoriesPro,
-				specifications: resp.data.specifications,
+				type_emploi: resp.data.type_emploi,
 				horaire: resp.data.horaire,
 			})
 		}else{
@@ -38,14 +38,14 @@ export const actions = {
 }
 
 export const getters = {
-	categories: (state) => {
-		return state.categories
+	secteurs: (state) => {
+		return state.secteurs
 	},
 	categoriesPro: (state) => {
 		return state.categoriesPro
 	},
-	specifications: (state) => {
-		return state.specifications
+	type_emploi: (state) => {
+		return state.type_emploi
 	},
 	horaire: (state) => {
 		return state.horaire

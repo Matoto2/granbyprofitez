@@ -7,14 +7,14 @@
 			<Dropdown required id="status" v-model="form.status" :options="statusChoises" optionLabel="label" optionValue="value" placeholder="Choix" />
 		</FieldWrapper>
 
-		<FieldWrapper id="categories" label="Catégories *">
-			<MultiSelect required v-model="form.categories" :options="categoriesChoises" optionLabel="label" optionValue="value" placeholder="Choix" display="chip" />
+		<FieldWrapper id="secteurs" label="Secteurs *">
+			<MultiSelect required v-model="form.secteurs" :options="secteursChoises" optionLabel="label" optionValue="value" placeholder="Choix" display="chip" />
 		</FieldWrapper>
 		<FieldWrapper id="categoriesPro" label="Catégories Professionnels *">
 			<MultiSelect required v-model="form.categoriesPro" :options="categoriesProChoises" optionLabel="label" optionValue="value" placeholder="Choix" display="chip" />
 		</FieldWrapper>
-		<FieldWrapper id="specifications" label="Spécifications *">
-			<MultiSelect required v-model="form.specifications" :options="specificationsChoises" optionLabel="label" optionValue="value" placeholder="Choix" display="chip" />
+		<FieldWrapper id="type_emploi" label="Spécifications *">
+			<MultiSelect required v-model="form.type_emploi" :options="type_emploiChoises" optionLabel="label" optionValue="value" placeholder="Choix" display="chip" />
 		</FieldWrapper>
 		<FieldWrapper id="horaire" label="Horaire *">
 			<MultiSelect required v-model="form.horaire" :options="horaireChoises" optionLabel="label" optionValue="value" placeholder="Choix" display="chip" />
@@ -57,9 +57,9 @@ export default {
 					status: 'publish',
 					title: '',
 					content: '',
-					categories: [],
+					secteurs: [],
 					categoriesPro: [],
-					specifications: [],
+					type_emploi: [],
 					horaire: [],
 					international: false,
 					dateUpdated: new Date(),
@@ -82,33 +82,24 @@ export default {
 		}
 	},
 	async mounted(){
-		if(this.$store.state.filters.categories.length === undefined)
+		if(this.$store.getters["filters/secteurs"].length === undefined)
 			await this.$store.dispatch('filters/filters');
 	},
 	computed: {
-		categoriesChoises(){
-			return this.jsonToArray(this.$store.state.filters.categories)
+		secteursChoises(){
+			return this.$jobFilters.secteursChoises()
 		},
 		categoriesProChoises(){
-			return this.jsonToArray(this.$store.state.filters.categoriesPro)
+			return this.$jobFilters.categoriesProChoises()
 		},
-		specificationsChoises(){
-			return this.jsonToArray(this.$store.state.filters.specifications)
+		type_emploiChoises(){
+			return this.$jobFilters.type_emploiChoises()
 		},
 		horaireChoises(){
-			return this.jsonToArray(this.$store.state.filters.horaire)
+			return this.$jobFilters.horaireChoises()
 		},
 	},
 	methods: {
-		jsonToArray(json){
-			let data = Object.values(json)
-			return Object.keys(json).map((key, v) => {
-				return {
-					label: data[v],
-					value: key
-				}
-			})
-		},
 		async submit(){
 			this.saving = true
 			const form = {
@@ -117,9 +108,9 @@ export default {
 				title: this.form.title,
 				status: this.form.status,
 				content: this.form.content,
-				categories: this.form.categories,
+				secteurs: this.form.secteurs,
 				categoriesPro: this.form.categoriesPro,
-				specifications: this.form.specifications,
+				type_emploi: this.form.type_emploi,
 				horaire: this.form.horaire,
 				international: this.form.international,
 				dateCreated: this.form.dateCreated,

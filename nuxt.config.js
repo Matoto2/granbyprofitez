@@ -44,6 +44,7 @@ export default {
 		"~/plugins/local-storage",
 		"~/plugins/slugify",
 		"~/plugins/dataApi",
+		"~/plugins/jobFilters",
 		{ src: "~/plugins/vue_trix", mode: "client", ssr: false },
 		{ src: "~/plugins/confirmationService", mode: "client", ssr: false },
 		{ src: "~/plugins/toastService", mode: "client", ssr: false },

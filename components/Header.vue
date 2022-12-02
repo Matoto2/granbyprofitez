@@ -7,7 +7,7 @@
 			<div class="header-right">
 				<nav class="top-menu">
 					<ul>
-						<li><NuxtLink to="" class="btn btn-emplois">Offres d'emploi</NuxtLink></li>
+						<li><NuxtLink :to="{name: 'offres-emploi'}" class="btn btn-emplois">Offres d'emploi</NuxtLink></li>
 						<li v-if="!is_loggedin"><NuxtLink to="/connexion">Employeur <svg style="margin-left: .5rem" xmlns="http://www.w3.org/2000/svg" width="15.345" height="17.538" viewBox="0 0 15.345 17.538"><path d="M7.673,2.192a2.739,2.739,0,0,1,2.74,2.74V6.577H4.932V4.932A2.739,2.739,0,0,1,7.673,2.192ZM2.74,4.932V6.577H0V17.538H15.345V6.577h-2.74V4.932a4.932,4.932,0,1,0-9.865,0Zm6.029,6.029v3.288H6.577V9.865H8.769Z"/></svg></NuxtLink></li>
 						<li v-if="is_loggedin && is_admin"><NuxtLink to="/admin/tableau-de-bord">Tableau de bord</NuxtLink></li>
 						<li v-if="is_loggedin && is_business"><NuxtLink to="/gestion/tableau-de-bord">Tableau de bord</NuxtLink></li>

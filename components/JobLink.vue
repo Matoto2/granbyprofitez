@@ -2,19 +2,24 @@
 	<NuxtLink :to="'#'">
 		<div class="upper">
 			<div class="logobox">
-				<img :src="job.logo" alt="">
+				<img v-if="job?.business?.logo.sizes.medium.source_url" :src="job.business.logo.sizes.medium.source_url" alt="">
 			</div>
 			<h2>{{ job.title }}</h2>
 		</div>
 		<div class="infos">
-			<span class="business">{{ job.business }}</span>
-			<span class="date">{{ $moment(job.date).format('D MMMM YYYY') }}</span>
+			<span class="business">{{ job.business.business }}</span>
+			<span class="date">{{ formattedDate }}</span>
 		</div>
 	</NuxtLink>
 </template>
 <script>
 export default {
-	props: ["job"]
+	props: ["job"],
+	computed: {
+		formattedDate(){
+			return this.$moment(this.dateUpdated).format('D MMMM YYYY')
+		}
+	}
 }
 </script>
 <style scoped>
