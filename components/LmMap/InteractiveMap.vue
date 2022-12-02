@@ -48,10 +48,6 @@ export default {
 	},
 
 	methods: {
-		//returnToCenter() {
-		//	this.$refs.gMap.map.setCenter(this.locations[0]);
-		//},
-
 		checkForMarkers() {
 			this.locations.forEach((location, i) => {
 				location.visible = this.$refs.gMap.map

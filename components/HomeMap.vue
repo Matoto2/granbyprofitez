@@ -1,7 +1,8 @@
 <template>
 	<div class="grid-home-map">
-		<InteractiveMap v-if="mapLocations.length"
-						:locations="mapLocations"
+		<InteractiveMap ref="interactivemap"
+						:key="updateMap"
+						:locations="filteredLocations"
 						:centerLat="45.40372"
 						:centerLng="-72.73419"
 		></InteractiveMap>
@@ -11,7 +12,7 @@
 				<Dropdown v-model="selectedCategory" optionValue="value" optionLabel="label" :options="categories"></Dropdown>
 			</div>
 			<div class="liste-entreprises">
-				<div v-for="location in mapLocations">
+				<div v-for="(location, key) in filteredLocations">
 					<h2>{{location.name}}</h2>
 					<address>{{ location.address }},<br>{{ location.city }}, {{location.province}} {{location.postal_code}}</address>
 					<div class="contact">
@@ -20,7 +21,7 @@
 						<div><a v-if="location.website" target="_blank" :href="location.website">Voir le site web</a></div>
 					</div>
 					<div>{{location.description}}</div>
-					<button v-if="location.lat" type="button">Voir sur la carte</button>
+					<button v-if="location.lat" @click="zoomToMarker(key, location)" type="button" class="btn">Voir sur la carte</button>
 				</div>
 			</div>
 		</div>
@@ -39,7 +40,21 @@ export default {
 		return {
 			selectedCategory: 0,
 			categories: [],
-			mapLocations: []
+			mapLocations: [],
+			updateMap: 1234
+		}
+	},
+	computed: {
+		filteredLocations(){
+			if(this.selectedCategory !== 0){
+				const locations = this.mapLocations.filter(v => parseInt(v.cat_id) === parseInt(this.selectedCategory))
+				this.updateMap++
+				return locations
+			}else{
+				if(this.updateMap !== 1234) this.updateMap++
+				return this.mapLocations
+			}
+
 		}
 	},
 	async fetch(){
@@ -68,6 +83,14 @@ export default {
 		this.categories = cats
 
 	},
+	methods: {
+		zoomToMarker(key, location){
+			const map = this.$refs.interactivemap.$refs.gMap.map
+			map.setZoom(16)
+			map.panTo({lat: location.lat, lng: location.lng})
+			google.maps.event.trigger(map.markers[key], 'click')
+		}
+	}
 }
 </script>
 <style scoped>
@@ -83,9 +106,11 @@ export default {
 .liste-entreprises > div{
 	border-bottom: 1px solid #c9ccd0;
 	padding: 2rem;
+	font-size: .9rem;
 }
 .liste-entreprises h2{
 	margin-top: 0;
+	font-size: 1.1rem;
 }
 .right{
 	height: 70vh;
@@ -96,5 +121,18 @@ export default {
 	align-items: center;
 	background-color: #f2f2f2;
 	padding-left: 3rem;
+}
+.liste-entreprises button.btn{
+	padding: .5rem 1rem;
+	font-size: .7rem;
+	margin-top: 1rem;
+}
+.contact{
+	padding: .5rem;
+}
+.contact a{
+	text-decoration: none;
+	font-size: .8rem;
+	font-weight: 600;
 }
 </style>
