@@ -9,7 +9,8 @@ export const state = () => ({
 	secteurs: {},
 	categoriesPro: {},
 	type_emploi: {},
-	horaire: {}
+	horaire: {},
+	selectedFilters: {},
 })
 
 export const mutations = {
@@ -19,6 +20,9 @@ export const mutations = {
 		state.type_emploi = data.type_emploi
 		state.horaire = data.horaire
 	},
+	SET_SELECTED_FILTERS(state, data){
+		state.selectedFilters = data
+	}
 }
 
 export const actions = {
@@ -35,6 +39,9 @@ export const actions = {
 			return 'Oups';
 		}
 	},
+	async storeSelectedFilters ({ commit }, data) {
+		commit('SET_SELECTED_FILTERS', data)
+	},
 }
 
 export const getters = {
@@ -49,5 +56,8 @@ export const getters = {
 	},
 	horaire: (state) => {
 		return state.horaire
+	},
+	selectedFilters: (state) => {
+		return state.selectedFilters
 	}
 }

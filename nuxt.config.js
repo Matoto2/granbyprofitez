@@ -45,10 +45,11 @@ export default {
 		"~/plugins/slugify",
 		"~/plugins/dataApi",
 		"~/plugins/jobFilters",
-		{ src: "~/plugins/vue_trix", mode: "client", ssr: false },
 		{ src: "~/plugins/confirmationService", mode: "client", ssr: false },
 		{ src: "~/plugins/toastService", mode: "client", ssr: false },
 		{ src: "~/plugins/vcalendar", ssr: false },
+		{ src: '~/plugins/nuxt-quill-plugin', ssr: false },
+		{ src: '~/plugins/vueuploadcomponent', ssr: false },
 	],
 	serverMiddleware: ['~/serverMiddleware/selectiveSSR.js'],
 

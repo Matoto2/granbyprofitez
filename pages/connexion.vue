@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="container">
 		<h1>Page de connexion</h1>
 		<form @submit.prevent="login">
 			<span class="p-float-label">

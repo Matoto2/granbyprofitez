@@ -21,7 +21,10 @@
 		</FieldWrapper>
 		<FieldWrapper id="content" label="Contenu">
 			<client-only>
-				<VueTrix v-model="form.content"/>
+				<quill-editor
+					ref="editor"
+					v-model="form.content"
+				/>
 			</client-only>
 		</FieldWrapper>
 		<Button :disabled="saving" type="submit">{{ use === 'add' ? 'Ajouter':'Mettre à jour'}}</Button>

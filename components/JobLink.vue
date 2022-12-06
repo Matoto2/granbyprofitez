@@ -1,5 +1,5 @@
 <template>
-	<NuxtLink :to="'#'">
+	<NuxtLink :to="{ name: 'offres-emploi-id', params: { id: job.id }}">
 		<div class="upper">
 			<div class="logobox">
 				<img v-if="job?.business?.logo.sizes.medium.source_url" :src="job.business.logo.sizes.medium.source_url" alt="">
@@ -17,7 +17,7 @@ export default {
 	props: ["job"],
 	computed: {
 		formattedDate(){
-			return this.$moment(this.dateUpdated).format('D MMMM YYYY')
+			return this.$moment(this.job.dateUpdated).format('D MMMM YYYY')
 		}
 	}
 }

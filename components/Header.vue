@@ -17,11 +17,11 @@
 				<Hamburger></Hamburger>
 				<nav class="menu-principal">
 					<ul class="menu-ul">
-						<li><NuxtLink to="">Travailler</NuxtLink></li>
-						<li><NuxtLink to="">Étudier</NuxtLink></li>
-						<li><NuxtLink to="">Vivre</NuxtLink></li>
-						<li><NuxtLink to="">Immigrer</NuxtLink></li>
-						<li><NuxtLink to="">S'installer</NuxtLink></li>
+						<li><NuxtLink :to="{name: 'travailler'}">Travailler</NuxtLink></li>
+						<li><NuxtLink :to="{name: 'etudier'}">Étudier</NuxtLink></li>
+						<li><NuxtLink :to="{name: 'vivre'}">Vivre</NuxtLink></li>
+						<li><NuxtLink :to="{name: 'immigrer'}">Immigrer</NuxtLink></li>
+						<li><NuxtLink :to="{name: 'sinstaller'}">S'installer</NuxtLink></li>
 					</ul>
 					<span class="separator"></span>
 					<ul class="sociaux">

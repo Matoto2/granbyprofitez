@@ -22,7 +22,7 @@
 				</template>
 			</JobsSlider>
 			<div class="btn-wrapper">
-				<NuxtLink to="" class="btn">Tous les emplois disponibles</NuxtLink>
+				<NuxtLink :to="{name: 'offres-emploi'}" class="btn">Tous les emplois disponibles</NuxtLink>
 			</div>
 		</div>
 
@@ -49,9 +49,19 @@ export default {
 				"de la vie",
 				"de la nature",
 			],
-			jobs: []
 		}
 	},
+	async asyncData({ $axios }) {
+		const jobsToShow = 10
+		const jobs = await $axios.$post(`/jobs/list`, {
+			withBusiness: true,
+			pagination: {
+				page: 1,
+				perPage: jobsToShow
+			}
+		})
+		return { jobs: jobs.jobs ?? [] }
+	}
 }
 </script>
 <style scoped>

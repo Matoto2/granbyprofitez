@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="container">
 		<h1>Bienvenue {{current_user?.name}}</h1>
 		<div class="sidebar-wrapper">
 			<div id="sidebar">

@@ -50,9 +50,11 @@ export default {
 	methods: {
 		checkForMarkers() {
 			this.locations.forEach((location, i) => {
-				location.visible = this.$refs.gMap.map
-					.getBounds()
-					.contains(this.$refs.gMap.markers[i].getPosition());
+				if(this.$refs.gMap.markers[i]){
+					location.visible = this.$refs.gMap.map
+						.getBounds()
+						.contains(this.$refs.gMap.markers[i].getPosition());
+				}
 			});
 
 			this.locationsVisibleOnMap = this.locations

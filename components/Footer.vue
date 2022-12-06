@@ -47,7 +47,7 @@
 						</div>
 					</div>
 					<div class="menu-footer">
-						<NuxtLink to="" class="btn-footer btn">Emplois disponibles</NuxtLink>
+						<NuxtLink :to="{name: 'offres-emploi'}" class="btn-footer btn">Emplois disponibles</NuxtLink>
 						<nav>
 							<ul>
 								<li><NuxtLink to="">Travailler</NuxtLink></li>

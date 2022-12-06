@@ -1,11 +1,8 @@
 <template>
-	<Button @click="logout">Se déconnecter</Button>
+	<button type="button" @click="logout">Se déconnecter</button>
 </template>
 <script>
 export default {
-	components: {
-		Button: require('primevue/button').default
-	},
 	methods: {
 		logout(){
 			this.$store.dispatch('auth/logout')
@@ -14,3 +11,14 @@ export default {
 	}
 }
 </script>
+<style scoped>
+button{
+	outline: none;
+	border: none;
+	text-transform: uppercase;
+	margin-left: 1rem;
+	background: transparent;
+	font-weight: 500;
+	color: #626262;
+}
+</style>

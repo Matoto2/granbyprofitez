@@ -30,9 +30,16 @@
 		</FieldWrapper>
 
 		<FieldWrapper id="content" label="Contenu">
-			<VueTrix v-model="form.content"/>
+			<client-only>
+				<quill-editor
+					ref="editor"
+					v-model="form.content"
+				/>
+			</client-only>
 		</FieldWrapper>
-		<Button :disabled="saving" type="submit">{{ use === 'add' ? 'Ajouter':'Mettre à jour'}}</Button>
+		<div>
+			<Button :disabled="saving" type="submit">{{ use === 'add' ? 'Ajouter':'Mettre à jour'}}</Button>
+		</div>
 	</form>
 </template>
 <script>
@@ -47,7 +54,7 @@ export default {
 		InputText,
 		Button,
 		MultiSelect,
-		ToggleButton
+		ToggleButton,
 	},
 	props: {
 		form: {
@@ -141,3 +148,8 @@ export default {
 	}
 }
 </script>
+<style scoped>
+form{
+
+}
+</style>
