@@ -1,35 +1,90 @@
 <template>
 	<form @submit.prevent="submit">
-		<FieldWrapper id="business" label="Nom de l'entreprise">
-			<InputText type="text" v-model="form.business"/>
-		</FieldWrapper>
-		<FieldWrapper id="logo" label="Logo de l'entreprise">
-			<SingleFileUpload @saving="toggleIsSaving" v-model="form.logo"></SingleFileUpload>
-		</FieldWrapper>
-		<FieldWrapper id="nameFirst" label="Prénom">
-			<InputText type="text" v-model="form.nameFirst"/>
-		</FieldWrapper>
-		<FieldWrapper id="nameLast" label="Nom">
-			<InputText type="text" v-model="form.nameLast"/>
-		</FieldWrapper>
-		<FieldWrapper id="email" label="Courriel">
-			<InputText type="email" v-model="form.email" :disabled="use === 'edit'"/>
-		</FieldWrapper>
-		<FieldWrapper id="password" label="Mot de passe">
-			<InputText type="password" v-model="form.password" placeholder="Mot de passe"/>
-			<InputText type="password" v-model="confirmPassword" placeholder="Confirmer le mot de passe"/>
-		</FieldWrapper>
-		<Button :disabled="saving" type="submit">{{ use === 'add' ? 'Ajouter':'Mettre à jour'}}</Button>
+
+		<Panel style="margin-bottom: 2rem" header="Informations du compte">
+			<div class="p-fluid grid formgrid">
+				<FieldWrapper id="nameFirst" label="Prénom" childclass="md:col-4">
+					<InputText type="text" v-model="form.nameFirst"/>
+				</FieldWrapper>
+				<FieldWrapper id="nameLast" label="Nom" childclass="md:col-4">
+					<InputText type="text" v-model="form.nameLast"/>
+				</FieldWrapper>
+				<FieldWrapper id="email" label="Courriel" childclass="md:col-4">
+					<InputText type="email" v-model="form.email" :disabled="use === 'edit'"/>
+				</FieldWrapper>
+				<FieldWrapper id="password" label="Modifier le mot de passe">
+					<small>Laisser vide pour ne pas modifier</small><br>
+					<InputText type="password" v-model="form.password" placeholder="Mot de passe"/>
+					<InputText type="password" v-model="confirmPassword" placeholder="Confirmer le mot de passe"/>
+				</FieldWrapper>
+			</div>
+		</Panel>
+
+		<Panel header="Informations Entreprise">
+			<div class="p-fluid grid formgrid">
+				<FieldWrapper id="business" label="Nom de l'entreprise" childclass="md:col-4">
+					<InputText type="text" v-model="form.business"/>
+				</FieldWrapper>
+				<FieldWrapper id="address" label="Adresse" childclass="md:col-4">
+					<Textarea v-model="form.address" rows="2"></Textarea>
+				</FieldWrapper>
+				<FieldWrapper id="logo" label="Logo de l'entreprise" childclass="md:col-4">
+					<LmFileUpload :maxItems="1" @saving="toggleIsSaving" v-model="form.logo"></LmFileUpload>
+				</FieldWrapper>
+				<FieldWrapper id="responsable_rh" label="Responsable RH" childclass="md:col-4">
+					<InputText type="text" v-model="form.responsable_rh"/>
+				</FieldWrapper>
+				<FieldWrapper id="categoriesPro" label="Secteur" childclass="md:col-4">
+					<Dropdown v-model="form.categoriesPro" :options="categoriesProChoises" optionLabel="label" optionValue="value"></Dropdown>
+				</FieldWrapper>
+				<FieldWrapper id="postal_code" label="Code postal" childclass="md:col-4">
+					<InputMask v-model="form.postal_code" mask="a9a 9a9"></InputMask>
+				</FieldWrapper>
+				<FieldWrapper id="telephone" label="Téléphone" childclass="md:col-4">
+					<InputMask v-model="form.telephone" mask="999 999-9999"></InputMask>
+				</FieldWrapper>
+				<FieldWrapper id="fax" label="Fax" childclass="md:col-4">
+					<InputMask v-model="form.fax" mask="999 999-9999"></InputMask>
+				</FieldWrapper>
+				<FieldWrapper id="website" label="Site web" childclass="md:col-4">
+					<InputText v-model="form.website"/>
+				</FieldWrapper>
+				<FieldWrapper id="description" label="Description de l'entreprise">
+					<client-only>
+						<quill-editor
+							ref="editor"
+							v-model="form.description"
+						/>
+					</client-only>
+				</FieldWrapper>
+				<FieldWrapper id="youtube_link" label="Lien vidéo YouTube">
+					<InputText v-model="form.youtube_link"/>
+				</FieldWrapper>
+				<FieldWrapper id="gallery" label="Galerie d'images">
+					<LmFileUpload @saving="toggleIsSaving" v-model="form.gallery"></LmFileUpload>
+				</FieldWrapper>
+			</div>
+		</Panel>
+
+		<Button style="margin-top: 1rem" :disabled="saving" type="submit">{{ use === 'add' ? 'Ajouter':'Mettre à jour'}}</Button>
 	</form>
 </template>
 <script>
-import InputText from 'primevue/inputtext';
-import Button from 'primevue/button';
+import InputText from 'primevue/inputtext'
+import Button from 'primevue/button'
+import Textarea from 'primevue/textarea'
+import InputMask from 'primevue/inputmask'
+import Panel from 'primevue/panel'
+import Dropdown from 'primevue/dropdown'
 
 export default {
 	components: {
 		InputText,
-		Button
+		Button,
+		Textarea,
+		InputMask,
+		Panel,
+		Dropdown
 	},
 	props: {
 		form: {
@@ -42,6 +97,17 @@ export default {
 					nameLast: '',
 					email: '',
 					password: '',
+					description: '',
+					address: '',
+					postal_code: '',
+					ville: '',
+					telephone: '',
+					fax: '',
+					website: '',
+					categoriesPro: [],
+					gallery: [],
+					youtube_link: '',
+					responsable_rh: ''
 				}
 			}
 		},
@@ -56,20 +122,23 @@ export default {
 			confirmPassword: ''
 		}
 	},
+	async mounted(){
+		if(this.$store.getters["filters/secteurs"].length === undefined)
+			await this.$store.dispatch('filters/filters');
+	},
+	computed: {
+		categoriesProChoises(){
+			return this.$jobFilters.categoriesProChoises()
+		},
+	},
 	methods: {
 		toggleIsSaving(value){
 			this.saving = value
 		},
 		async submit(){
 			this.saving = true
-			const form = {
-				token: this.$store.getters['auth/get_token'],
-				business: this.form.business,
-				logo: this.form.logo,
-				email: this.form.email,
-				nameFirst: this.form.nameFirst,
-				nameLast: this.form.nameLast,
-			}
+			const form = this.form
+			form.token = this.$store.getters['auth/get_token']
 
 			let response = {}
 			if(this.use === 'add'){

@@ -24,7 +24,7 @@
 				<Column field="business" header="Entreprise"></Column>
 				<Column field="logo" header="Logo">
 					<template #body="{data}">
-						<img class="logo-preview" v-if="data.logo" :src="data.logo.sizes.thumbnail.source_url" alt="">
+						<img class="logo-preview" v-if="data?.logo[0]" :src="data?.logo[0].sizes?.thumbnail.source_url" alt="">
 					</template>
 				</Column>
 				<Column field="email" header="Courriel"></Column>

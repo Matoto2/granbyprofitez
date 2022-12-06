@@ -5,7 +5,7 @@
 export default function ({ store, app: { $axios }, redirect }) {
 	const IGNORED_PATHS = ['/login', '/logout', '/refresh']
 
-	$axios.onRequest((config) => {
+	/*$axios.onRequest((config) => {
 		// check if the user is authenticated
 		if (store.state.auth.access_token) {
 			// set the Authorization header using the access token
@@ -13,7 +13,7 @@ export default function ({ store, app: { $axios }, redirect }) {
 		}
 
 		return config
-	})
+	})*/
 
 	$axios.onError((error) => {
 		return new Promise(async (resolve, reject) => {

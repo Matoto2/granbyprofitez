@@ -63,3 +63,6 @@ address{
 .ql-editor p, .ql-editor ol, .ql-editor ul, .ql-editor pre, .ql-editor blockquote, .ql-editor h1, .ql-editor h2, .ql-editor h3, .ql-editor h4, .ql-editor h5, .ql-editor h6 {
 	margin: 1rem 0 !important;
 }
+.ql-editor.ql-blank::before {
+	top: 1.7rem;
+}

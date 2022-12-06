@@ -2,7 +2,7 @@
 	<NuxtLink :to="{ name: 'offres-emploi-id', params: { id: job.id }}">
 		<div class="upper">
 			<div class="logobox">
-				<img v-if="job?.business?.logo.sizes.medium.source_url" :src="job.business.logo.sizes.medium.source_url" alt="">
+				<img v-if="job?.business?.logo[0]" :src="job.business.logo[0].sizes.medium.source_url" alt="">
 			</div>
 			<h2>{{ job.title }}</h2>
 		</div>

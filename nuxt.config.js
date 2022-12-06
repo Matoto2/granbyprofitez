@@ -62,6 +62,9 @@ export default {
 			'~/components/Gestion',
 			'~/components/Gestion/Forms',
 			'~/components/LmMap',
+			'~/components/Home',
+			'~/components/Layout',
+			'~/components/Forms',
 		]
 	},
 

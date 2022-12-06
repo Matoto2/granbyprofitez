@@ -1,5 +1,5 @@
 <template>
-	<div class="field-wrapper">
+	<div :class="'p-field col-12 '+childclass">
 		<label :for="id">{{label}}</label>
 		<div>
 			<slot></slot>
@@ -8,18 +8,17 @@
 </template>
 <script>
 export default {
-	props: ['label', 'id']
+	props: ['label', 'id', 'childclass']
 }
 </script>
 <style scoped>
-.field-wrapper{
-	display: flex;
-	flex-direction: column;
-	margin: 1rem 0;
-}
 label{
 	display: inline-block;
 	margin-bottom: .5rem;
 	font-weight: 600;
+}
+.p-field{
+	margin-bottom: .7rem;
+	margin-top: .7rem;
 }
 </style>
