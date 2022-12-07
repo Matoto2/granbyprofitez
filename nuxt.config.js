@@ -82,7 +82,7 @@ export default {
 		locales: ["fr"]
 	},
 
-	target: 'static',
+	target: 'server',
 	// Modules: https://go.nuxtjs.dev/config-modules
 	modules: [
 		// Doc: https://www.primefaces.org/primevue/showcase-v2/#/setup
