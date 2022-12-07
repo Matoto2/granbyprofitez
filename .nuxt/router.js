@@ -8,7 +8,9 @@ const _3a09cbe6 = () => interopDefault(import('..\\pages\\alertes-emplois.vue' /
 const _23fd813d = () => interopDefault(import('..\\pages\\connexion.vue' /* webpackChunkName: "pages/connexion" */))
 const _3dfe648c = () => interopDefault(import('..\\pages\\etudier.vue' /* webpackChunkName: "pages/etudier" */))
 const _c2889958 = () => interopDefault(import('..\\pages\\immigrer.vue' /* webpackChunkName: "pages/immigrer" */))
+const _62455fcc = () => interopDefault(import('..\\pages\\inscription.vue' /* webpackChunkName: "pages/inscription" */))
 const _8ca5f1b4 = () => interopDefault(import('..\\pages\\liste-des-employeurs\\index.vue' /* webpackChunkName: "pages/liste-des-employeurs/index" */))
+const _9f81ed6c = () => interopDefault(import('..\\pages\\mot-de-passe-oublie.vue' /* webpackChunkName: "pages/mot-de-passe-oublie" */))
 const _5549c258 = () => interopDefault(import('..\\pages\\offres-emploi\\index.vue' /* webpackChunkName: "pages/offres-emploi/index" */))
 const _564effb1 = () => interopDefault(import('..\\pages\\sinstaller.vue' /* webpackChunkName: "pages/sinstaller" */))
 const _7620c904 = () => interopDefault(import('..\\pages\\travailler.vue' /* webpackChunkName: "pages/travailler" */))
@@ -59,9 +61,17 @@ export const routerOptions = {
     component: _c2889958,
     name: "immigrer"
   }, {
+    path: "/inscription",
+    component: _62455fcc,
+    name: "inscription"
+  }, {
     path: "/liste-des-employeurs",
     component: _8ca5f1b4,
     name: "liste-des-employeurs"
+  }, {
+    path: "/mot-de-passe-oublie",
+    component: _9f81ed6c,
+    name: "mot-de-passe-oublie"
   }, {
     path: "/offres-emploi",
     component: _5549c258,

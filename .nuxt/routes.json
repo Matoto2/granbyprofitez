@@ -28,11 +28,25 @@
     "_name": "_c2889958"
   },
   {
+    "name": "inscription",
+    "path": "/inscription",
+    "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\inscription.vue",
+    "chunkName": "pages/inscription",
+    "_name": "_62455fcc"
+  },
+  {
     "name": "liste-des-employeurs",
     "path": "/liste-des-employeurs",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\liste-des-employeurs\\\\index.vue",
     "chunkName": "pages/liste-des-employeurs/index",
     "_name": "_8ca5f1b4"
+  },
+  {
+    "name": "mot-de-passe-oublie",
+    "path": "/mot-de-passe-oublie",
+    "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\mot-de-passe-oublie.vue",
+    "chunkName": "pages/mot-de-passe-oublie",
+    "_name": "_9f81ed6c"
   },
   {
     "name": "offres-emploi",
