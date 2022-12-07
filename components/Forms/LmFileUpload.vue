@@ -7,7 +7,7 @@
 					style="position: absolute;right:0;opacity: .8"
 					@click="deleteImage(v.wp_id)"
 			/>
-			<img v-if="v?.wp_id" :src="v?.sizes?.thumbnail?.source_url" style="margin-top: 10px;height: 80px;width:80px;object-fit:cover;margin-right: 1rem;" alt="">
+			<nuxt-img v-if="v?.wp_id" :src="v?.sizes?.thumbnail?.source_url" style="margin-top: 10px;height: 80px;width:80px;object-fit:cover;margin-right: 1rem;" />
 		</div>
 		<div>
 			<ProgressBar v-if="uploading" mode="indeterminate" style="height: 1rem; width: 200px;margin: 3rem 0" />

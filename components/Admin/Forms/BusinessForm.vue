@@ -37,8 +37,8 @@
 				<FieldWrapper id="categoriesPro" label="Secteur" childclass="md:col-4">
 					<Dropdown v-model="form.categoriesPro" :options="categoriesProChoises" optionLabel="label" optionValue="value"></Dropdown>
 				</FieldWrapper>
-				<FieldWrapper id="postal_code" label="Code postal" childclass="md:col-4">
-					<InputMask v-model="form.postal_code" mask="a9a 9a9"></InputMask>
+				<FieldWrapper id="nb_employe" label="Nb d'employés" childclass="md:col-4">
+					<InputText type="text" v-model="form.nb_employe"></InputText>
 				</FieldWrapper>
 				<FieldWrapper id="telephone" label="Téléphone" childclass="md:col-4">
 					<InputMask v-model="form.telephone" mask="999 999-9999"></InputMask>
@@ -56,6 +56,9 @@
 							v-model="form.description"
 						/>
 					</client-only>
+				</FieldWrapper>
+				<FieldWrapper id="produits" label="Vos produits">
+					<Textarea v-model="form.produits" rows="3"></Textarea>
 				</FieldWrapper>
 				<FieldWrapper id="youtube_link" label="Lien vidéo YouTube">
 					<InputText v-model="form.youtube_link"/>
@@ -99,8 +102,8 @@ export default {
 					password: '',
 					description: '',
 					address: '',
-					postal_code: '',
-					ville: '',
+					nb_employe: '',
+					produits: '',
 					telephone: '',
 					fax: '',
 					website: '',

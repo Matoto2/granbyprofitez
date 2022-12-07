@@ -26,7 +26,8 @@ export default {
 	},
 	methods: {
 		submit(){
-			console.log(this.form)
+			this.$store.dispatch('filters/storeSelectedFilters', JSON.parse(JSON.stringify(this.form)))
+			this.$router.push({name: 'offres-emploi'})
 		}
 	}
 }

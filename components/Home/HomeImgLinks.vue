@@ -4,7 +4,7 @@
 			<NuxtLink v-for="link in links"
 					  :key="link.title"
 					  :to="link.link">
-				<img :src="link.img">
+				<nuxt-img :src="link.img" />
 				<div class="infobox">
 					<h2>{{ link.title }}</h2>
 					<div class="hoverText">

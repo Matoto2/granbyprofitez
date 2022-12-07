@@ -5,7 +5,7 @@
 		<div class="container job-wrapper">
 			<div class="row-intro">
 				<div class="logo-business">
-					<img :src="job.business?.logo?.sizes?.large?.source_url" alt="">
+					<nuxt-img v-if="job?.business?.logo" :src="job?.business?.logo[0]?.sizes?.full?.source_url" />
 				</div>
 				<div class="job-name">
 					<h1>{{ job.title }}</h1>

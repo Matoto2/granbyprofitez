@@ -36,6 +36,7 @@ export default {
 		'~/assets/css/style.css',
 		'quill/dist/quill.core.css',
 		'quill/dist/quill.snow.css',
+		'node_modules/lite-youtube-embed/src/lite-yt-embed.css'
 	],
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -45,6 +46,7 @@ export default {
 		"~/plugins/slugify",
 		"~/plugins/dataApi",
 		"~/plugins/jobFilters",
+		"~/plugins/youtube.client.js",
 		{ src: "~/plugins/confirmationService", mode: "client", ssr: false },
 		{ src: "~/plugins/toastService", mode: "client", ssr: false },
 		{ src: "~/plugins/vcalendar", ssr: false },
@@ -91,8 +93,13 @@ export default {
 			{
 				key: 'AIzaSyB_qrCxWaDhlsfk3bXFZLBcHa7PltphHh4'
 			}
-		]
+		],
+		'@nuxt/image',
 	],
+
+	image: {
+		// Options
+	},
 
 	// Axios module configuration: https://go.nuxtjs.dev/config-axios
 	axios: {

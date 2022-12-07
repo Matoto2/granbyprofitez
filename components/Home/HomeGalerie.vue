@@ -12,10 +12,10 @@
 			</div>
 			<div class="galerie">
 				<div class="col1">
-					<img src="/images/tempo1.jpg" alt="">
+					<nuxt-img src="/images/tempo1.jpg" />
 				</div>
 				<div class="col2">
-					<img src="/images/tempo1.jpg" alt="">
+					<nuxt-img src="/images/tempo1.jpg" />
 					<div class="btn-wrapper">
 						<NuxtLink class="btn" to="">Prêts à vous installer?</NuxtLink>
 					</div>

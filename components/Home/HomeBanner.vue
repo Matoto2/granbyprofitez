@@ -1,16 +1,16 @@
 <template>
 	<ssr-carousel loop :autoplay-delay='3'>
 		<div class="slide">
-			<img src="/images/bas1.jpg" alt="">
-			<img src="/images/haut1.png" alt="">
+			<nuxt-img src="/images/bas1.jpg" />
+			<nuxt-img src="/images/haut1.png" />
 		</div>
 		<div class="slide">
-			<img src="/images/bas1.jpg" alt="">
-			<img src="/images/haut1.png" alt="">
+			<nuxt-img src="/images/bas1.jpg" />
+			<nuxt-img src="/images/haut1.png" />
 		</div>
 		<div class="slide">
-			<img src="/images/bas1.jpg" alt="">
-			<img src="/images/haut1.png" alt="">
+			<nuxt-img src="/images/bas1.jpg" />
+			<nuxt-img src="/images/haut1.png" />
 		</div>
 	</ssr-carousel>
 </template>

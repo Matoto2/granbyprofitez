@@ -4,7 +4,7 @@
 			<h1 v-if="h1">{{h1}}</h1>
 			<slot></slot>
 		</div>
-		<img :src="image" alt="">
+		<nuxt-img :src="image" />
 	</div>
 </template>
 <script>
