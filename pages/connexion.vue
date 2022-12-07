@@ -1,15 +1,20 @@
 <template>
 	<div class="container">
-		<h1>Page de connexion</h1>
+		<h1>Identifiez-vous si vous avez déjà un compte</h1>
+		<div class="no-account">
+			<span>Vous n'avez pas encore de compte?</span>
+			<NuxtLink class="btn" :to="{name: 'inscription'}">Inscription</NuxtLink>
+		</div>
 		<form @submit.prevent="login">
-			<span class="p-float-label">
-				<InputText id="email" type="text" v-model="email" />
-				<label for="email">Courriel</label>
+			<span class="p-input-icon-left">
+				<i class="pi pi-envelope"></i>
+				<InputText id="email" type="text" v-model="email" placeholder="Adresse courriel" />
 			</span>
-			<span class="p-float-label">
-				<InputText id="password" type="password" v-model="password" />
-				<label for="password">Mot de passe</label>
+			<span class="p-input-icon-left">
+				<i class="pi pi-key"></i>
+				<InputText id="password" type="password" v-model="password" placeholder="Mot de passe" />
 			</span>
+			<NuxtLink :to="{name: 'mot-de-passe-oublie'}">Mot de passe oublié</NuxtLink>
 			<div v-if="errors" class="error">
 				{{errors}}
 			</div>
