@@ -28,6 +28,7 @@ You can directly use them in pages and other components without the need to impo
 - `<CVForm>` | `<c-v-form>` (components/Forms/CVForm.vue)
 - `<LmFileUpload>` | `<lm-file-upload>` (components/Forms/LmFileUpload.vue)
 - `<SsrCarousel>` | `<ssr-carousel>` (node_modules/vue-ssr-carousel/index.js)
+- `<AutresEmplois>` | `<autres-emplois>` (components/AutresEmplois.vue)
 - `<BarreTitreTexte>` | `<barre-titre-texte>` (components/BarreTitreTexte.vue)
 - `<FieldWrapper>` | `<field-wrapper>` (components/FieldWrapper.vue)
 - `<JobLink>` | `<job-link>` (components/JobLink.vue)

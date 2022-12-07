@@ -20,30 +20,67 @@
 				<FieldWrapper id="horaire" label="Horaire *" childclass="md:col-4">
 					<MultiSelect required v-model="form.horaire" :options="horaireChoises" optionLabel="label" optionValue="value" placeholder="Choix" display="chip" />
 				</FieldWrapper>
-				<FieldWrapper id="postes_dispo" label="Nombre de poste disponible *" childclass="md:col-4">
-					<InputText required type="text" v-model="form.postes_dispo"/>
+				<FieldWrapper id="postes_dispo" label="Nombre de poste disponible" childclass="md:col-4">
+					<InputText type="text" v-model="form.postes_dispo"/>
 				</FieldWrapper>
+				<FieldWrapper id="salaire" label="Salaire" childclass="md:col-4">
+					<InputText type="text" v-model="form.salaire"/>
+				</FieldWrapper>
+				<FieldWrapper id="heures_semaine" label="Heures par semaine" childclass="md:col-4">
+					<InputText type="text" v-model="form.heures_semaine"/>
+				</FieldWrapper>
+				<FieldWrapper id="entree_fonction" label="Date d'entrée en fonction" childclass="md:col-4">
+					<Calendar :value="new Date(form.entree_fonction)"
+							  @date-select="value => form.entree_fonction = value"
+							  dateFormat="yy-mm-dd"
+					/>
+				</FieldWrapper>
+				<FieldWrapper id="scolarite" label="Niveau de scolarité" childclass="md:col-4">
+					<MultiSelect id="scolarite" v-model="form.scolarite" :options="scolariteChoices" optionLabel="label" optionValue="value" placeholder="Choix" />
+				</FieldWrapper>
+				<FieldWrapper id="experience" label="Expérience" childclass="md:col-4">
+					<Dropdown id="experience" v-model="form.experience" :options="experienceChoices" optionLabel="label" optionValue="value" placeholder="Choix" />
+				</FieldWrapper>
+				<FieldWrapper id="langues" label="Langues parlées et écrites" childclass="md:col-4">
+					<MultiSelect id="langues" v-model="form.langues" :options="languesChoices" optionLabel="label" optionValue="value" placeholder="Choix" />
+				</FieldWrapper>
+				<FieldWrapper id="fonctions" label="Fonctions">
+					<client-only>
+						<quill-editor
+							ref="editor"
+							v-model="form.fonctions"
+						/>
+					</client-only>
+				</FieldWrapper>
+				<FieldWrapper id="competences" label="Compétences">
+					<client-only>
+						<quill-editor
+							ref="editor"
+							v-model="form.competences"
+						/>
+					</client-only>
+				</FieldWrapper>
+				<FieldWrapper id="precisions" label="Précisions / Renseignements additionnels / Valeurs de l’entreprise">
+					<client-only>
+						<quill-editor
+							ref="editor"
+							v-model="form.precisions"
+						/>
+					</client-only>
+				</FieldWrapper>
+				<div>
+					<FieldWrapper id="international" label="Candidatures internationnale">
+						<ToggleButton v-model="form.international"
+									  onLabel="J'accepte les candidatures internationale"
+									  offLabel="Je refuse les candidatures internationale"
+									  onIcon="pi pi-check"
+									  offIcon="pi pi-times"
+						/>
+					</FieldWrapper>
+				</div>
+
 			</div>
 		</Panel>
-
-
-		<FieldWrapper id="international" label="Candidatures internationnale">
-			<ToggleButton v-model="form.international"
-						  onLabel="J'accepte les candidatures internationale"
-						  offLabel="Je refuse les candidatures internationale"
-						  onIcon="pi pi-check"
-						  offIcon="pi pi-times"
-			/>
-		</FieldWrapper>
-
-		<FieldWrapper id="content" label="Contenu">
-			<client-only>
-				<quill-editor
-					ref="editor"
-					v-model="form.content"
-				/>
-			</client-only>
-		</FieldWrapper>
 		<div>
 			<Button :disabled="saving" type="submit">{{ use === 'add' ? 'Ajouter':'Mettre à jour'}}</Button>
 		</div>
@@ -56,6 +93,12 @@ import MultiSelect from 'primevue/multiselect';
 import ToggleButton from 'primevue/togglebutton';
 import Button from 'primevue/button';
 import Panel from 'primevue/panel';
+import Calendar from 'primevue/calendar'
+
+import scolarite from '@/data/scolarite.json'
+import experience from '@/data/experience.json'
+import langues from '@/data/langues.json'
+
 export default {
 	components: {
 		Dropdown,
@@ -63,7 +106,8 @@ export default {
 		Button,
 		MultiSelect,
 		ToggleButton,
-		Panel
+		Panel,
+		Calendar
 	},
 	props: {
 		form: {
@@ -72,11 +116,19 @@ export default {
 				return {
 					status: 'publish',
 					title: '',
-					content: '',
+					fonctions: '',
+					competences: '',
+					precisions: '',
 					secteurs: [],
 					categoriesPro: [],
 					type_emploi: [],
 					horaire: [],
+					scolarite: '',
+					experience: '',
+					langues: '',
+					salaire: '',
+					heures_semaine: '',
+					entree_fonction: new Date(),
 					international: false,
 					dateUpdated: new Date(),
 					dateCreated: new Date(),
@@ -95,6 +147,9 @@ export default {
 				{label: 'Publié', value: 'publish'},
 				{label: 'Brouillon', value: 'draft'}
 			],
+			scolariteChoices: scolarite,
+			experienceChoices: experience,
+			languesChoices: langues,
 		}
 	},
 	async mounted(){
@@ -118,20 +173,12 @@ export default {
 	methods: {
 		async submit(){
 			this.saving = true
-			const form = {
-				token: this.$store.getters['auth/get_token'],
-				businessID: this.$store.state.auth.current_user.id,
-				title: this.form.title,
-				status: this.form.status,
-				content: this.form.content,
-				secteurs: this.form.secteurs,
-				categoriesPro: this.form.categoriesPro,
-				type_emploi: this.form.type_emploi,
-				horaire: this.form.horaire,
-				international: this.form.international,
-				dateCreated: this.form.dateCreated,
-				dateUpdated: new Date(),
-			}
+			const form = this.form
+
+			form.token = this.$store.getters['auth/get_token']
+			form.businessID = this.$store.state.auth.current_user.id
+			form.dateUpdated = new Date()
+
 			let response = {}
 			if(this.use === 'add'){
 				response = await this.$axios.post(

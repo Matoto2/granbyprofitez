@@ -13,18 +13,31 @@
 			</div>
 			<div class="details-row">
 				<div class="col1">
-					<div class="sect-details">
+					<div class="section-left sect-details">
 						<h2>Détails</h2>
-						<span>Compagnie</span>
-						<h3>{{ job.business.business }}</h3>
+						<div class="compagnie">
+							<span>Compagnie</span>
+							<NuxtLink :to="{name: 'liste-des-employeurs-id', params: {id: job.businessID}}">{{ job.business.business }}</NuxtLink>
+						</div>
 						<ul>
-							<li>SECTEURS D’ACTIVITÉ : ALIMENTATION / BOISSONS</li>
+							<li v-if="job.business.categoriesPro">SECTEURS D’ACTIVITÉ&nbsp;: {{job.business.categoriesPro}}</li>
+							<li v-if="job.postes_dispo">NOMBRE D'EMPLOIS&nbsp;: {{job.postes_dispo}}</li>
+							<li v-if="job.business.ville">OÙ&nbsp;: {{job.business.ville}}</li>
+							<li v-if="job.business.responsable_rh">CONTACT&nbsp;: {{job.business.responsable_rh}}</li>
+							<li v-if="job.business.telephone">TÉL&nbsp;: {{job.business.telephone}}</li>
 						</ul>
 					</div>
-					<div class="sect-informations">
+					<div class="section-left sect-informations">
 						<h2>Informations</h2>
 						<ul>
-							<li>Spécifications reliées à l’emploi : Permanent</li>
+							<li v-if="type_emploi">Statut de l'emploi&nbsp;: {{type_emploi}}</li>
+							<li v-if="horaire">Quart de travail&nbsp;: {{horaire}}</li>
+							<li v-if="scolarite">Scolarité&nbsp;: {{scolarite}}</li>
+							<li v-if="experience">Expérience&nbsp;: {{experience}}</li>
+							<li v-if="langues">Langues parlées et écrites&nbsp;: {{langues}}</li>
+							<li v-if="job.salaire">Salaire offert&nbsp;: {{job.salaire}}</li>
+							<li v-if="job.heures_semaine">Heures par semaine&nbsp;: {{job.heures_semaine}}</li>
+							<li v-if="job.entree_fonction">Entrée en fonction&nbsp;: {{$moment(job.entree_fonction).format('DD MMM YYYY')}}</li>
 						</ul>
 					</div>
 				</div>
@@ -35,7 +48,24 @@
 						<a href="#" class="btn">Postulez maintenant</a>
 					</div>
 
-					<div class="contenu-annonce" v-html="job.content"></div>
+					<div class="contenu-annonce">
+						<div v-if="job.fonctions" class="fonctions">
+							<h2>Fonctions</h2>
+							<div class="contenu" v-html="job.fonctions"></div>
+						</div>
+						<div v-if="job.competences" class="competences">
+							<h2>Compétences</h2>
+							<div class="contenu" v-html="job.competences"></div>
+						</div>
+						<div v-if="job.precisions" class="precisions">
+							<h2>Précisions</h2>
+							<div class="contenu" v-html="job.precisions"></div>
+						</div>
+						<div v-if="job.business?.description" class="a-propos">
+							<h2>À propos de l'entreprise</h2>
+							<div class="contenu" v-html="job.business.description"></div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -45,10 +75,78 @@
 			<CVForm></CVForm>
 		</div>
 
+		<AutresEmplois v-if="jobs.length" :jobs="jobs"></AutresEmplois>
+
 	</div>
 </template>
 <script>
+import experienceChoices from '~/data/experience.json';
+import languesChoices from '~/data/langues.json';
+import scolariteChoices from '~/data/scolarite.json';
 export default {
+	async mounted(){
+		if(this.$store.getters["filters/secteurs"].length === undefined)
+			await this.$store.dispatch('filters/filters');
+	},
+	computed: {
+		experience(){
+			if(this.job.experience){
+				const data = experienceChoices.reduce((obj, cur) => ({...obj, [cur.value]: cur}), {})
+				return data[this.job.experience].label
+			}
+			return ''
+		},
+		langues(){
+			let str = ''
+			if(this.job.langues){
+				const data = languesChoices.reduce((obj, cur) => ({...obj, [cur.value]: cur}), {})
+				this.job.langues.forEach((id, key) => {
+					str += key > 0 ? ', ':''
+					str += data[id].label
+				})
+			}
+			return str
+		},
+		scolarite(){
+			let str = ''
+			if(this.job.scolarite){
+				const data = scolariteChoices.reduce((obj, cur) => ({...obj, [cur.value]: cur}), {})
+				this.job.scolarite.forEach((id, key) => {
+					str += key > 0 ? ', ':''
+					str += data[id].label
+				})
+			}
+			return str
+		},
+		secteurs(){
+			return this.$store.getters["filters/secteurs"]
+		},
+		categoriesPro(){
+			return this.$store.getters["filters/categoriesPro"]
+		},
+		type_emploi(){
+			let str = ''
+			if(this.job.type_emploi){
+				const sect = this.$store.getters["filters/type_emploi"]
+				this.job.type_emploi.forEach((id, key) => {
+					str += key > 0 ? ', ':''
+					str += sect[id]
+				})
+			}
+			return str
+		},
+		horaire(){
+			let str = ''
+			if(this.job.horaire){
+				const sect = this.$store.getters["filters/horaire"]
+				this.job.horaire.forEach((id, key) => {
+					str += key > 0 ? ', ':''
+					str += sect[id]
+				})
+			}
+			return str
+		},
+	},
 	async asyncData({ params, $axios, error }) {
 		const job = await $axios.$post(`/jobs/get`, {
 			id: params.id,
@@ -58,6 +156,25 @@ export default {
 			return { job: job.data }
 		else
 			error({ statusCode: 404, message: "Oups, cette page n'existe pas." })
+	},
+	data(){
+		return {
+			jobs: []
+		}
+	},
+	async fetch(){
+		const jobs = await this.$axios.$post(`/jobs/list`, {
+			withBusiness: true,
+			pagination: {
+				perPage: 4
+			},
+			filters: {
+				categoriesPro: this.job.categoriesPro,
+				exclude: [this.job.id]
+			},
+
+		})
+		this.jobs = jobs.jobs
 	}
 }
 </script>
@@ -132,6 +249,34 @@ export default {
 	list-style: none;
 	padding-left: 0;
 }
+.compagnie{
+	display: flex;
+	flex-direction: column;
+}
+.compagnie span{
+	text-transform: uppercase;
+}
+.compagnie a{
+	text-decoration: none;
+	color: #606060;
+	font-size: 1.5rem;
+	display: inline-block;
+	margin: 1rem 0 .5rem;
+}
+.section-left h2{
+	color: #006DB8;
+	text-transform: uppercase;
+	font-size: 1.3rem;
+}
+.sect-informations{
+	margin-top: 3rem;
+}
+.sect-informations li{
+	font-weight: 500;
+}
+.section-left li{
+	margin: 1rem 0;
+}
 </style>
 
 <style>
@@ -161,6 +306,9 @@ export default {
 	position: absolute;
 	top: 0;
 	left: 0;
+}
+.contenu-annonce > div{
+	margin-top: 2rem;
 }
 .contenu-annonce ul{
 	padding-left: 0;

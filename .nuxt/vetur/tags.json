@@ -65,6 +65,9 @@
   "SsrCarousel": {
     "description": "Auto imported from node_modules/vue-ssr-carousel/index.js"
   },
+  "AutresEmplois": {
+    "description": "Auto imported from components/AutresEmplois.vue"
+  },
   "BarreTitreTexte": {
     "description": "Auto imported from components/BarreTitreTexte.vue"
   },

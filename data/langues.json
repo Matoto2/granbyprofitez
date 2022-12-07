@@ -1,0 +1,14 @@
+[
+	{
+		"value": 1,
+		"label": "Français"
+	},
+	{
+		"value": 2,
+		"label": "Anglais"
+	},
+	{
+		"value": 3,
+		"label": "Autres"
+	}
+]

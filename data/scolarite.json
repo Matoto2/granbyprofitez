@@ -1,0 +1,58 @@
+[
+	{
+		"value": 1,
+		"label": "Non défini"
+	},
+	{
+		"value": 2,
+		"label": "DES non complété"
+	},
+	{
+		"value": 3,
+		"label": "DES"
+	},
+	{
+		"value": 4,
+		"label": "AEP"
+	},
+	{
+		"value": 5,
+		"label": "DEP"
+	},
+	{
+		"value": 6,
+		"label": "ASP"
+	},
+	{
+		"value": 7,
+		"label": "AEC"
+	},
+	{
+		"value": 8,
+		"label": "DEC"
+	},
+	{
+		"value": 9,
+		"label": "Certificat"
+	},
+	{
+		"value": 10,
+		"label": "BAC"
+	},
+	{
+		"value": 11,
+		"label": "DESS"
+	},
+	{
+		"value": 12,
+		"label": "Maîtrise"
+	},
+	{
+		"value": 13,
+		"label": "Doctorat"
+	},
+	{
+		"value": 14,
+		"label": "Post-doctorat"
+	}
+]

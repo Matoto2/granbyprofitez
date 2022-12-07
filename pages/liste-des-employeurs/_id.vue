@@ -74,10 +74,11 @@
 					</client-only>
 
 					<youtube v-if="youtube_id" :id="youtube_id"></youtube>
-
 				</div>
 			</div>
 		</div>
+
+		<AutresEmplois v-if="jobs.length" :jobs="jobs"></AutresEmplois>
 
 	</div>
 </template>
@@ -85,6 +86,11 @@
 import Galleria from 'primevue/galleria';
 export default {
 	components: {Galleria},
+	data(){
+		return {
+			jobs: []
+		}
+	},
 	async mounted(){
 		if(this.$store.getters["filters/secteurs"].length === undefined)
 			await this.$store.dispatch('filters/filters');
@@ -123,6 +129,13 @@ export default {
 			return { user: user.user }
 		else
 			error({ statusCode: 404, message: "Oups, cette page n'existe pas." })
+	},
+	async fetch(){
+		const jobs = await this.$axios.$post(`/jobs/list`, {
+			businessID: this.user.id,
+			withBusiness: true,
+		})
+		this.jobs = jobs.jobs
 	}
 }
 </script>
