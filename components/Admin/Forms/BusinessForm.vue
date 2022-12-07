@@ -26,7 +26,13 @@
 					<InputText type="text" v-model="form.business"/>
 				</FieldWrapper>
 				<FieldWrapper id="address" label="Adresse" childclass="md:col-4">
-					<Textarea v-model="form.address" rows="2"></Textarea>
+					<InputText v-model="form.address"></InputText>
+				</FieldWrapper>
+				<FieldWrapper id="ville" label="Ville" childclass="md:col-4">
+					<Dropdown v-model="form.ville" :options="villes"></Dropdown>
+				</FieldWrapper>
+				<FieldWrapper id="code_postal" label="Code Postal" childclass="md:col-4">
+					<InputMask v-model="form.code_postal" mask="a9a 9a9"></InputMask>
 				</FieldWrapper>
 				<FieldWrapper id="logo" label="Logo de l'entreprise" childclass="md:col-4">
 					<LmFileUpload :maxItems="1" @saving="toggleIsSaving" v-model="form.logo"></LmFileUpload>
@@ -95,13 +101,15 @@ export default {
 			default: () => {
 				return {
 					business: '',
-					logo: {},
+					logo: [],
 					nameFirst: '',
 					nameLast: '',
 					email: '',
 					password: '',
 					description: '',
 					address: '',
+					ville: 'Granby',
+					code_postal: '',
 					nb_employe: '',
 					produits: '',
 					telephone: '',
@@ -122,7 +130,8 @@ export default {
 	data(){
 		return {
 			saving: false,
-			confirmPassword: ''
+			confirmPassword: '',
+			villes: ["Granby", "Roxton Pond", "Saint-Alphonse-de-Granby", "Sainte-Cécile-de-Milton", "Saint-Joachim-de-Sherfford", "Shefford", "Warden", "Waterloo"]
 		}
 	},
 	async mounted(){

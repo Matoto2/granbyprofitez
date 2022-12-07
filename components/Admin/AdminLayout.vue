@@ -36,11 +36,6 @@ export default {
 					to: '/admin/entreprises'
 				},
 				{
-					label: 'Nouvelles',
-					icon:'pi pi-fw pi-book',
-					to: '/admin/nouvelles'
-				},
-				{
 					label: 'Administrateurs',
 					icon:'pi pi-fw pi-users',
 					to: '/admin/administrateurs'

@@ -1,24 +1,31 @@
 <template>
 	<form @submit.prevent="submit">
-		<FieldWrapper id="title" label="Titre de l'emploi *">
-			<InputText required type="text" v-model="form.title"/>
-		</FieldWrapper>
-		<FieldWrapper id="status" label="Statut *">
-			<Dropdown required id="status" v-model="form.status" :options="statusChoises" optionLabel="label" optionValue="value" placeholder="Choix" />
-		</FieldWrapper>
+		<Panel style="margin-bottom: 2rem" header="Information">
+			<div class="p-fluid grid formgrid">
+				<FieldWrapper id="title" label="Titre de l'emploi *" childclass="md:col-4">
+					<InputText required type="text" v-model="form.title"/>
+				</FieldWrapper>
+				<FieldWrapper id="status" label="Statut *" childclass="md:col-4">
+					<Dropdown required id="status" v-model="form.status" :options="statusChoises" optionLabel="label" optionValue="value" placeholder="Choix" />
+				</FieldWrapper>
+				<FieldWrapper id="secteurs" label="Secteurs *" childclass="md:col-4">
+					<MultiSelect required v-model="form.secteurs" :options="secteursChoises" optionLabel="label" optionValue="value" placeholder="Choix" display="chip" />
+				</FieldWrapper>
+				<FieldWrapper id="categoriesPro" label="Catégories Professionnels *" childclass="md:col-4">
+					<MultiSelect required v-model="form.categoriesPro" :options="categoriesProChoises" optionLabel="label" optionValue="value" placeholder="Choix" display="chip" />
+				</FieldWrapper>
+				<FieldWrapper id="type_emploi" label="Spécifications *" childclass="md:col-4">
+					<MultiSelect required v-model="form.type_emploi" :options="type_emploiChoises" optionLabel="label" optionValue="value" placeholder="Choix" display="chip" />
+				</FieldWrapper>
+				<FieldWrapper id="horaire" label="Horaire *" childclass="md:col-4">
+					<MultiSelect required v-model="form.horaire" :options="horaireChoises" optionLabel="label" optionValue="value" placeholder="Choix" display="chip" />
+				</FieldWrapper>
+				<FieldWrapper id="postes_dispo" label="Nombre de poste disponible *" childclass="md:col-4">
+					<InputText required type="text" v-model="form.postes_dispo"/>
+				</FieldWrapper>
+			</div>
+		</Panel>
 
-		<FieldWrapper id="secteurs" label="Secteurs *">
-			<MultiSelect required v-model="form.secteurs" :options="secteursChoises" optionLabel="label" optionValue="value" placeholder="Choix" display="chip" />
-		</FieldWrapper>
-		<FieldWrapper id="categoriesPro" label="Catégories Professionnels *">
-			<MultiSelect required v-model="form.categoriesPro" :options="categoriesProChoises" optionLabel="label" optionValue="value" placeholder="Choix" display="chip" />
-		</FieldWrapper>
-		<FieldWrapper id="type_emploi" label="Spécifications *">
-			<MultiSelect required v-model="form.type_emploi" :options="type_emploiChoises" optionLabel="label" optionValue="value" placeholder="Choix" display="chip" />
-		</FieldWrapper>
-		<FieldWrapper id="horaire" label="Horaire *">
-			<MultiSelect required v-model="form.horaire" :options="horaireChoises" optionLabel="label" optionValue="value" placeholder="Choix" display="chip" />
-		</FieldWrapper>
 
 		<FieldWrapper id="international" label="Candidatures internationnale">
 			<ToggleButton v-model="form.international"
@@ -48,6 +55,7 @@ import InputText from 'primevue/inputtext';
 import MultiSelect from 'primevue/multiselect';
 import ToggleButton from 'primevue/togglebutton';
 import Button from 'primevue/button';
+import Panel from 'primevue/panel';
 export default {
 	components: {
 		Dropdown,
@@ -55,6 +63,7 @@ export default {
 		Button,
 		MultiSelect,
 		ToggleButton,
+		Panel
 	},
 	props: {
 		form: {
