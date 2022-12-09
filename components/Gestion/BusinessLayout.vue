@@ -25,7 +25,7 @@ export default {
 		return {
 			menuItems: [
 				{
-					label: 'Tableau de bord',
+					label: 'Mon compte',
 					icon:'pi pi-fw pi-th-large',
 					to: '/gestion/tableau-de-bord'
 				},

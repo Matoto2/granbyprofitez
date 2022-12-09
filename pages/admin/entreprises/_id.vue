@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<AdminLayout title="Editer une entreprise">
-			<BusinessForm :form="resp.user" :use="'edit'" />
+			<BusinessForm @redirect="redirect" :form="resp.user" :use="'edit'" />
 		</AdminLayout>
 	</div>
 </template>
@@ -15,6 +15,11 @@ export default {
 	async asyncData({ $dataApi, params }) {
 		const resp = await $dataApi.getUser(params.id)
 		return {resp}
+	},
+	methods: {
+		async redirect(){
+			await this.$router.push('/admin/entreprises');
+		}
 	}
 }
 </script>

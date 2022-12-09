@@ -84,5 +84,8 @@ export const getters = {
 	},
 	user_id: (state) => {
 		return state.current_user.id
+	},
+	user: (state) => {
+		return state.current_user
 	}
 }

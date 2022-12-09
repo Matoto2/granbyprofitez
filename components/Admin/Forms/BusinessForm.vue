@@ -167,7 +167,7 @@ export default {
 				}
 
 			}else if(this.use === 'edit'){
-				form.id = this.$route.params.id
+				form.id = this.$route.params.id ?? this.$store.getters["auth/user_id"]
 				if(this.form.password !== '' && this.form.password !== undefined){
 					if(this.form.password === this.confirmPassword) {
 						form.password = this.form.password
@@ -185,7 +185,7 @@ export default {
 			this.saving = false
 			if(response.data.success){
 				this.$toast.add({severity:'success', summary: 'Succès!', detail:'Sauvegarde effectué', life: 3000});
-				await this.$router.push('/admin/entreprises');
+
 			}else{
 				this.$toast.add({severity:'error', summary: 'Erreur!', detail:response.data.error, life: 15000});
 			}

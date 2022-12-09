@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<AdminLayout title="Ajouter une entreprise">
-			<BusinessForm />
+			<BusinessForm @redirect="redirect" />
 		</AdminLayout>
 	</div>
 </template>
@@ -12,5 +12,10 @@ export default {
 	meta: {
 		auth: {role: ['admin']}
 	},
+	methods: {
+		async redirect(){
+			await this.$router.push('/admin/entreprises');
+		}
+	}
 }
 </script>
