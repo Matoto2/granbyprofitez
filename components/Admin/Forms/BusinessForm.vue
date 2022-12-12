@@ -40,7 +40,10 @@
 				<FieldWrapper id="responsable_rh" label="Responsable RH" childclass="md:col-4">
 					<InputText type="text" v-model="form.responsable_rh"/>
 				</FieldWrapper>
-				<FieldWrapper id="categoriesPro" label="Secteur" childclass="md:col-4">
+				<FieldWrapper id="secteur" label="Secteur" childclass="md:col-4">
+					<Dropdown v-model="form.secteur" :options="secteursChoises" optionLabel="label" optionValue="value"></Dropdown>
+				</FieldWrapper>
+				<FieldWrapper id="categoriesPro" label="Secteur Pro." childclass="md:col-4">
 					<Dropdown v-model="form.categoriesPro" :options="categoriesProChoises" optionLabel="label" optionValue="value"></Dropdown>
 				</FieldWrapper>
 				<FieldWrapper id="nb_employe" label="Nb d'employés" childclass="md:col-4">
@@ -115,6 +118,7 @@ export default {
 					telephone: '',
 					fax: '',
 					website: '',
+					secteur: [],
 					categoriesPro: [],
 					gallery: [],
 					youtube_link: '',
@@ -139,7 +143,10 @@ export default {
 			await this.$store.dispatch('filters/filters');
 	},
 	computed: {
-		categoriesProChoises(){
+		secteursChoises(){
+			return this.$jobFilters.secteursChoises()
+		}
+		,categoriesProChoises(){
 			return this.$jobFilters.categoriesProChoises()
 		},
 	},

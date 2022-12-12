@@ -35,5 +35,6 @@ You can directly use them in pages and other components without the need to impo
 - `<JobsDisplay>` | `<jobs-display>` (components/JobsDisplay.vue)
 - `<JobSearch>` | `<job-search>` (components/JobSearch.vue)
 - `<JobsSlider>` | `<jobs-slider>` (components/JobsSlider.vue)
+- `<PieChart>` | `<pie-chart>` (components/PieChart.vue)
 - `<TypeWrite>` | `<type-write>` (components/TypeWrite.vue)
 - `<Youtube>` | `<youtube>` (components/Youtube.vue)

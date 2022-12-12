@@ -86,6 +86,9 @@
   "JobsSlider": {
     "description": "Auto imported from components/JobsSlider.vue"
   },
+  "PieChart": {
+    "description": "Auto imported from components/PieChart.vue"
+  },
   "TypeWrite": {
     "description": "Auto imported from components/TypeWrite.vue"
   },

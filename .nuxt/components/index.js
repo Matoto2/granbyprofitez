@@ -27,6 +27,7 @@ export { default as JobLink } from '../..\\components\\JobLink.vue'
 export { default as JobsDisplay } from '../..\\components\\JobsDisplay.vue'
 export { default as JobSearch } from '../..\\components\\JobSearch.vue'
 export { default as JobsSlider } from '../..\\components\\JobsSlider.vue'
+export { default as PieChart } from '../..\\components\\PieChart.vue'
 export { default as TypeWrite } from '../..\\components\\TypeWrite.vue'
 export { default as Youtube } from '../..\\components\\Youtube.vue'
 

@@ -87,7 +87,7 @@ export default {
 		}
 	},
 	async fetch(){
-		const resp = await this.$dataApi.getJobsList(this.$store.getters['auth/user_id'])
+		const resp = await this.$dataApi.getJobsList(this.$store.getters['auth/user_id'], 'all')
 		this.jobs = resp.jobs
 		this.tableLoading = false
 	},

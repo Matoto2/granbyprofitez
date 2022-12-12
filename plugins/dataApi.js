@@ -61,11 +61,12 @@ export default function({$axios, error, store}, inject){
 	}
 
 	//Jobs
-	async function getJobsList(businessID = false){
+	async function getJobsList(businessID = false, status = ['publish']){
 		let post = {}
 		if(businessID){
 			post = {
-				businessID: businessID
+				businessID: businessID,
+				status: status
 			}
 		}
 		return await $axios.$post('/jobs/list', post)
