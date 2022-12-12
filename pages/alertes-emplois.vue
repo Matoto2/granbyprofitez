@@ -73,6 +73,21 @@
 						<label for="international">Recrutement international</label>
 					</div>
 				</div>
+				<div style="margin-top: 3rem">
+					<h3>Je désir recevoir des alertes emploi par courriel:</h3>
+					<div class="field-radiobutton">
+						<RadioButton id="recurrence-never" name="recurrence" v-model="form.recurrence" value=""></RadioButton>
+						<label for="recurrence-never">Jamais</label>
+					</div>
+					<div class="field-radiobutton">
+						<RadioButton id="recurrence-daily" name="recurrence" v-model="form.recurrence" value="daily"></RadioButton>
+						<label for="recurrence-daily">Quotidiennement</label>
+					</div>
+					<div class="field-radiobutton">
+						<RadioButton id="recurrence-weekly" name="recurrence" v-model="form.recurrence" value="weekly"></RadioButton>
+						<label for="recurrence-weekly">Hebdomadairement</label>
+					</div>
+				</div>
 			</div>
 
 			<div class="submit-wrapper">
@@ -84,10 +99,12 @@
 </template>
 <script>
 import Checkbox from "primevue/checkbox";
+import RadioButton from "primevue/radiobutton";
 
 export default {
 	components: {
-		Checkbox
+		Checkbox,
+		RadioButton
 	},
 	async mounted(){
 		if(this.$store.getters["filters/secteurs"].length === undefined)
@@ -131,6 +148,7 @@ export default {
 					type_emploi: [],
 					horaire: [],
 					international: false,
+					recurrence: ''
 				}
 				this.$toast.add({severity:'success', summary: 'Bienvenue!', detail:response.data.data === 'REMOVED_FROM_LIST' ? "Vous avez été retiré de la liste.":"L'emploi de vos rêves est maintenant à votre portée!", life: 6000});
 			}else{
