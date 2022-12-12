@@ -9,7 +9,7 @@
 						<svg xmlns="http://www.w3.org/2000/svg" width="26.435" height="30.213" viewBox="0 0 26.435 30.213"><path d="M15.106,1.888V2.943A8.974,8.974,0,0,1,22.659,11.8v1.971a11.841,11.841,0,0,0,2.585,7.376l.879,1.1a1.416,1.416,0,0,1-1.1,2.3H1.416a1.416,1.416,0,0,1-1.106-2.3l.88-1.1a11.818,11.818,0,0,0,2.586-7.376V11.8A8.974,8.974,0,0,1,11.33,2.943V1.888a1.888,1.888,0,0,1,3.777,0Zm-2.36,3.777A6.14,6.14,0,0,0,6.609,11.8v1.971a14.65,14.65,0,0,1-2.342,7.943h17.9a14.655,14.655,0,0,1-2.343-7.943V11.8A6.14,6.14,0,0,0,13.69,5.665Zm4.249,20.771a3.768,3.768,0,0,1-3.777,3.777,3.778,3.778,0,0,1-2.673-1.1,3.872,3.872,0,0,1-1.1-2.673Z" transform="translate(0)"/></svg>
 						<span>Inscription aux<br>alertes-emplois</span>
 					</div>
-					<input type="email" v-model="form.email" placeholder="Courriel">
+					<input required type="email" v-model="form.email" placeholder="Courriel">
 				</div>
 			</div>
 			<div class="container">
@@ -120,8 +120,27 @@ export default {
 		}
 	},
 	methods: {
-		submit(){
-			console.log('submit!', this.form)
+		async submit(){
+			let response = await this.$axios.post('/jobalerts', this.form)
+
+			if(response.data.success){
+				this.form = {
+					email: '',
+					secteurs: [],
+					categoriesPro: [],
+					type_emploi: [],
+					horaire: [],
+					international: false,
+				}
+				this.$toast.add({severity:'success', summary: 'Bienvenue!', detail:response.data.data === 'REMOVED_FROM_LIST' ? "Vous avez été retiré de la liste.":"L'emploi de vos rêves est maintenant à votre portée!", life: 6000});
+			}else{
+				this.$toast.add({
+					severity:'error',
+					summary: 'Oups!',
+					detail: "Une erreur est survenue!",
+					life: 6000});
+			}
+			console.log('submit!', response)
 		}
 	}
 }

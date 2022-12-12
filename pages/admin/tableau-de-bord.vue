@@ -4,6 +4,7 @@
 			<Panel>
 				<div class="p-fluid grid formgrid">
 					<div class="p-field col-12 md:col-4">
+						<h3 class="text-center">Entreprises par secteur</h3>
 						<PieChart :chartData="chartData" :chartOptions="chartOptions"></PieChart>
 					</div>
 				</div>

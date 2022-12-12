@@ -204,8 +204,3 @@ export default {
 	}
 }
 </script>
-<style scoped>
-form{
-
-}
-</style>

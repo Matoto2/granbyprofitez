@@ -42,13 +42,6 @@
     "_name": "_8ca5f1b4"
   },
   {
-    "name": "mot-de-passe-oublie",
-    "path": "/mot-de-passe-oublie",
-    "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\mot-de-passe-oublie.vue",
-    "chunkName": "pages/mot-de-passe-oublie",
-    "_name": "_9f81ed6c"
-  },
-  {
     "name": "offres-emploi",
     "path": "/offres-emploi",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\offres-emploi\\\\index.vue",
@@ -173,6 +166,13 @@
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\gestion\\\\emplois\\\\_id.vue",
     "chunkName": "pages/gestion/emplois/_id",
     "_name": "_14751a42"
+  },
+  {
+    "name": "change-password-id",
+    "path": "/change-password/:id?",
+    "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\change-password\\\\_id.vue",
+    "chunkName": "pages/change-password/_id",
+    "_name": "_a4521e44"
   },
   {
     "name": "liste-des-employeurs-id",

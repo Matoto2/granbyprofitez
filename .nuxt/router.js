@@ -10,7 +10,6 @@ const _3dfe648c = () => interopDefault(import('..\\pages\\etudier.vue' /* webpac
 const _c2889958 = () => interopDefault(import('..\\pages\\immigrer.vue' /* webpackChunkName: "pages/immigrer" */))
 const _62455fcc = () => interopDefault(import('..\\pages\\inscription.vue' /* webpackChunkName: "pages/inscription" */))
 const _8ca5f1b4 = () => interopDefault(import('..\\pages\\liste-des-employeurs\\index.vue' /* webpackChunkName: "pages/liste-des-employeurs/index" */))
-const _9f81ed6c = () => interopDefault(import('..\\pages\\mot-de-passe-oublie.vue' /* webpackChunkName: "pages/mot-de-passe-oublie" */))
 const _5549c258 = () => interopDefault(import('..\\pages\\offres-emploi\\index.vue' /* webpackChunkName: "pages/offres-emploi/index" */))
 const _564effb1 = () => interopDefault(import('..\\pages\\sinstaller.vue' /* webpackChunkName: "pages/sinstaller" */))
 const _7620c904 = () => interopDefault(import('..\\pages\\travailler.vue' /* webpackChunkName: "pages/travailler" */))
@@ -29,6 +28,7 @@ const _39093f7c = () => interopDefault(import('..\\pages\\admin\\administrateurs
 const _a49b6cf6 = () => interopDefault(import('..\\pages\\admin\\entreprises\\_id.vue' /* webpackChunkName: "pages/admin/entreprises/_id" */))
 const _03eab96c = () => interopDefault(import('..\\pages\\admin\\nouvelles\\_id.vue' /* webpackChunkName: "pages/admin/nouvelles/_id" */))
 const _14751a42 = () => interopDefault(import('..\\pages\\gestion\\emplois\\_id.vue' /* webpackChunkName: "pages/gestion/emplois/_id" */))
+const _a4521e44 = () => interopDefault(import('..\\pages\\change-password\\_id.vue' /* webpackChunkName: "pages/change-password/_id" */))
 const _4efe9b0e = () => interopDefault(import('..\\pages\\liste-des-employeurs\\_id.vue' /* webpackChunkName: "pages/liste-des-employeurs/_id" */))
 const _85ea7388 = () => interopDefault(import('..\\pages\\offres-emploi\\_id.vue' /* webpackChunkName: "pages/offres-emploi/_id" */))
 const _6543b4c6 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
@@ -68,10 +68,6 @@ export const routerOptions = {
     path: "/liste-des-employeurs",
     component: _8ca5f1b4,
     name: "liste-des-employeurs"
-  }, {
-    path: "/mot-de-passe-oublie",
-    component: _9f81ed6c,
-    name: "mot-de-passe-oublie"
   }, {
     path: "/offres-emploi",
     component: _5549c258,
@@ -144,6 +140,10 @@ export const routerOptions = {
     path: "/gestion/emplois/:id",
     component: _14751a42,
     name: "gestion-emplois-id"
+  }, {
+    path: "/change-password/:id?",
+    component: _a4521e44,
+    name: "change-password-id"
   }, {
     path: "/liste-des-employeurs/:id?",
     component: _4efe9b0e,
