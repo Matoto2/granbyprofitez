@@ -6,11 +6,14 @@
 			</NuxtLink>
 
 			<DataTable :loading="tableLoading"
+					   :paginator="true"
+					   :rows="10"
 					   :value="users"
 					   showGridlines
 					   :filters.sync="filters"
 					   filterDisplay="menu"
 					   :globalFilterFields="['nameFirst','nameLast','email']"
+					   class="p-datatable-sm"
 					   responsiveLayout="scroll">
 				<template #header>
 					<div class="datatable-header-row">

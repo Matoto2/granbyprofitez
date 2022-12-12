@@ -6,6 +6,8 @@
 			</NuxtLink>
 
 			<DataTable :loading="tableLoading"
+					   :paginator="true"
+					   :rows="10"
 					   :value="jobs"
 					   showGridlines
 					   :filters.sync="filters"
@@ -13,6 +15,7 @@
 					   :globalFilterFields="['title']"
 					   sortField="dateUpdated"
 					   :sortOrder="-1"
+					   class="p-datatable-sm"
 					   responsiveLayout="scroll">
 				<template #header>
 					<div class="datatable-header-row">
