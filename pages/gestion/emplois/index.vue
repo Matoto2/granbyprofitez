@@ -107,9 +107,9 @@ export default {
 					this.tableLoading = true
 					const result = await this.$dataApi.deleteJob(id)
 					if(result.success){
-						this.$toast.add({severity:'success', summary: 'Succès!', detail:'suppression effectué', life: 3000});
+						this.$toast.add({severity:'success', summary: 'Succès!', detail:'Suppression effectué', life: 3000});
 					} else{
-						this.$toast.add({severity:'error', summary: 'Erreur!', detail:"Un problème est survenu. Veuillez contacter l'administrateur", life: 3000});
+						this.$toast.add({severity:'error', summary: 'Erreur!', detail:result.message ?result.message:"Un problème est survenu. Veuillez contacter l'administrateur", life: 3000});
 					}
 					this.tableLoading = false
 					this.$nuxt.refresh()

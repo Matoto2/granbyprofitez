@@ -80,7 +80,7 @@ export default function({$axios, error, store}, inject){
 		return resp
 	}
 	async function deleteJob(id){
-		const resp = await $axios.$post('/jobs/delete', {
+		const resp = await $axios.$post('/jobs/archive', {
 			token: store.getters['auth/get_token'],
 			id: id
 		})
