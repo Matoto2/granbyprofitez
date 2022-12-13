@@ -30,6 +30,7 @@ import nuxt_plugin_toastService_f7ab0df8 from 'nuxt_plugin_toastService_f7ab0df8
 import nuxt_plugin_vcalendar_8688e204 from 'nuxt_plugin_vcalendar_8688e204' // Source: ..\\plugins\\vcalendar (mode: 'client')
 import nuxt_plugin_nuxtquillplugin_36d64ccf from 'nuxt_plugin_nuxtquillplugin_36d64ccf' // Source: ..\\plugins\\nuxt-quill-plugin (mode: 'client')
 import nuxt_plugin_vueuploadcomponent_5ae0e3cc from 'nuxt_plugin_vueuploadcomponent_5ae0e3cc' // Source: ..\\plugins\\vueuploadcomponent (mode: 'client')
+import nuxt_plugin_persistedStateclient_3b127e9c from 'nuxt_plugin_persistedStateclient_3b127e9c' // Source: ..\\plugins\\persistedState.client.js (mode: 'client')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -292,6 +293,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (process.client && typeof nuxt_plugin_vueuploadcomponent_5ae0e3cc === 'function') {
     await nuxt_plugin_vueuploadcomponent_5ae0e3cc(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_persistedStateclient_3b127e9c === 'function') {
+    await nuxt_plugin_persistedStateclient_3b127e9c(app.context, inject)
   }
 
   // Lock enablePreview in context

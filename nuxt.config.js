@@ -52,6 +52,7 @@ export default {
 		{ src: "~/plugins/vcalendar", ssr: false },
 		{ src: '~/plugins/nuxt-quill-plugin', ssr: false },
 		{ src: '~/plugins/vueuploadcomponent', ssr: false },
+		{ src: '~/plugins/persistedState.client.js' }
 	],
 	serverMiddleware: ['~/serverMiddleware/selectiveSSR.js'],
 
