@@ -62,6 +62,9 @@
   "LmFileUpload": {
     "description": "Auto imported from components/Forms/LmFileUpload.vue"
   },
+  "RegisterBusiness": {
+    "description": "Auto imported from components/Forms/RegisterBusiness.vue"
+  },
   "SsrCarousel": {
     "description": "Auto imported from node_modules/vue-ssr-carousel/index.js"
   },

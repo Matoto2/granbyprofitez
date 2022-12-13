@@ -27,6 +27,7 @@ You can directly use them in pages and other components without the need to impo
 - `<LogoutBtn>` | `<logout-btn>` (components/Layout/LogoutBtn.vue)
 - `<CVForm>` | `<c-v-form>` (components/Forms/CVForm.vue)
 - `<LmFileUpload>` | `<lm-file-upload>` (components/Forms/LmFileUpload.vue)
+- `<RegisterBusiness>` | `<register-business>` (components/Forms/RegisterBusiness.vue)
 - `<SsrCarousel>` | `<ssr-carousel>` (node_modules/vue-ssr-carousel/index.js)
 - `<AutresEmplois>` | `<autres-emplois>` (components/AutresEmplois.vue)
 - `<BarreTitreTexte>` | `<barre-titre-texte>` (components/BarreTitreTexte.vue)

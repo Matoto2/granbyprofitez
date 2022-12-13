@@ -1,5 +1,5 @@
 <template>
-	<div>
-		Immigrer
+	<div class="container">
+		<RegisterBusiness></RegisterBusiness>
 	</div>
 </template>
