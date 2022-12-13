@@ -133,6 +133,7 @@ export default {
 				type_emploi: [],
 				horaire: [],
 				international: false,
+				recurrence: ''
 			}
 		}
 	},
