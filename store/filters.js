@@ -11,6 +11,7 @@ export const state = () => ({
 	type_emploi: {},
 	horaire: {},
 	selectedFilters: {},
+	currentPage: 1,
 })
 
 export const mutations = {
@@ -22,6 +23,9 @@ export const mutations = {
 	},
 	SET_SELECTED_FILTERS(state, data){
 		state.selectedFilters = data
+	},
+	SET_CURRENT_PAGE(state, data){
+		state.currentPage = data
 	}
 }
 
@@ -42,6 +46,9 @@ export const actions = {
 	async storeSelectedFilters ({ commit }, data) {
 		commit('SET_SELECTED_FILTERS', data)
 	},
+	storeCurrentPage({commit}, data){
+		commit('SET_CURRENT_PAGE', data)
+	}
 }
 
 export const getters = {
@@ -59,5 +66,8 @@ export const getters = {
 	},
 	selectedFilters: (state) => {
 		return state.selectedFilters
+	},
+	currentPage: (state) => {
+		return state.currentPage
 	}
 }
