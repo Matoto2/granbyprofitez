@@ -78,6 +78,7 @@
 			</div>
 		</Panel>
 
+		<div><ProgressSpinner style="width: 2rem;height: 2rem;" v-if="sending"></ProgressSpinner></div>
 		<Button style="margin-top: 1rem" type="submit">{{ use === 'add' ? 'Ajouter':'Mettre à jour'}}</Button>
 	</form>
 </template>
@@ -88,6 +89,7 @@ import Textarea from 'primevue/textarea'
 import InputMask from 'primevue/inputmask'
 import Panel from 'primevue/panel'
 import Dropdown from 'primevue/dropdown'
+import ProgressSpinner from "primevue/progressspinner";
 
 export default {
 	components: {
@@ -96,7 +98,8 @@ export default {
 		Textarea,
 		InputMask,
 		Panel,
-		Dropdown
+		Dropdown,
+		ProgressSpinner
 	},
 	props: {
 		form: {
@@ -133,6 +136,7 @@ export default {
 	},
 	data(){
 		return {
+			sending: false,
 			confirmPassword: '',
 			villes: ["Granby", "Roxton Pond", "Saint-Alphonse-de-Granby", "Sainte-Cécile-de-Milton", "Saint-Joachim-de-Sherfford", "Shefford", "Warden", "Waterloo"]
 		}
@@ -140,6 +144,7 @@ export default {
 	async mounted(){
 		if(this.$store.getters["filters/secteurs"].length === undefined)
 			await this.$store.dispatch('filters/filters');
+
 	},
 	computed: {
 		secteursChoises(){
@@ -157,6 +162,7 @@ export default {
 				else
 					this.form.gallery.push(file)
 			})
+			console.log(this.form)
 		},
 		removeFile(obj){
 			if(obj.name === 'logo')
@@ -165,6 +171,7 @@ export default {
 				this.form.gallery.splice(obj.index, 1)
 		},
 		async submit(){
+			this.sending = true
 			const form = this.form
 			form.token = this.$store.getters['auth/get_token']
 
@@ -178,6 +185,7 @@ export default {
 						form
 					)
 				}else{
+					this.sending = false
 					this.$toast.add({severity:'error', summary: 'Erreur!', detail:"Vérifier que les mots de passe concordent", life: 10000});
 					return
 				}
@@ -188,6 +196,7 @@ export default {
 					if(this.form.password === this.confirmPassword) {
 						form.password = this.form.password
 					}else{
+						this.sending = false
 						this.$toast.add({severity:'error', summary: 'Erreur!', detail:"Vérifier que les mots de passe concordent", life: 10000});
 						return
 					}
@@ -199,9 +208,11 @@ export default {
 			}
 
 			if(response.data.success){
+				this.sending = false
 				this.$toast.add({severity:'success', summary: 'Succès!', detail:'Sauvegarde effectué', life: 3000});
 
 			}else{
+				this.sending = false
 				this.$toast.add({severity:'error', summary: 'Erreur!', detail:response.data.error, life: 15000});
 			}
 		}

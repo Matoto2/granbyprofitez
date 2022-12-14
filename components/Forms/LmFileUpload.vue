@@ -7,8 +7,8 @@
 					style="position: absolute;right:0;opacity: .8"
 					@click="$emit('removeFile', {index: k, name: name})"
 			/>
-			<nuxt-img v-if="v?.id && accept.includes('image') && !listFiles" :src="v?.sizes?.thumbnail?.source_url" style="margin-top: 10px;height: 80px;width:80px;object-fit:cover;margin-right: 1rem;" />
-			<nuxt-img v-else-if="v?.base64 && accept.includes('image') && !listFiles" :src="v.base64" style="margin-top: 10px;height: 80px;width:80px;object-fit:cover;margin-right: 1rem;" />
+			<nuxt-img v-if="v?.id && accept.includes('image') && !listFiles" :src="v?.media_details?.sizes?.thumbnail?.source_url" style="margin-top: 10px;height: 80px;width:80px;object-fit:cover;margin-right: 1rem;" />
+			<nuxt-img v-else-if="v?.base64 && accept.includes('image') && !listFiles" :src="v?.base64" style="margin-top: 10px;height: 80px;width:80px;object-fit:cover;margin-right: 1rem;" />
 		</div>
 
 		<ul v-if="listFiles && value.length" style="margin-top: 0">
