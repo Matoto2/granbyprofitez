@@ -3,196 +3,168 @@
     "name": "alertes-emplois",
     "path": "/alertes-emplois",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\alertes-emplois.vue",
-    "chunkName": "pages/alertes-emplois",
-    "_name": "_3a09cbe6"
+    "chunkName": "pages/alertes-emplois"
   },
   {
     "name": "connexion",
     "path": "/connexion",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\connexion.vue",
-    "chunkName": "pages/connexion",
-    "_name": "_23fd813d"
+    "chunkName": "pages/connexion"
   },
   {
     "name": "etudier",
     "path": "/etudier",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\etudier.vue",
-    "chunkName": "pages/etudier",
-    "_name": "_3dfe648c"
+    "chunkName": "pages/etudier"
   },
   {
     "name": "immigrer",
     "path": "/immigrer",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\immigrer.vue",
-    "chunkName": "pages/immigrer",
-    "_name": "_c2889958"
+    "chunkName": "pages/immigrer"
   },
   {
     "name": "inscription",
     "path": "/inscription",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\inscription.vue",
-    "chunkName": "pages/inscription",
-    "_name": "_62455fcc"
+    "chunkName": "pages/inscription"
   },
   {
     "name": "liste-des-employeurs",
     "path": "/liste-des-employeurs",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\liste-des-employeurs\\\\index.vue",
-    "chunkName": "pages/liste-des-employeurs/index",
-    "_name": "_8ca5f1b4"
+    "chunkName": "pages/liste-des-employeurs/index"
   },
   {
     "name": "offres-emploi",
     "path": "/offres-emploi",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\offres-emploi\\\\index.vue",
-    "chunkName": "pages/offres-emploi/index",
-    "_name": "_5549c258"
+    "chunkName": "pages/offres-emploi/index"
   },
   {
     "name": "sinstaller",
     "path": "/sinstaller",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\sinstaller.vue",
-    "chunkName": "pages/sinstaller",
-    "_name": "_564effb1"
+    "chunkName": "pages/sinstaller"
   },
   {
     "name": "travailler",
     "path": "/travailler",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\travailler.vue",
-    "chunkName": "pages/travailler",
-    "_name": "_7620c904"
+    "chunkName": "pages/travailler"
   },
   {
     "name": "vivre",
     "path": "/vivre",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\vivre.vue",
-    "chunkName": "pages/vivre",
-    "_name": "_9aaa38ec"
+    "chunkName": "pages/vivre"
   },
   {
     "name": "admin-administrateurs",
     "path": "/admin/administrateurs",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\admin\\\\administrateurs\\\\index.vue",
-    "chunkName": "pages/admin/administrateurs/index",
-    "_name": "_220d4f5a"
+    "chunkName": "pages/admin/administrateurs/index"
   },
   {
     "name": "admin-entreprises",
     "path": "/admin/entreprises",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\admin\\\\entreprises\\\\index.vue",
-    "chunkName": "pages/admin/entreprises/index",
-    "_name": "_3a2ef3dd"
+    "chunkName": "pages/admin/entreprises/index"
   },
   {
     "name": "admin-nouvelles",
     "path": "/admin/nouvelles",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\admin\\\\nouvelles\\\\index.vue",
-    "chunkName": "pages/admin/nouvelles/index",
-    "_name": "_37e9f3f8"
+    "chunkName": "pages/admin/nouvelles/index"
   },
   {
     "name": "admin-tableau-de-bord",
     "path": "/admin/tableau-de-bord",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\admin\\\\tableau-de-bord.vue",
-    "chunkName": "pages/admin/tableau-de-bord",
-    "_name": "_1a8679e6"
+    "chunkName": "pages/admin/tableau-de-bord"
   },
   {
     "name": "gestion-emplois",
     "path": "/gestion/emplois",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\gestion\\\\emplois\\\\index.vue",
-    "chunkName": "pages/gestion/emplois/index",
-    "_name": "_08feed4c"
+    "chunkName": "pages/gestion/emplois/index"
   },
   {
     "name": "gestion-tableau-de-bord",
     "path": "/gestion/tableau-de-bord",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\gestion\\\\tableau-de-bord.vue",
-    "chunkName": "pages/gestion/tableau-de-bord",
-    "_name": "_2dcaa1b3"
+    "chunkName": "pages/gestion/tableau-de-bord"
   },
   {
     "name": "admin-administrateurs-add",
     "path": "/admin/administrateurs/add",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\admin\\\\administrateurs\\\\add.vue",
-    "chunkName": "pages/admin/administrateurs/add",
-    "_name": "_44bf9ba9"
+    "chunkName": "pages/admin/administrateurs/add"
   },
   {
     "name": "admin-entreprises-add",
     "path": "/admin/entreprises/add",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\admin\\\\entreprises\\\\add.vue",
-    "chunkName": "pages/admin/entreprises/add",
-    "_name": "_0ef684ec"
+    "chunkName": "pages/admin/entreprises/add"
   },
   {
     "name": "admin-nouvelles-add",
     "path": "/admin/nouvelles/add",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\admin\\\\nouvelles\\\\add.vue",
-    "chunkName": "pages/admin/nouvelles/add",
-    "_name": "_652ef4d3"
+    "chunkName": "pages/admin/nouvelles/add"
   },
   {
     "name": "gestion-emplois-add",
     "path": "/gestion/emplois/add",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\gestion\\\\emplois\\\\add.vue",
-    "chunkName": "pages/gestion/emplois/add",
-    "_name": "_75b955a9"
+    "chunkName": "pages/gestion/emplois/add"
   },
   {
     "name": "admin-administrateurs-id",
     "path": "/admin/administrateurs/:id",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\admin\\\\administrateurs\\\\_id.vue",
-    "chunkName": "pages/admin/administrateurs/_id",
-    "_name": "_39093f7c"
+    "chunkName": "pages/admin/administrateurs/_id"
   },
   {
     "name": "admin-entreprises-id",
     "path": "/admin/entreprises/:id",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\admin\\\\entreprises\\\\_id.vue",
-    "chunkName": "pages/admin/entreprises/_id",
-    "_name": "_a49b6cf6"
+    "chunkName": "pages/admin/entreprises/_id"
   },
   {
     "name": "admin-nouvelles-id",
     "path": "/admin/nouvelles/:id",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\admin\\\\nouvelles\\\\_id.vue",
-    "chunkName": "pages/admin/nouvelles/_id",
-    "_name": "_03eab96c"
+    "chunkName": "pages/admin/nouvelles/_id"
   },
   {
     "name": "gestion-emplois-id",
     "path": "/gestion/emplois/:id",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\gestion\\\\emplois\\\\_id.vue",
-    "chunkName": "pages/gestion/emplois/_id",
-    "_name": "_14751a42"
+    "chunkName": "pages/gestion/emplois/_id"
   },
   {
     "name": "change-password-id",
     "path": "/change-password/:id?",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\change-password\\\\_id.vue",
-    "chunkName": "pages/change-password/_id",
-    "_name": "_a4521e44"
+    "chunkName": "pages/change-password/_id"
   },
   {
     "name": "liste-des-employeurs-id",
     "path": "/liste-des-employeurs/:id?",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\liste-des-employeurs\\\\_id.vue",
-    "chunkName": "pages/liste-des-employeurs/_id",
-    "_name": "_4efe9b0e"
+    "chunkName": "pages/liste-des-employeurs/_id"
   },
   {
     "name": "offres-emploi-id",
     "path": "/offres-emploi/:id?",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\offres-emploi\\\\_id.vue",
-    "chunkName": "pages/offres-emploi/_id",
-    "_name": "_85ea7388"
+    "chunkName": "pages/offres-emploi/_id"
   },
   {
     "name": "index",
     "path": "/",
     "component": "C:\\\\Users\\\\marti\\\\granbyprofitez\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "_name": "_6543b4c6"
+    "chunkName": "pages/index"
   }
 ]

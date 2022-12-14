@@ -35,7 +35,7 @@
 					<InputMask v-model="form.code_postal" mask="a9a 9a9"></InputMask>
 				</FieldWrapper>
 				<FieldWrapper id="logo" label="Logo de l'entreprise" childclass="md:col-4">
-					<LmFileUpload :maxItems="1" @saving="toggleIsSaving" v-model="form.logo"></LmFileUpload>
+					<LmFileUpload name="logo" :maxItems="1"  v-model="form.logo" @newFiles="newFiles" @removeFile="removeFile"></LmFileUpload>
 				</FieldWrapper>
 				<FieldWrapper id="responsable_rh" label="Responsable RH" childclass="md:col-4">
 					<InputText type="text" v-model="form.responsable_rh"/>
@@ -73,12 +73,12 @@
 					<InputText v-model="form.youtube_link"/>
 				</FieldWrapper>
 				<FieldWrapper id="gallery" label="Galerie d'images">
-					<LmFileUpload @saving="toggleIsSaving" v-model="form.gallery"></LmFileUpload>
+					<LmFileUpload name="gallery" v-model="form.gallery" @newFiles="newFiles" @removeFile="removeFile"></LmFileUpload>
 				</FieldWrapper>
 			</div>
 		</Panel>
 
-		<Button style="margin-top: 1rem" :disabled="saving" type="submit">{{ use === 'add' ? 'Ajouter':'Mettre à jour'}}</Button>
+		<Button style="margin-top: 1rem" type="submit">{{ use === 'add' ? 'Ajouter':'Mettre à jour'}}</Button>
 	</form>
 </template>
 <script>
@@ -133,7 +133,6 @@ export default {
 	},
 	data(){
 		return {
-			saving: false,
 			confirmPassword: '',
 			villes: ["Granby", "Roxton Pond", "Saint-Alphonse-de-Granby", "Sainte-Cécile-de-Milton", "Saint-Joachim-de-Sherfford", "Shefford", "Warden", "Waterloo"]
 		}
@@ -151,11 +150,21 @@ export default {
 		},
 	},
 	methods: {
-		toggleIsSaving(value){
-			this.saving = value
+		async newFiles(obj){
+			obj.files.forEach(file => {
+				if(obj.name === 'logo')
+					this.form.logo.push(file)
+				else
+					this.form.gallery.push(file)
+			})
+		},
+		removeFile(obj){
+			if(obj.name === 'logo')
+				this.form.logo.splice(obj.index, 1)
+			else
+				this.form.gallery.splice(obj.index, 1)
 		},
 		async submit(){
-			this.saving = true
 			const form = this.form
 			form.token = this.$store.getters['auth/get_token']
 
@@ -189,7 +198,6 @@ export default {
 				)
 			}
 
-			this.saving = false
 			if(response.data.success){
 				this.$toast.add({severity:'success', summary: 'Succès!', detail:'Sauvegarde effectué', life: 3000});
 
