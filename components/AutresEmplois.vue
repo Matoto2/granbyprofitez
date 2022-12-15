@@ -19,7 +19,7 @@ export default {
 }
 .grid-emplois{
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: repeat(5, 1fr);
 	padding-top: 1rem;
 	padding-bottom: 4rem;
 }

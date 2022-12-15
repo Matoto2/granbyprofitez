@@ -16,8 +16,8 @@ export default {
 }
 .jobs-list .container{
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	gap: 2rem 1rem;
+	grid-template-columns: repeat(5, 1fr);
+	gap: 1rem .5rem;
 	max-width: 1500px;
 }
 </style>

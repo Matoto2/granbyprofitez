@@ -27,7 +27,7 @@
 				<Column field="business" header="Entreprise"></Column>
 				<Column field="logo" header="Logo">
 					<template #body="{data}">
-						<nuxt-img class="logo-preview" v-if="data?.logo[0]" :src="data?.logo[0].sizes?.thumbnail.source_url" />
+						<nuxt-img class="logo-preview" v-if="data?.logo[0]?.media_details?.sizes?.thumbnail?.source_url" :src="data?.logo[0].media_details.sizes.thumbnail.source_url" />
 					</template>
 				</Column>
 				<Column field="email" header="Courriel"></Column>

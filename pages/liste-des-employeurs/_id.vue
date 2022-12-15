@@ -5,7 +5,7 @@
 		<div class="container job-wrapper">
 			<div class="row-intro">
 				<div class="logo-business">
-					<nuxt-img v-if="user?.logo" :src="user?.logo[0]?.sizes?.full?.source_url" />
+					<nuxt-img v-if="user?.logo[0]?.media_details?.sizes?.full?.source_url" :src="user.logo[0].media_details.sizes.full.source_url" />
 				</div>
 				<div class="job-name">
 					<h1>{{ user.business }}</h1>
@@ -65,10 +65,10 @@
 								  :autoPlay="true"
 								  :showItemNavigators="true">
 							<template #item="slotProps">
-								<nuxt-img :src="slotProps.item.itemImageSrc" style="height: 500px;width:100%;object-fit:cover;" />
+								<nuxt-img v-if="slotProps.item.itemImageSrc" :src="slotProps.item.itemImageSrc" style="height: 500px;width:100%;object-fit:cover;" />
 							</template>
 							<template #thumbnail="slotProps">
-								<nuxt-img :src="slotProps.item.thumbnailImageSrc" />
+								<nuxt-img v-if="slotProps.item.thumbnailImageSrc" :src="slotProps.item.thumbnailImageSrc" />
 							</template>
 						</Galleria>
 					</client-only>
@@ -106,8 +106,8 @@ export default {
 			let images = []
 			if(this.user.gallery){
 				this.user.gallery.forEach(image => images.push({
-					"itemImageSrc": image.sizes.full.source_url,
-					"thumbnailImageSrc": image.sizes.thumbnail.source_url
+					"itemImageSrc": image.media_details.sizes.full.source_url,
+					"thumbnailImageSrc": image.media_details.sizes.thumbnail.source_url
 				}))
 			}
 			return images

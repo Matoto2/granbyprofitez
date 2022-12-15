@@ -1,0 +1,101 @@
+<template>
+	<div style="margin: 1rem 0">
+		<div class="dates-wrapper">
+			<div class="date-field">
+				<label for="debut">Date début</label>
+				<Calendar id="debut" v-model="debut" :maxDate="new Date()"></Calendar>
+			</div>
+			<div class="date-field">
+				<label for="fin">Date fin</label>
+				<Calendar v-model="fin" :minDate="debut"></Calendar>
+			</div>
+		</div>
+
+		<DataTable :value="stats" sortField="date" :sortOrder="1" class="p-datatable-sm" ref="dtSentCv">
+			<template #header>
+				<div style="text-align: left">
+					<Button icon="pi pi-external-link" label="Exporter en .csv" @click="exportCSV($event)" />
+				</div>
+			</template>
+			<Column field="date" header="Date" :sortable="true">
+				<template #body="slotProps">
+					{{$moment(slotProps.data.date).format('YYYY-MM-DD')}}
+				</template>
+			</Column>
+			<Column field="business" header="Employeur"></Column>
+			<Column field="job" header="Emploi"></Column>
+			<Column field="name" header="Nom"></Column>
+			<Column field="phone" header="Téléphone"></Column>
+			<Column field="postal_code" header="Code postal"></Column>
+			<Column field="email" header="Courriel"></Column>
+			<Column field="files" header="Fichiers">
+				<template #body="slotProps">
+					<div v-for="file in slotProps.data.files">
+						<a target="_blank" :href="file.url ?? file.source_url">{{(file.name ?? file.title.rendered).substring(0,10)}}</a>
+					</div>
+				</template>
+			</Column>
+			<Column field="agreed" header="Accepté">
+				<template #body="slotProps">
+					{{slotProps.data.agreed ? 'Oui':'Non'}}
+				</template>
+			</Column>
+		</DataTable>
+	</div>
+
+</template>
+<script>
+import DataTable from "primevue/datatable"
+import Column from "primevue/column"
+import Calendar from "primevue/calendar"
+import Button from "primevue/button"
+export default {
+	components: {
+		DataTable,Column,Calendar,Button
+	},
+	data(){
+		return {
+			debut: this.$moment().startOf('month').toDate(),
+			fin: new Date(),
+			stats: []
+		}
+	},
+	watch: {
+		async debut(){
+			await this.getCV()
+		},
+		async fin(){
+			await this.getCV()
+		}
+	},
+	async fetch(){
+		await this.getCV()
+	},
+	methods: {
+		async getCV(){
+			const response = await this.$axios.$post('/stats/sent_cv', {
+				debut: this.debut,
+				fin: this.fin
+			})
+			this.stats = response.data
+		},
+		exportCSV(){
+			this.$refs.dtSentCv.exportCSV();
+		}
+	}
+}
+</script>
+<style scoped>
+.dates-wrapper{
+	display: flex;
+	gap: 1rem;
+	margin-bottom: 1rem;
+}
+.date-field{
+	display: flex;
+	flex-direction: column;
+}
+.p-datatable-sm{
+	font-size: .85rem
+}
+</style>

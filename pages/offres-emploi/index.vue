@@ -21,7 +21,7 @@ export default {
 		return {
 			jobs: [],
 			filters: {},
-			perPage: 32,
+			perPage: 100,
 			totalItems: 0,
 		}
 	},

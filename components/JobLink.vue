@@ -30,12 +30,13 @@ export default {
 		overflow: hidden;
 		display: flex;
 		flex-direction: column;
+		justify-content: space-between;
 		margin: 10px;
 		border-radius: 10px;
 		box-shadow: 0 5px 10px rgba(0,0,0,.3);
 	}
 	.upper{
-		padding: 1.5rem;
+		padding: 1rem;
 	}
 	.infos{
 		display: flex;
@@ -43,7 +44,7 @@ export default {
 		background-color: #F8F6E9;
 		color: #6A6A6A;
 		font-weight: 600;
-		padding: 1.5rem;
+		padding: 1rem;
 		font-size: .9rem;
 		text-transform: uppercase;
 	}

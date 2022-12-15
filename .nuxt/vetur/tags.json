@@ -14,6 +14,18 @@
   "AdminLayout": {
     "description": "Auto imported from components/Admin/AdminLayout.vue"
   },
+  "EntrepriseParSecteur": {
+    "description": "Auto imported from components/Admin/EntrepriseParSecteur.vue"
+  },
+  "StatsAlertesEmplois": {
+    "description": "Auto imported from components/Admin/StatsAlertesEmplois.vue"
+  },
+  "StatsSentCV": {
+    "description": "Auto imported from components/Admin/StatsSentCV.vue"
+  },
+  "TableStatsAlert": {
+    "description": "Auto imported from components/Admin/TableStatsAlert.vue"
+  },
   "BusinessLayout": {
     "description": "Auto imported from components/Gestion/BusinessLayout.vue"
   },
