@@ -47,6 +47,7 @@ export default {
 		"~/plugins/dataApi",
 		"~/plugins/jobFilters",
 		"~/plugins/youtube.client.js",
+		"~/plugins/tooltip.client.js",
 		{ src: "~/plugins/confirmationService", mode: "client", ssr: false },
 		{ src: "~/plugins/toastService", mode: "client", ssr: false },
 		{ src: "~/plugins/vcalendar", ssr: false },
