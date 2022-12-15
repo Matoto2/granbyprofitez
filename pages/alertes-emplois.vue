@@ -76,16 +76,16 @@
 				<div style="margin-top: 3rem">
 					<h3>Je désir recevoir des alertes emploi par courriel:</h3>
 					<div class="field-radiobutton">
-						<RadioButton id="recurrence-never" name="recurrence" v-model="form.recurrence" value=""></RadioButton>
-						<label for="recurrence-never">Jamais</label>
-					</div>
-					<div class="field-radiobutton">
 						<RadioButton id="recurrence-daily" name="recurrence" v-model="form.recurrence" value="daily"></RadioButton>
 						<label for="recurrence-daily">Quotidiennement</label>
 					</div>
 					<div class="field-radiobutton">
 						<RadioButton id="recurrence-weekly" name="recurrence" v-model="form.recurrence" value="weekly"></RadioButton>
 						<label for="recurrence-weekly">Hebdomadairement</label>
+					</div>
+					<div class="field-radiobutton">
+						<RadioButton id="recurrence-never" name="recurrence" v-model="form.recurrence" value=""></RadioButton>
+						<label for="recurrence-never">Se désincrire</label>
 					</div>
 				</div>
 			</div>
@@ -126,15 +126,7 @@ export default {
 	},
 	data(){
 		return {
-			form: {
-				email: '',
-				secteurs: [],
-				categoriesPro: [],
-				type_emploi: [],
-				horaire: [],
-				international: false,
-				recurrence: ''
-			}
+			form: this.resetForm()
 		}
 	},
 	methods: {
@@ -142,15 +134,7 @@ export default {
 			let response = await this.$axios.post('/jobalerts', this.form)
 
 			if(response.data.success){
-				this.form = {
-					email: '',
-					secteurs: [],
-					categoriesPro: [],
-					type_emploi: [],
-					horaire: [],
-					international: false,
-					recurrence: ''
-				}
+				this.form = this.resetForm()
 				this.$toast.add({severity:'success', summary: 'Bienvenue!', detail:response.data.data === 'REMOVED_FROM_LIST' ? "Vous avez été retiré de la liste.":"L'emploi de vos rêves est maintenant à votre portée!", life: 6000});
 			}else{
 				this.$toast.add({
@@ -159,7 +143,18 @@ export default {
 					detail: "Une erreur est survenue!",
 					life: 6000});
 			}
-			console.log('submit!', response)
+			//console.log('submit!', response)
+		},
+		resetForm(){
+			return {
+				email: '',
+				secteurs: [],
+				categoriesPro: [],
+				type_emploi: [],
+				horaire: [],
+				international: false,
+				recurrence: 'daily'
+			}
 		}
 	}
 }
