@@ -40,9 +40,10 @@ export default function({$axios, error, store}, inject){
 			error({ statusCode: 404, message: 'Oups, vérifier votre URL' })
 		return resp
 	}
-	async function getBusinesses(){
+	async function getBusinesses(csv = false){
 		const resp = await $axios.$post('/users/list/business', {
-			token: store.getters['auth/get_token']
+			token: store.getters['auth/get_token'],
+			csv: csv
 		})
 		return resp
 	}

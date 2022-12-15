@@ -14,7 +14,7 @@
 		<DataTable :value="stats" sortField="date" :sortOrder="1" class="p-datatable-sm" ref="dtSentCv">
 			<template #header>
 				<div style="text-align: left">
-					<Button icon="pi pi-external-link" label="Exporter en .csv" @click="exportCSV($event)" />
+					<Button icon="pi pi-external-link" label="Exporter en .csv" @click="exportCSV" />
 				</div>
 			</template>
 			<Column field="date" header="Date" :sortable="true">
@@ -49,6 +49,7 @@ import DataTable from "primevue/datatable"
 import Column from "primevue/column"
 import Calendar from "primevue/calendar"
 import Button from "primevue/button"
+import {arrayToCSVDownload} from "@/helpers/arrayToCSVDownload";
 export default {
 	components: {
 		DataTable,Column,Calendar,Button
@@ -79,8 +80,8 @@ export default {
 			})
 			this.stats = response.data
 		},
-		exportCSV(){
-			this.$refs.dtSentCv.exportCSV();
+		async exportCSV(){
+			arrayToCSVDownload(this.stats, 'stats-cv-'+this.$moment(this.debut).format('YYYY-MM-DD')+'-au-'+this.$moment(this.fin).format('YYYY-MM-DD'))
 		}
 	}
 }

@@ -19,7 +19,9 @@
 					<div class="datatable-header-row">
 						<InputText v-model="filters['global'].value" placeholder="Recherche" />
 					</div>
-
+					<div style="text-align: left">
+						<Button icon="pi pi-external-link" label="Exporter en .csv" @click="exportCSV()" />
+					</div>
 				</template>
 				<template #empty>
 					Aucune entreprise trouvé.
@@ -51,6 +53,7 @@ import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
+import {arrayToCSVDownload} from "@/helpers/arrayToCSVDownload";
 
 export default {
 	middleware: 'auth',
@@ -102,6 +105,10 @@ export default {
 					this.$nuxt.refresh()
 				},
 			});
+		},
+		async exportCSV(){
+			const response = await this.$dataApi.getBusinesses(true)
+			arrayToCSVDownload(response.users, 'entreprises-'+this.$moment().format('YYYY-MM-DD'))
 		}
 	}
 }
