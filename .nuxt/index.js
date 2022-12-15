@@ -25,6 +25,7 @@ import nuxt_plugin_slugify_69285c3b from 'nuxt_plugin_slugify_69285c3b' // Sourc
 import nuxt_plugin_dataApi_3cd42dda from 'nuxt_plugin_dataApi_3cd42dda' // Source: ..\\plugins\\dataApi (mode: 'all')
 import nuxt_plugin_jobFilters_2225bd18 from 'nuxt_plugin_jobFilters_2225bd18' // Source: ..\\plugins\\jobFilters (mode: 'all')
 import nuxt_plugin_youtubeclient_7a41dc8b from 'nuxt_plugin_youtubeclient_7a41dc8b' // Source: ..\\plugins\\youtube.client.js (mode: 'client')
+import nuxt_plugin_tooltipclient_6a09e96b from 'nuxt_plugin_tooltipclient_6a09e96b' // Source: ..\\plugins\\tooltip.client.js (mode: 'client')
 import nuxt_plugin_confirmationService_1ac4718a from 'nuxt_plugin_confirmationService_1ac4718a' // Source: ..\\plugins\\confirmationService (mode: 'client')
 import nuxt_plugin_toastService_f7ab0df8 from 'nuxt_plugin_toastService_f7ab0df8' // Source: ..\\plugins\\toastService (mode: 'client')
 import nuxt_plugin_vcalendar_8688e204 from 'nuxt_plugin_vcalendar_8688e204' // Source: ..\\plugins\\vcalendar (mode: 'client')
@@ -273,6 +274,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (process.client && typeof nuxt_plugin_youtubeclient_7a41dc8b === 'function') {
     await nuxt_plugin_youtubeclient_7a41dc8b(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_tooltipclient_6a09e96b === 'function') {
+    await nuxt_plugin_tooltipclient_6a09e96b(app.context, inject)
   }
 
   if (process.client && typeof nuxt_plugin_confirmationService_1ac4718a === 'function') {

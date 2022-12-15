@@ -8,6 +8,7 @@
 			<DataTable :loading="tableLoading"
 					   :paginator="true"
 					   :rows="10"
+					   :rowClass="rowClass"
 					   :value="jobs"
 					   showGridlines
 					   :filters.sync="filters"
@@ -23,6 +24,7 @@
 							<Button label="Tous" @click="filters['status'].value = ''" class="p-button-text" />
 							<Button label="Publié" @click="filters['status'].value = 'publish'" class="p-button-text" />
 							<Button label="Brouillon" @click="filters['status'].value = 'draft'" class="p-button-text" />
+							<Button label="Inactif" @click="filters['status'].value = 'inactive'" class="p-button-text" />
 						</div>
 						<InputText v-model="filters['global'].value" placeholder="Recherche" />
 					</div>
@@ -32,27 +34,44 @@
 					Aucun emploi trouvé.
 				</template>
 				<Column field="title" header="Titre" :sortable="true"></Column>
-				<Column headerStyle="width: 3rem" field="status" header="Status" :sortable="true">
+				<Column field="status" header="Status" :sortable="true">
 					<template #body="{data}">
-						<span>{{data.status==='publish' ? 'Publié':'Brouillon'}}</span>
+						<span>{{data.status==='publish' ? 'Publié':(data.status==='draft')?'Brouillon':'Inactif'}}</span>
 					</template>
 				</Column>
-				<Column headerStyle="width: 3rem" field="dateUpdated" header="Date m.à.j" :sortable="true">
+				<Column :headerStyle="{width: '10rem'}" field="dateUpdated" header="Date m.à.j" :sortable="true">
 					<template #body="{data}">
 						<span>{{$moment(data.dateUpdated).format('DD MMM YYYY HH:mm')}}</span>
 					</template>
 				</Column>
-				<Column headerStyle="width: 3rem" field="dateCreated" header="Date créé" :sortable="true">
+				<Column :headerStyle="{width: '10rem'}" field="dateCreated" header="Date créé" :sortable="true">
 					<template #body="{data}">
 						<span>{{$moment(data.dateCreated).format('DD MMM YYYY HH:mm')}}</span>
 					</template>
 				</Column>
-				<Column headerStyle="width: 50px; text-align: center">
+				<Column :headerStyle="{width: '10rem'}" field="dateRemonte" header="Remonter" :sortable="true">
 					<template #body="{data}">
-						<NuxtLink class="p-button" :to="'/gestion/emplois/'+data.id">
-							<i class="pi pi-file-edit"></i>
+						{{data.status !== 'publish' ? 'Emploi non-publié':remonteTimeLeft(currentDate, data.dateRemonte).timeLeft}}
+					</template>
+				</Column>
+				<Column :headerStyle="{width: '158px','text-align': 'center'}">
+					<template #body="{data}">
+						<NuxtLink :to="'/gestion/emplois/'+data.id">
+							<Button type="button" icon="pi pi-file-edit"></Button>
 						</NuxtLink>
-						<Button type="button" @click="del(data.id)" class="p-button-danger" icon="pi pi-trash"></Button>
+						<Button :disabled="data.status !== 'publish' || !remonteTimeLeft(currentDate, data.dateRemonte).ok"
+								type="button"
+								v-tooltip.top="'Remonter mon emploi\n1 fois aux 7 jours'"
+								title="Remonter mon emploi"
+								class="p-button-success"
+								@click="remonteJob(data.id)"
+								icon="pi pi-angle-double-up"></Button>
+						<Button type="button"
+								v-tooltip.top="'Supprimer mon emploi'"
+								title="Supprimer mon emploi"
+								@click="del(data.id)"
+								class="p-button-danger"
+								icon="pi pi-trash"></Button>
 					</template>
 				</Column>
 			</DataTable>
@@ -86,7 +105,8 @@ export default {
 		return {
 			jobs: [],
 			tableLoading: true,
-			filters: {}
+			filters: {},
+			currentDate: this.$moment()
 		}
 	},
 	async fetch(){
@@ -100,6 +120,27 @@ export default {
 				'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
 				'status': {value: null, matchMode: FilterMatchMode.EQUALS},
 			}
+		},
+		remonteJob(id){
+			this.$confirm.require({
+				message: "Cette action ne peut-être effectué qu'une seule fois aux 7 jours. Désirez-vous remonter votre annonce?",
+				header: 'Confirmation',
+				icon: 'pi pi-exclamation-triangle',
+				accept: async () => {
+					this.tableLoading = true
+					const result = await this.$axios.$post('/jobs/remonte', {
+						token: this.$store.getters["auth/get_token"],
+						id: id
+					})
+					if(result.success){
+						this.$toast.add({severity:'success', summary: 'Succès!', detail:'Vous avez bien remonté votre emploi!', life: 3000});
+					} else{
+						this.$toast.add({severity:'error', summary: 'Erreur!', detail:result.message ?result.message:"Un problème est survenu. Veuillez contacter l'administrateur", life: 3000});
+					}
+					this.tableLoading = false
+					this.$nuxt.refresh()
+				},
+			});
 		},
 		del(id){
 			this.$confirm.require({
@@ -118,6 +159,29 @@ export default {
 					this.$nuxt.refresh()
 				},
 			});
+		},
+		remonteTimeLeft(currentDate, dateRemonte){
+			const remonte = this.$moment(dateRemonte).add(7,'d')
+			const time = remonte.diff(currentDate)
+			return {
+				ok: currentDate.isAfter(remonte),
+				time: time,
+				timeLeft: time <= 0 ?'Possible de remonter!':remonte.fromNow()
+			}
+		},
+		rowClass(data){
+			let rowclass = ''
+			switch (data.status){
+				case 'draft':
+					rowclass = 'row-draft'
+					break;
+				case 'inactive':
+					rowclass = 'row-inactive'
+					break;
+				default:
+					rowclass = ''
+			}
+			return rowclass
 		}
 	}
 }
@@ -127,5 +191,17 @@ export default {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+}
+a:has(> button){
+	text-decoration: none;
+}
+</style>
+
+<style>
+.p-datatable .p-datatable-tbody > tr.row-draft{
+	background-color: #f2f2f2;
+}
+.p-datatable .p-datatable-tbody > tr.row-inactive{
+	background-color: #ffc8c8;
 }
 </style>

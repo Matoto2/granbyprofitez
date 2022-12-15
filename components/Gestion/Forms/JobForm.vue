@@ -132,6 +132,7 @@ export default {
 					international: false,
 					dateUpdated: new Date(),
 					dateCreated: new Date(),
+					dateRemonte: new Date(),
 				}
 			}
 		},
@@ -145,7 +146,8 @@ export default {
 			saving: false,
 			statusChoises: [
 				{label: 'Publié', value: 'publish'},
-				{label: 'Brouillon', value: 'draft'}
+				{label: 'Brouillon', value: 'draft'},
+				{label: 'Inactif', value: 'inactive'}
 			],
 			scolariteChoices: scolarite,
 			experienceChoices: experience,
