@@ -124,6 +124,7 @@ export default {
 					type_emploi: [],
 					horaire: [],
 					scolarite: '',
+					postes_dispo: 1,
 					experience: '',
 					langues: '',
 					salaire: '',
