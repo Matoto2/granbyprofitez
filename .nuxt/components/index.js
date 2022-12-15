@@ -5,6 +5,7 @@ export { default as JobForm } from '../..\\components\\Gestion\\Forms\\JobForm.v
 export { default as AdminLayout } from '../..\\components\\Admin\\AdminLayout.vue'
 export { default as EntrepriseParSecteur } from '../..\\components\\Admin\\EntrepriseParSecteur.vue'
 export { default as StatsAlertesEmplois } from '../..\\components\\Admin\\StatsAlertesEmplois.vue'
+export { default as StatsEmplois } from '../..\\components\\Admin\\StatsEmplois.vue'
 export { default as StatsSentCV } from '../..\\components\\Admin\\StatsSentCV.vue'
 export { default as TableStatsAlert } from '../..\\components\\Admin\\TableStatsAlert.vue'
 export { default as BusinessLayout } from '../..\\components\\Gestion\\BusinessLayout.vue'

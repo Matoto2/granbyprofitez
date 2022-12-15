@@ -20,6 +20,9 @@
   "StatsAlertesEmplois": {
     "description": "Auto imported from components/Admin/StatsAlertesEmplois.vue"
   },
+  "StatsEmplois": {
+    "description": "Auto imported from components/Admin/StatsEmplois.vue"
+  },
   "StatsSentCV": {
     "description": "Auto imported from components/Admin/StatsSentCV.vue"
   },

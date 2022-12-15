@@ -2,7 +2,7 @@
 	<div>
 		<AdminLayout title="Tableau de bord">
 			<Panel>
-				<TabView lazy>
+				<TabView>
 					<TabPanel header="Entreprises par secteurs">
 						<div style="max-width: 450px">
 							<EntrepriseParSecteur></EntrepriseParSecteur>
@@ -13,6 +13,9 @@
 					</TabPanel>
 					<TabPanel header="CV envoyés">
 						<StatsSentCV></StatsSentCV>
+					</TabPanel>
+					<TabPanel header="Emplois">
+						<StatsEmplois></StatsEmplois>
 					</TabPanel>
 				</TabView>
 			</Panel>

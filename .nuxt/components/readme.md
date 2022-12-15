@@ -13,6 +13,7 @@ You can directly use them in pages and other components without the need to impo
 - `<AdminLayout>` | `<admin-layout>` (components/Admin/AdminLayout.vue)
 - `<EntrepriseParSecteur>` | `<entreprise-par-secteur>` (components/Admin/EntrepriseParSecteur.vue)
 - `<StatsAlertesEmplois>` | `<stats-alertes-emplois>` (components/Admin/StatsAlertesEmplois.vue)
+- `<StatsEmplois>` | `<stats-emplois>` (components/Admin/StatsEmplois.vue)
 - `<StatsSentCV>` | `<stats-sent-c-v>` (components/Admin/StatsSentCV.vue)
 - `<TableStatsAlert>` | `<table-stats-alert>` (components/Admin/TableStatsAlert.vue)
 - `<BusinessLayout>` | `<business-layout>` (components/Gestion/BusinessLayout.vue)

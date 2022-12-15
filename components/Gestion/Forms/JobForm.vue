@@ -30,7 +30,7 @@
 					<InputText type="text" v-model="form.heures_semaine"/>
 				</FieldWrapper>
 				<FieldWrapper id="entree_fonction" label="Date d'entrée en fonction" childclass="md:col-4">
-					<Calendar :value="new Date(form.entree_fonction)"
+					<Calendar :value="form?.entree_fonction ? new Date(form.entree_fonction):new Date()"
 							  @date-select="value => form.entree_fonction = value"
 							  dateFormat="yy-mm-dd"
 					/>

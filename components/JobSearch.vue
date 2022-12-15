@@ -21,7 +21,6 @@
 								 :options="categoriesProChoises"
 								 optionLabel="label"
 								 optionValue="value"
-								 style="flex-grow: 1"
 								 placeholder="Catégories professionnelles"
 								 display="chip" />
 					<MultiSelect v-model="form.horaire"
@@ -29,12 +28,6 @@
 								 optionLabel="label"
 								 optionValue="value"
 								 placeholder="Horaire"
-								 display="chip" />
-					<MultiSelect v-model="form.type_emploi"
-								 :options="horaireChoises"
-								 optionLabel="label"
-								 optionValue="value"
-								 placeholder="Type d'emploi"
 								 display="chip" />
 
 					<div class="checkbox-wrapper international-wrapper">
@@ -152,9 +145,8 @@ input{
 	padding: .5rem 1.5rem;
 	outline: none;
 	border: none;
-	width: 100%;
+	width: calc(65% - 1rem);
 	height: 71px;
-	max-width: 465px;
 }
 .checkbox-wrapper{
 	display: flex;
@@ -211,7 +203,7 @@ label{
 	height: 71px;
 	transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
 	border-radius: 10px;
-	width: 400px;
+	width: 35%;
 }
 .job-search-wrapper .p-multiselect .p-multiselect-trigger {
 	color: #EDA008;
