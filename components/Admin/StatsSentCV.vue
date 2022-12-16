@@ -3,11 +3,11 @@
 		<div class="dates-wrapper">
 			<div class="date-field">
 				<label for="debut">Date début</label>
-				<Calendar id="debut" v-model="debut" :maxDate="new Date()"></Calendar>
+				<Calendar id="debut" @date-select="value => debut = value" :value="debutJournee" :maxDate="new Date()"></Calendar>
 			</div>
 			<div class="date-field">
 				<label for="fin">Date fin</label>
-				<Calendar v-model="fin" :minDate="debut"></Calendar>
+				<Calendar id="fin" @date-select="value => fin = value" :value="finJournee" :minDate="debut"></Calendar>
 			</div>
 		</div>
 
@@ -54,18 +54,26 @@ export default {
 	components: {
 		DataTable,Column,Calendar,Button
 	},
+	computed:{
+		debutJournee(){
+			return this.$moment(this.debut).startOf('day').toDate()
+		},
+		finJournee(){
+			return this.$moment(this.fin).endOf('day').toDate()
+		}
+	},
 	data(){
 		return {
 			debut: this.$moment().startOf('month').toDate(),
-			fin: new Date(),
+			fin: this.$moment().toDate(),
 			stats: []
 		}
 	},
 	watch: {
-		async debut(){
+		async debutJournee(){
 			await this.getCV()
 		},
-		async fin(){
+		async finJournee(){
 			await this.getCV()
 		}
 	},
@@ -75,8 +83,8 @@ export default {
 	methods: {
 		async getCV(){
 			const response = await this.$axios.$post('/stats/sent_cv', {
-				debut: this.debut,
-				fin: this.fin
+				debut: this.debutJournee,
+				fin: this.finJournee
 			})
 			this.stats = response.data
 		},

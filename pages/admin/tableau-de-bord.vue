@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<AdminLayout title="Tableau de bord">
-			<Panel>
+		<AdminLayout>
+			<Panel header="Tableau de bord">
 				<TabView>
 					<TabPanel header="Entreprises par secteurs">
 						<div style="max-width: 450px">
