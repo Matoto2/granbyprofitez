@@ -182,6 +182,12 @@ export default {
 			form.businessID = this.$store.state.auth.current_user.id
 			form.dateUpdated = new Date()
 
+			if(this.$store.getters["auth/user"]?.is_confirmed === false){
+				form.is_confirmed = false
+			}else{
+				form.is_confirmed = null
+			}
+
 			let response = {}
 			if(this.use === 'add'){
 				response = await this.$axios.post(

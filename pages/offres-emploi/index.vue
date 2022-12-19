@@ -66,7 +66,8 @@ export default {
 				pagination: {
 					page: this.page,
 					perPage: this.perPage
-				}
+				},
+				with_not_confirmed: false
 			})
 			this.totalItems = jobs.pagination.totalItems
 			this.jobs = jobs.jobs

@@ -27,10 +27,10 @@
 				<Column field="nameFirst" header="Prénom"></Column>
 				<Column field="nameLast" header="Nom"></Column>
 				<Column field="email" header="Courriel"></Column>
-				<Column headerStyle="width: 50px; text-align: center">
+				<Column :headerStyle="{width: '109px', 'text-align': 'center'}">
 					<template #body="{data}">
-						<NuxtLink class="p-button" :to="'/admin/administrateurs/'+data.id">
-							<i class="pi pi-file-edit"></i>
+						<NuxtLink :to="'/admin/administrateurs/'+data.id">
+							<Button type="button" icon="pi pi-file-edit"></Button>
 						</NuxtLink>
 						<Button type="button" @click="del(data.id)" class="p-button-danger" icon="pi pi-trash"></Button>
 					</template>

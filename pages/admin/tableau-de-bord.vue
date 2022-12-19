@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<AdminLayout>
+			<AttenteApprobationEntreprise></AttenteApprobationEntreprise>
 			<Panel header="Tableau de bord">
 				<TabView>
 					<TabPanel header="Entreprises par secteurs">

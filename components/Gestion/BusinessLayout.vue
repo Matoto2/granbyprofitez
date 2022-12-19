@@ -6,6 +6,9 @@
 				<LeftMenu :items="menuItems"></LeftMenu>
 			</div>
 			<div class="content-wrapper">
+				<div v-if="current_user?.is_confirmed === false" class="attente-appro">
+					<h4>Votre compte est en attente d'approbation.</h4>
+					<p>Vous pouvez finaliser les informations de votre compte ainsi que créer des emplois, mais rien ne sera visible encore sur le site web.<br>Merci de votre patience!</p></div>
 				<h2>{{ title }}</h2>
 				<slot></slot>
 			</div>
@@ -44,5 +47,10 @@ export default {
 	display: grid;
 	grid-template-columns: 300px 1fr;
 	gap: 3rem;
+}
+.attente-appro{
+	background-color: #f2f2f2;
+	border-radius: 10px;
+	padding: 1rem 2rem;
 }
 </style>

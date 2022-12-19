@@ -110,7 +110,7 @@ export default {
 		}
 	},
 	async fetch(){
-		const resp = await this.$dataApi.getJobsList(this.$store.getters['auth/user_id'], 'all')
+		const resp = await this.$dataApi.getJobsList(this.$store.getters['auth/user_id'], 'all', true)
 		this.jobs = resp.jobs
 		this.tableLoading = false
 	},
@@ -191,9 +191,6 @@ export default {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-}
-a:has(> button){
-	text-decoration: none;
 }
 </style>
 

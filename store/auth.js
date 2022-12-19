@@ -42,6 +42,7 @@ export const actions = {
 				id: data.data.session.id,
 				role: data.data.session.role,
 				name: data.data.session.name,
+				is_confirmed: data.data.session.is_confirmed,
 			})
 			commit(AUTH_MUTATIONS.SET_PAYLOAD, {
 				token: data.data.session.token,
@@ -51,18 +52,6 @@ export const actions = {
 			return 'Nom d\'utilisateur ou mot de passe invalide.';
 		}
 	},
-
-	/*async register ({ commit }, { email_addr, password }) {
-		// make an API call to register the user
-		const { data: { data: { user, payload } } } = await this.$axios.post(
-			'/register',
-			{ email, password }
-		)
-
-		// commit the user and tokens to the state
-		commit(AUTH_MUTATIONS.SET_USER, user)
-		commit(AUTH_MUTATIONS.SET_PAYLOAD, payload)
-	},*/
 
 	// logout the user
 	logout ({ commit }) {

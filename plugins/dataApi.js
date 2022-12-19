@@ -62,12 +62,13 @@ export default function({$axios, error, store}, inject){
 	}
 
 	//Jobs
-	async function getJobsList(businessID = false, status = ['publish']){
+	async function getJobsList(businessID = false, status = ['publish'], with_not_confirmed = false){
 		let post = {}
 		if(businessID){
 			post = {
 				businessID: businessID,
-				status: status
+				status: status,
+				with_not_confirmed: with_not_confirmed
 			}
 		}
 		return await $axios.$post('/jobs/list', post)

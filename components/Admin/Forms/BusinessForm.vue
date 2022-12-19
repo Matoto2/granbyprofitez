@@ -80,6 +80,7 @@
 
 		<div><ProgressSpinner style="width: 2rem;height: 2rem;" v-if="sending"></ProgressSpinner></div>
 		<Button style="margin-top: 1rem" type="submit">{{ use === 'add' ? 'Ajouter':'Mettre à jour'}}</Button>
+		<Button v-if="is_admin && form?.is_confirmed === false" class="p-button-success" @click="confirmAccount">Approuver ce compte</Button>
 	</form>
 </template>
 <script>
@@ -153,6 +154,9 @@ export default {
 		,categoriesProChoises(){
 			return this.$jobFilters.categoriesProChoises()
 		},
+		is_admin(){
+			return this.$store.getters["auth/getRole"] === 'admin'
+		}
 	},
 	methods: {
 		async newFiles(obj){
@@ -214,6 +218,18 @@ export default {
 			}else{
 				this.sending = false
 				this.$toast.add({severity:'error', summary: 'Erreur!', detail:response.data.error, life: 15000});
+			}
+		},
+		async confirmAccount(){
+			let response = await this.$axios.$post('/users/confirm', {
+				token: this.$store.getters["auth/get_token"],
+				id: this.$route.params.id
+			})
+			if(response.success){
+				this.form.is_confirmed = true
+				this.$toast.add({severity:'success', summary: 'Succès!', detail:'Compte approuvé avec succès!', life: 3000});
+			}else{
+				this.$toast.add({severity:'error', summary: 'Erreur!', detail: "Une erreur est survenue!", life: 15000});
 			}
 		}
 	}

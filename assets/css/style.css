@@ -70,3 +70,19 @@ address{
 	position: relative;
 	top: -120px;
 }
+.p-inputtext:enabled:focus {
+	outline: none;
+	outline-offset: 0;
+	box-shadow: none;
+	border-color: initial;
+}
+.quill-editor{
+	background-color: #fff;
+}
+.box-wrapper .p-dropdown-label{
+	display: flex;
+	align-items: center;
+}
+a:has(> button){
+	text-decoration: none;
+}

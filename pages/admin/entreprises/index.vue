@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<AdminLayout title="Entreprises">
+			<AttenteApprobationEntreprise></AttenteApprobationEntreprise>
 			<NuxtLink class="p-button p-component" to="/admin/entreprises/add">
 				Ajouter +
 			</NuxtLink>
@@ -14,29 +15,33 @@
 					   filterDisplay="menu"
 					   :globalFilterFields="['nameFirst','nameLast','email']"
 					   class="p-datatable-sm"
+					   sortField="business"
+					   :sortOrder="1"
 					   responsiveLayout="scroll">
 				<template #header>
-					<div class="datatable-header-row">
-						<InputText v-model="filters['global'].value" placeholder="Recherche" />
-					</div>
-					<div style="text-align: left">
-						<Button icon="pi pi-external-link" label="Exporter en .csv" @click="exportCSV()" />
+					<div style="display:flex;justify-content:space-between">
+						<div class="datatable-header-row">
+							<InputText v-model="filters['global'].value" placeholder="Recherche" />
+						</div>
+						<div style="text-align: left">
+							<Button icon="pi pi-external-link" label="Exporter en .csv" @click="exportCSV()" />
+						</div>
 					</div>
 				</template>
 				<template #empty>
 					Aucune entreprise trouvé.
 				</template>
-				<Column field="business" header="Entreprise"></Column>
-				<Column field="logo" header="Logo">
+				<Column field="business" header="Entreprise" :sortable="true"></Column>
+				<Column field="logo" header="Logo" :headerStyle="{width: '8rem'}">
 					<template #body="{data}">
-						<nuxt-img class="logo-preview" v-if="data?.logo[0]?.media_details?.sizes?.thumbnail?.source_url" :src="data?.logo[0].media_details.sizes.thumbnail.source_url" />
+						<nuxt-img class="logo-preview" v-if="data?.logo[0]?.media_details?.sizes?.medium?.source_url" :src="data?.logo[0].media_details.sizes.medium.source_url" />
 					</template>
 				</Column>
 				<Column field="email" header="Courriel"></Column>
-				<Column headerStyle="width: 50px; text-align: center">
+				<Column :headerStyle="{width: '109px', 'text-align': 'center'}">
 					<template #body="{data}">
-						<NuxtLink class="p-button" :to="'/admin/entreprises/'+data.id">
-							<i class="pi pi-file-edit"></i>
+						<NuxtLink :to="'/admin/entreprises/'+data.id">
+							<Button type="button" icon="pi pi-file-edit"></Button>
 						</NuxtLink>
 						<Button type="button" @click="del(data.id)" class="p-button-danger" icon="pi pi-trash"></Button>
 					</template>

@@ -136,12 +136,6 @@ form{
 	margin: 1rem 0;
 	cursor: pointer;
 }
-.p-inputtext:enabled:focus {
-	outline: none;
-	outline-offset: 0;
-	box-shadow: none;
-	border-color: initial;
-}
 .pi {
 	font-size: 1.4rem;
 }
