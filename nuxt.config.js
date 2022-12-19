@@ -101,6 +101,7 @@ export default {
 			}
 		],
 		'@nuxt/image',
+		'vue-social-sharing/nuxt'
 	],
 
 	image: {

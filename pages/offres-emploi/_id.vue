@@ -44,7 +44,11 @@
 				<div class="col2">
 					<div class="row-postuler">
 						<button type="button">IMPRIMER <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42"><g transform="translate(-1055.516 -667)"><circle cx="21" cy="21" r="21" transform="translate(1055.516 667)" fill="#363636"/><path d="M17.552,13.5H4.05a1.35,1.35,0,0,0-1.35,1.35v5.4A1.35,1.35,0,0,0,4.05,21.6h13.5a1.35,1.35,0,0,0,1.35-1.35v-5.4A1.349,1.349,0,0,0,17.552,13.5Zm0,6.751H4.05v-5.4h13.5ZM18.9,8.1V2.98a1.351,1.351,0,0,0-.4-.955L16.876.4a1.41,1.41,0,0,0-.952-.4H5.4A2.7,2.7,0,0,0,2.7,2.7V8.1A2.7,2.7,0,0,0,0,10.8v4.726a.675.675,0,0,0,1.35,0V10.8A1.35,1.35,0,0,1,2.7,9.451H18.9a1.35,1.35,0,0,1,1.35,1.35v4.726a.675.675,0,0,0,1.35,0V10.8A2.7,2.7,0,0,0,18.9,8.1Zm-1.35,0H4.05V2.7A1.35,1.35,0,0,1,5.4,1.35H15.923l1.629,1.63Zm.675,2.363a1.013,1.013,0,1,0,1.013,1.013A1.013,1.013,0,0,0,18.227,10.464Z" transform="translate(1065.715 676.699)" fill="#fff"/></g></svg></button>
-						<button type="button">PARTAGER <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42"><g transform="translate(-1218 -667)"><circle cx="21" cy="21" r="21" transform="translate(1218 667)" fill="#363636"/><path d="M23.152,36.134a4.133,4.133,0,0,1-4.134,4.134,3.984,3.984,0,0,1-3-1.338l-7.8,3.948a4.31,4.31,0,0,1,0,1.4l7.8,3.9a4.135,4.135,0,1,1-1.132,2.842,3.944,3.944,0,0,1,.253-1.432l-7.53-3.762a4.134,4.134,0,1,1,0-4.5l7.53-3.762a4.135,4.135,0,1,1,8.015-1.432ZM4.088,46.057a2.481,2.481,0,1,0,0-4.961,2.481,2.481,0,1,0,0,4.961Zm14.93-12.4A2.481,2.481,0,1,0,21.5,36.134,2.481,2.481,0,0,0,19.018,33.654Zm0,19.845a2.481,2.481,0,1,0-2.481-2.481A2.481,2.481,0,0,0,19.018,53.5Z" transform="translate(1225.649 644.699)" fill="#fff"/></g></svg></button>
+						<client-only>
+							<Share :title="job.title + ' - ' + job.business.business"
+								   :url="currentUrl" />
+						</client-only>
+
 						<a @click="$refs.formpostuler.scrollIntoView()" class="btn">Postulez maintenant</a>
 					</div>
 
@@ -90,6 +94,13 @@ export default {
 			await this.$store.dispatch('filters/filters');
 	},
 	computed: {
+		currentUrl(){
+			let url = ''
+			if (process.client){
+				url = window.location.href
+			}
+			return url
+		},
 		jobID(){
 			return this.job.id
 		},

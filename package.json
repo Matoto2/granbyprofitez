@@ -28,6 +28,7 @@
     "vue": "^2.7.10",
     "vue-quill-editor": "^3.0.6",
     "vue-server-renderer": "^2.7.10",
+    "vue-social-sharing": "^3.0.9",
     "vue-ssr-carousel": "^1.9.0",
     "vue-template-compiler": "^2.7.10",
     "vue-upload-component": "^2.8.23",
