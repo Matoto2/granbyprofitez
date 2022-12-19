@@ -140,6 +140,9 @@ export default {
 		use: {
 			type: String,
 			default: 'add'
+		},
+		businessID: {
+			type: String
 		}
 	},
 	data(){
@@ -172,6 +175,9 @@ export default {
 		horaireChoises(){
 			return this.$jobFilters.horaireChoises()
 		},
+		defaultBusinessID(){
+			return this.businessID ?? this.$store.getters["auth/user_id"]
+		}
 	},
 	methods: {
 		async submit(){
@@ -179,7 +185,7 @@ export default {
 			const form = this.form
 
 			form.token = this.$store.getters['auth/get_token']
-			form.businessID = this.$store.state.auth.current_user.id
+			form.businessID = this.defaultBusinessID
 			form.dateUpdated = new Date()
 
 			if(this.$store.getters["auth/user"]?.is_confirmed === false){
@@ -205,7 +211,10 @@ export default {
 			this.saving = false
 			if(response.data.success){
 				this.$toast.add({severity:'success', summary: 'Succès!', detail:'Sauvegarde effectué', life: 3000});
-				await this.$router.push('/gestion/emplois/'+response.data.job.id)
+				if(this.$store.getters["auth/user_id"] === this.defaultBusinessID)
+					await this.$router.push('/gestion/emplois/'+response.data.job.id)
+				else
+					await this.$router.push('/admin/emplois/'+response.data.job.id)
 			}else{
 				this.$toast.add({severity:'error', summary: 'Erreur!', detail:response.data.error, life: 15000});
 			}

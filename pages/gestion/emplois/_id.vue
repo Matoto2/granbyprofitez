@@ -12,8 +12,11 @@ export default {
 	meta: {
 		auth: {role: ['business']}
 	},
-	async asyncData({ params, $dataApi }) {
+	async asyncData({ params, store, error, $dataApi }) {
 		const resp = await $dataApi.getSingleJob(params.id)
+		if(resp.data.businessID !== store.getters["auth/user_id"])
+			error({ statusCode: 403, message: "Oups, votre lien n'est pas légal!" })
+
 		return {resp}
 	}
 }

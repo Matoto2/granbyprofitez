@@ -36,9 +36,19 @@ export default {
 					to: '/admin/entreprises'
 				},
 				{
+					label: 'Emplois',
+					icon:'pi pi-fw pi-bookmark',
+					to: '/admin/emplois'
+				},
+				{
 					label: 'Administrateurs',
 					icon:'pi pi-fw pi-users',
 					to: '/admin/administrateurs'
+				},
+				{
+					label: 'Configurations',
+					icon:'pi pi-fw pi-cog',
+					to: '/admin/configurations'
 				}
 			]
 		}
