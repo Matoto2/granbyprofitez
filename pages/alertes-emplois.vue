@@ -14,80 +14,84 @@
 			</div>
 			<div class="container">
 				<h2>Selectionnez vos préférences</h2>
-				<div class="filter-choice">
-					<strong>Secteurs</strong>
-					<div v-for="(secteur, key) in secteursChoises"
-						 class="checkbox-wrapper">
-						<Checkbox :id="'secteur'+key"
-								  :inputId="'secteur'+key"
-								  name="secteurs"
-								  :value="secteur.value"
-								  v-model="form.secteurs" />
-						<label :for="'secteur'+key">{{secteur.label}}</label>
+				<client-only>
+					<div class="filter-choice">
+						<strong>Secteurs</strong>
+						<div v-for="(secteur, key) in secteursChoises"
+							 class="checkbox-wrapper">
+							<Checkbox :id="'secteur'+key"
+									  :inputId="'secteur'+key"
+									  name="secteurs"
+									  :value="secteur.value"
+									  v-model="form.secteurs" />
+							<label :for="'secteur'+key">{{secteur.label}}</label>
+						</div>
 					</div>
-				</div>
-				<div class="filter-choice">
-					<strong>Catégorie professionnelle</strong>
-					<div v-for="(categoriesPro, key) in categoriesProChoises"
-						 class="checkbox-wrapper">
-						<Checkbox :id="'categoriesPro'+key"
-								  :inputId="'categoriesPro'+key"
-								  name="categoriesPro"
-								  :value="categoriesPro.value"
-								  v-model="form.categoriesPro" />
-						<label :for="'categoriesPro'+key">{{categoriesPro.label}}</label>
+					<div class="filter-choice">
+						<strong>Catégorie professionnelle</strong>
+						<div v-for="(categoriesPro, key) in categoriesProChoises"
+							 class="checkbox-wrapper">
+							<Checkbox :id="'categoriesPro'+key"
+									  :inputId="'categoriesPro'+key"
+									  name="categoriesPro"
+									  :value="categoriesPro.value"
+									  v-model="form.categoriesPro" />
+							<label :for="'categoriesPro'+key">{{categoriesPro.label}}</label>
+						</div>
 					</div>
-				</div>
-				<div class="filter-choice">
-					<strong>Type d'emploi</strong>
-					<div v-for="(type_emploi, key) in type_emploiChoises"
-						 class="checkbox-wrapper">
-						<Checkbox :id="'type_emploi'+key"
-								  :inputId="'type_emploi'+key"
-								  name="type_emploi"
-								  :value="type_emploi.value"
-								  v-model="form.type_emploi" />
-						<label :for="'type_emploi'+key">{{type_emploi.label}}</label>
+					<div class="filter-choice">
+						<strong>Type d'emploi</strong>
+						<div v-for="(type_emploi, key) in type_emploiChoises"
+							 class="checkbox-wrapper">
+							<Checkbox :id="'type_emploi'+key"
+									  :inputId="'type_emploi'+key"
+									  name="type_emploi"
+									  :value="type_emploi.value"
+									  v-model="form.type_emploi" />
+							<label :for="'type_emploi'+key">{{type_emploi.label}}</label>
+						</div>
 					</div>
-				</div>
-				<div class="filter-choice">
-					<strong>Horaire</strong>
-					<div v-for="(horaire, key) in horaireChoises"
-						 class="checkbox-wrapper">
-						<Checkbox :id="'horaire'+key"
-								  :inputId="'horaire'+key"
-								  name="horaire"
-								  :value="horaire.value"
-								  v-model="form.horaire" />
-						<label :for="'horaire'+key">{{horaire.label}}</label>
+					<div class="filter-choice">
+						<strong>Horaire</strong>
+						<div v-for="(horaire, key) in horaireChoises"
+							 class="checkbox-wrapper">
+							<Checkbox :id="'horaire'+key"
+									  :inputId="'horaire'+key"
+									  name="horaire"
+									  :value="horaire.value"
+									  v-model="form.horaire" />
+							<label :for="'horaire'+key">{{horaire.label}}</label>
+						</div>
 					</div>
-				</div>
-				<div class="filter-choice filter-international-wrapper">
-					<div class="checkbox-wrapper">
-						<Checkbox id="international"
-								  inputId="international"
-								  name="horaire"
-								  v-model="form.international"
-								  :binary="true"
-						/>
-						<label for="international">Recrutement international</label>
+					<div class="filter-choice filter-international-wrapper">
+						<div class="checkbox-wrapper">
+							<Checkbox id="international"
+									  inputId="international"
+									  name="horaire"
+									  v-model="form.international"
+									  :binary="true"
+							/>
+							<label for="international">Recrutement international</label>
+						</div>
 					</div>
-				</div>
-				<div style="margin-top: 3rem">
-					<h3>Je désir recevoir des alertes emploi par courriel:</h3>
-					<div class="field-radiobutton">
-						<RadioButton id="recurrence-daily" name="recurrence" v-model="form.recurrence" value="daily"></RadioButton>
-						<label for="recurrence-daily">Quotidiennement</label>
+					<div style="margin-top: 3rem">
+						<h3>Je désir recevoir des alertes emploi par courriel:</h3>
+						<div class="field-radiobutton">
+							<RadioButton id="recurrence-daily" name="recurrence" v-model="form.recurrence" value="daily"></RadioButton>
+							<label for="recurrence-daily">Quotidiennement</label>
+						</div>
+						<div class="field-radiobutton">
+							<RadioButton id="recurrence-weekly" name="recurrence" v-model="form.recurrence" value="weekly"></RadioButton>
+							<label for="recurrence-weekly">Hebdomadairement</label>
+						</div>
+						<div class="field-radiobutton">
+							<RadioButton id="recurrence-never" name="recurrence" v-model="form.recurrence" value=""></RadioButton>
+							<label for="recurrence-never">Se désincrire</label>
+						</div>
 					</div>
-					<div class="field-radiobutton">
-						<RadioButton id="recurrence-weekly" name="recurrence" v-model="form.recurrence" value="weekly"></RadioButton>
-						<label for="recurrence-weekly">Hebdomadairement</label>
-					</div>
-					<div class="field-radiobutton">
-						<RadioButton id="recurrence-never" name="recurrence" v-model="form.recurrence" value=""></RadioButton>
-						<label for="recurrence-never">Se désincrire</label>
-					</div>
-				</div>
+				</client-only>
+
+				<p style="margin-top: 3rem">Dans le cas où aucun emploi ne correspond avec vos préférences, aucun courriel ne vous sera envoyé.</p>
 			</div>
 
 			<div class="submit-wrapper">
