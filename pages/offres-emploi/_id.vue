@@ -20,7 +20,7 @@
 							<NuxtLink :to="{name: 'liste-des-employeurs-id', params: {id: job.businessID}}">{{ job.business.business }}</NuxtLink>
 						</div>
 						<ul>
-							<li v-if="job.business.categoriesPro">SECTEURS D’ACTIVITÉ&nbsp;: {{job.business.categoriesPro}}</li>
+							<li v-if="job.business.categoriesPro">SECTEURS D’ACTIVITÉ&nbsp;: {{categoriesPro[job.business.categoriesPro]}}</li>
 							<li v-if="job.postes_dispo">NOMBRE D'EMPLOIS&nbsp;: {{job.postes_dispo}}</li>
 							<li v-if="job.business.ville">OÙ&nbsp;: {{job.business.ville}}</li>
 							<li v-if="job.business.responsable_rh">CONTACT&nbsp;: {{job.business.responsable_rh}}</li>
@@ -43,7 +43,7 @@
 				</div>
 				<div class="col2">
 					<div class="row-postuler">
-						<button type="button">IMPRIMER <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42"><g transform="translate(-1055.516 -667)"><circle cx="21" cy="21" r="21" transform="translate(1055.516 667)" fill="#363636"/><path d="M17.552,13.5H4.05a1.35,1.35,0,0,0-1.35,1.35v5.4A1.35,1.35,0,0,0,4.05,21.6h13.5a1.35,1.35,0,0,0,1.35-1.35v-5.4A1.349,1.349,0,0,0,17.552,13.5Zm0,6.751H4.05v-5.4h13.5ZM18.9,8.1V2.98a1.351,1.351,0,0,0-.4-.955L16.876.4a1.41,1.41,0,0,0-.952-.4H5.4A2.7,2.7,0,0,0,2.7,2.7V8.1A2.7,2.7,0,0,0,0,10.8v4.726a.675.675,0,0,0,1.35,0V10.8A1.35,1.35,0,0,1,2.7,9.451H18.9a1.35,1.35,0,0,1,1.35,1.35v4.726a.675.675,0,0,0,1.35,0V10.8A2.7,2.7,0,0,0,18.9,8.1Zm-1.35,0H4.05V2.7A1.35,1.35,0,0,1,5.4,1.35H15.923l1.629,1.63Zm.675,2.363a1.013,1.013,0,1,0,1.013,1.013A1.013,1.013,0,0,0,18.227,10.464Z" transform="translate(1065.715 676.699)" fill="#fff"/></g></svg></button>
+						<button @click="printPage" type="button">IMPRIMER <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42"><g transform="translate(-1055.516 -667)"><circle cx="21" cy="21" r="21" transform="translate(1055.516 667)" fill="#363636"/><path d="M17.552,13.5H4.05a1.35,1.35,0,0,0-1.35,1.35v5.4A1.35,1.35,0,0,0,4.05,21.6h13.5a1.35,1.35,0,0,0,1.35-1.35v-5.4A1.349,1.349,0,0,0,17.552,13.5Zm0,6.751H4.05v-5.4h13.5ZM18.9,8.1V2.98a1.351,1.351,0,0,0-.4-.955L16.876.4a1.41,1.41,0,0,0-.952-.4H5.4A2.7,2.7,0,0,0,2.7,2.7V8.1A2.7,2.7,0,0,0,0,10.8v4.726a.675.675,0,0,0,1.35,0V10.8A1.35,1.35,0,0,1,2.7,9.451H18.9a1.35,1.35,0,0,1,1.35,1.35v4.726a.675.675,0,0,0,1.35,0V10.8A2.7,2.7,0,0,0,18.9,8.1Zm-1.35,0H4.05V2.7A1.35,1.35,0,0,1,5.4,1.35H15.923l1.629,1.63Zm.675,2.363a1.013,1.013,0,1,0,1.013,1.013A1.013,1.013,0,0,0,18.227,10.464Z" transform="translate(1065.715 676.699)" fill="#fff"/></g></svg></button>
 						<client-only>
 							<Share :title="job.title + ' - ' + job.business.business"
 								   :url="currentUrl" />
@@ -190,6 +190,11 @@ export default {
 
 		})
 		this.jobs = jobs.jobs
+	},
+	methods: {
+		printPage(){
+			window.print()
+		}
 	}
 }
 </script>
@@ -295,6 +300,53 @@ export default {
 </style>
 
 <style>
+@media print{
+	:root{
+		font-size: 9pt !important;
+	}
+	header,
+	.banner-page,
+	.job-wrapper .row-postuler,
+	footer,
+	.postuler-section{
+		display: none;
+	}
+	.job-wrapper{
+		margin-top: 0 !important;
+	}
+	.details-row{
+		flex-direction: column;
+	}
+	.logo-business,
+	.col1,
+	.job-name,
+	.col2{
+		width: 100% !important;
+	}
+	.col1{
+		display: flex;
+		justify-content: space-between;
+		margin-top: 20px !important;
+	}
+	.logo-business img{
+		height: 100px !important;
+		padding: .5rem !important;
+	}
+	.row-intro{
+		flex-direction: column;
+	}
+	.job-name{
+		background: transparent !important;
+	}
+	.job-name h1{
+		color: #000 !important;
+		margin: 0 !important;
+		font-size: 15pt !important;
+	}
+	.section-left li{
+		margin: .2rem 0 !important;
+	}
+}
 .contenu-annonce{
 	line-height: 1.6;
 	padding-bottom: 4rem;
