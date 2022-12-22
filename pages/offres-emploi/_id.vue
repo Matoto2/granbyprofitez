@@ -77,7 +77,7 @@
 		<div class="container postuler-section">
 			<div ref="formpostuler" id="form-postuler" class="is-anchor"></div>
 			<h2 class="th2">Postulez maintenant</h2>
-			<CVForm :jobID="jobID"></CVForm>
+			<CVForm :jobID="jobID" :international="job.international ?? false"></CVForm>
 		</div>
 
 		<AutresEmplois v-if="jobs.length" :jobs="jobs"></AutresEmplois>

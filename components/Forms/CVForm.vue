@@ -2,10 +2,23 @@
 	<div>
 		<form @submit.prevent="submit">
 			<div class="left">
+				<div class="full" v-if="international">
+					<p>Cette offre d'emploi accepte les candidatures internationales.</p>
+					<div class="checkbox-wrapper full">
+						<Checkbox id="is_international" v-model="is_international" :binary="true" />
+						<label for="is_international">
+							Je suis un candidat international.
+						</label>
+					</div>
+				</div>
+				<div v-else class="full">
+					<p>Cette offre d'emploi n'accepte <strong>pas</strong> les candidatures internationales.</p>
+				</div>
 				<InputText class="half" required type="text" v-model="form.first_name" placeholder="Prénom*"></InputText>
 				<InputText class="half" required type="text" v-model="form.last_name" placeholder="Nom*"></InputText>
 				<InputMask class="half" v-model="form.phone" mask="999 999-9999" placeholder="Téléphone*" />
-				<InputMask class="half" v-model="form.postal_code" mask="a9a 9a9" placeholder="Code postal*" />
+				<InputMask v-if="!is_international" class="half" v-model="form.postal_code" mask="a9a 9a9" placeholder="Code postal*" />
+				<InputText v-else class="half" v-model="form.postal_code" placeholder="Pays*" />
 				<InputText class="full" required type="email" v-model="form.email" placeholder="Courriel*"></InputText>
 				<Textarea class="full" v-model="form.message" rows="4" placeholder="Message à l’employeur..." />
 				<div class="checkbox-wrapper full">
@@ -40,7 +53,7 @@ import Textarea from 'primevue/textarea';
 import Checkbox from 'primevue/checkbox';
 import ProgressSpinner from "primevue/progressspinner";
 export default {
-	props: ["jobID"],
+	props: ["jobID", "international"],
 	components: {
 		InputText,
 		InputMask,
@@ -52,6 +65,7 @@ export default {
 		return {
 			form: this.formReset(),
 			sending: false,
+			is_international: false,
 		}
 	},
 	methods: {
