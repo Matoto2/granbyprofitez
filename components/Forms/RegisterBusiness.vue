@@ -59,7 +59,13 @@
 						<Dropdown v-model="form.secteur" :options="secteursChoises" optionLabel="label" optionValue="value"></Dropdown>
 					</FieldWrapper>
 					<FieldWrapper id="logo" label="Logo de l'entreprise" childclass="md:col-4">
-						<LmFileUpload name="logo" :maxItems="1"  v-model="form.logo" @newFiles="newFiles" @removeFile="removeFile"></LmFileUpload>
+						<LmFileUpload name="logo"
+									  :maxItems="1"
+									  :maxSize="1000000"
+									  message="Seul les fichiers images sont acceptées<br>Format idéal de 300x200 pixels"
+									  v-model="form.logo"
+									  @newFiles="newFiles"
+									  @removeFile="removeFile"></LmFileUpload>
 					</FieldWrapper>
 					<FieldWrapper id="description" label="Description de l'entreprise">
 						<client-only>

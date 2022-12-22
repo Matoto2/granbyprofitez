@@ -35,7 +35,13 @@
 					<InputMask v-model="form.code_postal" mask="a9a 9a9"></InputMask>
 				</FieldWrapper>
 				<FieldWrapper id="logo" label="Logo de l'entreprise" childclass="md:col-4">
-					<LmFileUpload name="logo" :maxItems="1"  v-model="form.logo" @newFiles="newFiles" @removeFile="removeFile"></LmFileUpload>
+					<LmFileUpload name="logo"
+								  :maxItems="1"
+								  :maxSize="1000000"
+								  message="Seul les fichiers images sont acceptées<br>Format idéal de 300x200 pixels"
+								  v-model="form.logo"
+								  @newFiles="newFiles"
+								  @removeFile="removeFile"></LmFileUpload>
 				</FieldWrapper>
 				<FieldWrapper id="responsable_rh" label="Responsable RH" childclass="md:col-4">
 					<InputText type="text" v-model="form.responsable_rh"/>
@@ -70,7 +76,12 @@
 					<InputText v-model="form.youtube_link"/>
 				</FieldWrapper>
 				<FieldWrapper id="gallery" label="Galerie d'images">
-					<LmFileUpload name="gallery" v-model="form.gallery" @newFiles="newFiles" @removeFile="removeFile"></LmFileUpload>
+					<LmFileUpload name="gallery"
+								  v-model="form.gallery"
+								  @newFiles="newFiles"
+								  :maxSize="1500000"
+								  message="Seul les fichiers images sont acceptées"
+								  @removeFile="removeFile"></LmFileUpload>
 				</FieldWrapper>
 			</div>
 		</Panel>

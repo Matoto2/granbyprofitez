@@ -28,6 +28,10 @@
 				<span class="btn">Ajouter un fichier +</span>
 				<input id="file" ref="fileuploader" type="file" @change="onSelectedFiles" multiple="multiple" :accept="accept">
 			</label>
+			<div class="small-text" v-if="maxSize">
+				Taille max: {{filesizeconvert(maxSize)}}
+			</div>
+			<div class="small-text" v-if="message" v-html="message"></div>
 		</div>
 	</div>
 </template>
@@ -41,6 +45,8 @@ export default {
 	props: {
 		value: Array,
 		maxItems: Number,
+		maxSize: Number,
+		message: String,
 		accept: {
 			type: String,
 			default: 'image/*'
@@ -71,49 +77,24 @@ export default {
 			return humanFileSize(value, true, 2)
 		},
 		async onSelectedFiles(event){
-			if(event.target.files.length > 0){
-				const files = await fileListToBase64(event.target.files)
-				console.log('filelisttobase64', files)
-				this.$emit('newFiles', {files: files, name: this.name})
+			if(event.target.files.length > 0 && (this.maxItems === undefined || event.target.files.length <= this.maxItems)){
+				let newFiles = event.target.files
+				if(this.maxSize !== undefined){
+					newFiles = Object.values(event.target.files).filter(file => {
+						return file.size <= this.maxSize
+					})
+					if(event.target.files.length !== newFiles.length)
+						this.$toast.add({severity:'error', summary: 'Erreur!', detail:"Un ou plusieurs fichier ne respecte pas la limite de poid.", life: 5000});
+				}
+				if(newFiles.length){
+					const files = await fileListToBase64(newFiles)
+					//console.log('filelisttobase64', files)
+					this.$emit('newFiles', {files: files, name: this.name})
+				}
+			}else{
+				this.$toast.add({severity:'error', summary: 'Erreur!', detail:"Maximum de fichier atteint pour ce champ.", life: 5000});
 			}
-		},
-		async deleteFile(id){
-
-			/*this.$confirm.require({
-				message: 'Êtes-vous sûr? Cette opération est irréversible.',
-				header: 'Confirmation',
-				icon: 'pi pi-exclamation-triangle',
-				accept: async () => {
-					this.$emit('saving', true)
-					try{
-						const result = await this.$axios.$delete('https://imgapi.lithiummarketing.net/wp-json/wp/v2/media/'+id+'?force=1', {
-							headers: {
-								"Content-Disposition": "attachment; filename=pexels-pixabay-60597.jpg",
-								"Content-Type": "image/jpg"
-							},
-							auth: {
-								username: "lithiummarketing",
-								password: "LVrE BrkO PPh0 q8XJ csxq laqa"
-							}
-						})
-						if(result.deleted){
-							this.$toast.add({severity:'success', summary: 'Succès!', detail:'Supprimé avec succès', life: 10000});
-						} else{
-							this.$toast.add({severity:'error', summary: 'Erreur!', detail:'Oups!', life: 3000});
-						}
-					}catch(e){
-						console.log(e)
-					}
-
-					console.log(this.result)
-					this.result = this.result.filter(file => file.wp_id !== id)
-					this.$emit('input', this.result)
-					console.log(this.result)
-
-					this.$emit('saving', false)
-				},
-			});*/
-		},
+		}
 	}
 }
 </script>
@@ -144,5 +125,10 @@ export default {
 	outline: none;
 	border: none;
 	color: #fff;
+}
+.small-text{
+	font-weight: 600;
+	font-size: .8rem;
+	margin-top: .2rem;
 }
 </style>
