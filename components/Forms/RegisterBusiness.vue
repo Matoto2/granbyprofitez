@@ -10,24 +10,24 @@
 					<FieldWrapper id="nameLast" label="Nom" childclass="md:col-6">
 						<InputText type="text" v-model="form.nameLast"/>
 					</FieldWrapper>
-					<FieldWrapper id="email" label="Courriel" childclass="md:col-6">
-						<InputText type="email" v-model="form.email"/>
+					<FieldWrapper id="email" label="Courriel*" childclass="md:col-6">
+						<InputText required type="email" v-model="form.email"/>
 					</FieldWrapper>
-					<FieldWrapper id="email" label="Confirmer le courriel" childclass="md:col-6">
-						<InputText type="email" v-model="form.emailConfirm"/>
+					<FieldWrapper id="email" label="Confirmer le courriel*" childclass="md:col-6">
+						<InputText required type="email" v-model="form.emailConfirm"/>
 					</FieldWrapper>
-					<FieldWrapper id="password" label="Mot de passe" childclass="md:col-6">
-						<InputText type="password" v-model="form.password"/>
+					<FieldWrapper id="password" label="Mot de passe*" childclass="md:col-6">
+						<InputText required type="password" v-model="form.password"/>
 					</FieldWrapper>
-					<FieldWrapper id="password" label="Confirmer le mot de passe" childclass="md:col-6">
-						<InputText type="password" v-model="form.confirmPassword"/>
+					<FieldWrapper id="password" label="Confirmer le mot de passe*" childclass="md:col-6">
+						<InputText required type="password" v-model="form.confirmPassword"/>
 					</FieldWrapper>
 				</div>
 
 				<h2>Informations sur l'entreprise</h2>
 				<div class="p-fluid grid formgrid">
-					<FieldWrapper id="business" label="Nom de l'entreprise" childclass="md:col-6">
-						<InputText type="text" v-model="form.business"/>
+					<FieldWrapper id="business" label="Nom de l'entreprise*" childclass="md:col-6">
+						<InputText required type="text" v-model="form.business"/>
 					</FieldWrapper>
 				</div>
 
@@ -55,8 +55,8 @@
 					<FieldWrapper id="nb_employe" label="Nb d'employés" childclass="md:col-6">
 						<InputText type="text" v-model="form.nb_employe"></InputText>
 					</FieldWrapper>
-					<FieldWrapper id="secteur" label="Secteur" childclass="md:col-6">
-						<Dropdown v-model="form.secteur" :options="secteursChoises" optionLabel="label" optionValue="value"></Dropdown>
+					<FieldWrapper id="secteur" label="Secteur*" childclass="md:col-6">
+						<Dropdown required v-model="form.secteur" :options="secteursChoises" optionLabel="label" optionValue="value"></Dropdown>
 					</FieldWrapper>
 					<FieldWrapper id="logo" label="Logo de l'entreprise" childclass="md:col-4">
 						<LmFileUpload name="logo"
