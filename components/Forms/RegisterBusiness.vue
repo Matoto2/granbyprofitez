@@ -58,9 +58,6 @@
 					<FieldWrapper id="secteur" label="Secteur" childclass="md:col-6">
 						<Dropdown v-model="form.secteur" :options="secteursChoises" optionLabel="label" optionValue="value"></Dropdown>
 					</FieldWrapper>
-					<FieldWrapper id="categoriesPro" label="Secteur Pro." childclass="md:col-6">
-						<Dropdown v-model="form.categoriesPro" :options="categoriesProChoises" optionLabel="label" optionValue="value"></Dropdown>
-					</FieldWrapper>
 					<FieldWrapper id="logo" label="Logo de l'entreprise" childclass="md:col-4">
 						<LmFileUpload name="logo" :maxItems="1"  v-model="form.logo" @newFiles="newFiles" @removeFile="removeFile"></LmFileUpload>
 					</FieldWrapper>
@@ -113,7 +110,6 @@ export default {
 				telephone: '',
 				website: '',
 				secteur: [],
-				categoriesPro: [],
 			},
 			sending: false,
 			villes: ["Granby", "Roxton Pond", "Saint-Alphonse-de-Granby", "Sainte-Cécile-de-Milton", "Saint-Joachim-de-Sherfford", "Shefford", "Warden", "Waterloo"]
@@ -127,9 +123,6 @@ export default {
 		secteursChoises(){
 			return this.$jobFilters.secteursChoises()
 		}
-		,categoriesProChoises(){
-			return this.$jobFilters.categoriesProChoises()
-		},
 	},
 	methods: {
 		async newFiles(obj){
