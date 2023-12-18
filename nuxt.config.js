@@ -97,8 +97,9 @@ export default {
 		[
 			"nuxt-gmaps",
 			{
-				key: 'AIzaSyB_qrCxWaDhlsfk3bXFZLBcHa7PltphHh4'
+				key: 'AIzaSyBlJJDqHlUBNT9GyjQDu4SS79nBIpR0Qy8'
 			}
+
 		],
 		'@nuxt/image',
 		'vue-social-sharing/nuxt'
