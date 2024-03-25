@@ -382,6 +382,9 @@ export default {
 }
 .contenu-annonce ul li{
 	list-style: none;
+	display: flex;
+	position: relative;
+    padding-left: calc(11px + 0.8rem);
 }
 .contenu-annonce ul li::before{
 	content: '';
@@ -391,7 +394,10 @@ export default {
 	width: 11px;
 	height: 11px;
 	display: inline-block;
-	margin-right: .8rem;
+	/* margin-right: .8rem; */
+	position: absolute;
+	left: 0;
+	top: 0.5rem;
 }
 .th2{
 	font-size: 2rem;

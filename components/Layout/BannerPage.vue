@@ -18,9 +18,14 @@ export default {
 }
 .banner-page{
 	position: relative;
-	height: 60vh;
-	min-height: 400px;
 	clip-path: polygon(0 0, 100% 0, 100% 86%, 0% 100%);
+	height: 30dvh;
+
+	@media (min-width: 480px) {
+		height: 60vh;
+		min-height: 400px;
+
+	}
 }
 h1{
 	text-transform: uppercase;
@@ -30,8 +35,12 @@ h1{
 	z-index: 10;
 	padding-top: 4rem;
 	margin: 0;
-	font-size: 3rem;
-	text-shadow: 1px 1px 5px rgba(0,0,0,.3)
+	font-size: 2rem;
+	text-shadow: 1px 1px 5px rgba(0,0,0,.3);
+
+	@media (min-width: 480px) {
+		font-size: 3rem;
+	}
 }
 img{
 	position: absolute;
