@@ -1,6 +1,6 @@
 <template>
 	<div class="page">
-		<BannerPage h1="Travailler" image="./images/travailler/banner.png" />
+		<BannerPage h1="Travailler" image="/images/travailler/banner.png" />
 		<div class="search">
 			<HomeSearch>
 				<template #more>
@@ -17,7 +17,7 @@
 			</HomeSearch>
 		</div>
 		<div style="margin-bottom: 36px;">
-			<SubBannerPage logo="./images/travailler/Groupe-1940.svg" image="./images/travailler/Groupe-2029.png">
+			<SubBannerPage logo="/images/travailler/Groupe-1940.svg" image="/images/travailler/Groupe-2029.png">
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem earum soluta quasi animi
 				adipisci
 				deleniti. Quaerat, quasi eaque fugit dolorum nam inventore laborum? Maiores hic delectus eum mollitia
@@ -48,7 +48,7 @@ export default {
 				{
 					title: 'Ressource #1',
 					text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus officiis dolor ut? Cumque debitis sapiente alias assumenda laborum possimus ex blanditiis id ipsa quidem temporibus inventore, quia deserunt voluptate rem?',
-					image: "./images/travailler/arrimage.png",
+					image: "/images/travailler/arrimage.png",
 					location: '740, rue Galt Ouest, suite 110, Sherbrooke , J1H 1Z3',
 					website: 'arrimagestrie.com',
 					phone: "819 564-7885",
@@ -57,7 +57,7 @@ export default {
 				{
 					title: 'Ressource #2',
 					text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus officiis dolor ut? Cumque debitis sapiente alias assumenda laborum possimus ex blanditiis id ipsa quidem temporibus inventore, quia deserunt voluptate rem?',
-					image: "./images/travailler/arrimage.png",
+					image: "/images/travailler/arrimage.png",
 					location: '740, rue Galt Ouest, suite 110, Sherbrooke , J1H 1Z3',
 					website: 'arrimagestrie.com',
 					phone: "819 564-7885",
@@ -66,7 +66,7 @@ export default {
 				{
 					title: 'Ressource #3',
 					text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus officiis dolor ut? Cumque debitis sapiente alias assumenda laborum possimus ex blanditiis id ipsa quidem temporibus inventore, quia deserunt voluptate rem?',
-					image: "./images/travailler/arrimage.png",
+					image: "/images/travailler/arrimage.png",
 					location: '740, rue Galt Ouest, suite 110, Sherbrooke , J1H 1Z3',
 					website: 'arrimagestrie.com',
 					phone: "819 564-7885",
@@ -76,13 +76,13 @@ export default {
 			externalLinkBlocks: [
 				{
 					text: 'RÉPERTOIRE INDUSTRIEL DE GRANBY ET LA RÉGION',
-					image: './images/travailler/Rectangle-985.png',
+					image: '/images/travailler/Rectangle-985.png',
 					url: '',
 					color: "#79A444"
 				},
 				{
 					text: 'RÉPERTOIRE DES COMMERCES DE GRANBY ET LA RÉGION',
-					image: './images/travailler/denisLandryPhoto-11.png',
+					image: '/images/travailler/denisLandryPhoto-11.png',
 					url: '',
 					color: '#316CB2'
 				},
@@ -90,22 +90,22 @@ export default {
 			externalLinkRows: [
 				{
 					text: 'Demeure à l’affût des opportunités de recrutement dans ton pays avec les missions de recrutement à l’international Journées Québec',
-					image: './images/travailler/Rectangle-970.png',
+					image: '/images/travailler/Rectangle-970.png',
 					url: 'journeesquebec.gouv.qc.ca',
 				},
 				{
 					text: 'Inscits-toi sur le portail Arrima - services d’immigration en ligne',
-					image: './images/travailler/Rectangle-973.png',
+					image: '/images/travailler/Rectangle-973.png',
 					url: 'quebec.ca/immigration/services-en-ligne',
 				},
 				{
 					text: 'Tout savoir pour apprendre le français, immigrer au Québec, faire un séjour d’études et obtenir de l’aide pour s’intégrer : Immigration au Québec',
-					image: './images/travailler/Rectangle-975.png',
+					image: '/images/travailler/Rectangle-975.png',
 					url: 'quebec.ca/immigration/services-en-ligne',
 				},
 				{
 					text: 'Il existe un service gratuit d’intégration pour les personnes immigrantes : Accompagnement Québec',
-					image: './images/travailler/Rectangle-977.png',
+					image: '/images/travailler/Rectangle-977.png',
 					url: 'quebec.ca/immigration/service-integration-personnes-immigrantes',
 				},
 
